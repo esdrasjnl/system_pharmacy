@@ -1,0 +1,363 @@
+﻿@inject IPresentacionService _presentacionServicio
+@inject IProdpresentacionService _prodpresentacionServicio
+@inject ISnackbar _snackBar
+
+@inject IDialogService _dialogServicio
+@inject SweetAlertService Swal;
+
+
+<MudDialog Style="width:800px">
+
+    <DialogContent>
+
+
+
+        <EditForm Model="@_prodpresentacion" OnValidSubmit="Guardar">
+
+
+
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <MudGrid>
+
+                <MudTextField @bind-Value="@IdProducto" Class="mb-3"
+                Label="" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Badge" Style="display: none;" />
+
+
+                <MudItem xs="12" sm="6">
+                    <MudSelect Label="Presentacion" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" Class="mb-3"
+                    @bind-Value="presentacionSeleccionado">
+                        @if (listapresentacion.Any())
+                        {
+                            foreach (var prod in listapresentacion)
+                            {
+                                <MudSelectItem Value="@prod">@prod.Descripcion</MudSelectItem>
+                            }
+                        }
+                    </MudSelect>
+                </MudItem>
+
+                <MudItem xs="12" sm="6">
+                    <MudNumericField @bind-Value="@_prodpresentacion.Cantidad" Class="mb-3"
+                    Label="Cantidad" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.QrCode" />
+                    <ValidationMessage For="() => _prodpresentacion.Cantidad" />
+                </MudItem>
+
+            </MudGrid>
+
+        </EditForm>
+
+
+
+
+
+        <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-5">
+
+            <MudPaper Elevation="3" Class="pa-4" Width="100%">
+                <MudGrid>
+
+                    <MudItem xs="12">
+
+                        <MudTable Items="@listaProdpresentacion"
+                        Striped="true" Bordered="true" Dense="true"
+                        Loading="@_loading" LoadingProgressColor="Color.Info">
+
+                            <HeaderContent>
+
+                                <MudTh>Id</MudTh>
+                                <MudTh>Presentacion</MudTh>
+                                <MudTh>Cantidad</MudTh>
+                                <MudTh></MudTh>
+                            </HeaderContent>
+                            <RowTemplate Context="productoRow">
+
+                                <MudTd DataLabel="Id">@productoRow.IdProducto</MudTd>
+                                <MudTd DataLabel="Presentacion">@productoRow.DescripcionPresentacion</MudTd>
+                                <MudTd DataLabel="Cantidad">@productoRow.Cantidad</MudTd>
+
+                                <MudTd DataLabel="">
+                                    <MudFab Color="Color.Primary"
+                                    StartIcon="@Icons.Material.Filled.Edit"
+                                    Size="Size.Small"
+                                    IconSize="Size.Small"
+                                    OnClick="@(() => AbrirEditarProducto(productoRow))" />
+                                    <MudFab Color="Color.Error"
+                                    StartIcon="@Icons.Material.Filled.Delete"
+                                    Size="Size.Small"
+                                    IconSize="Size.Small"
+                                    OnClick="@(() => EliminarUsuario(productoRow))" />
+
+
+                                </MudTd>
+
+                            </RowTemplate>
+
+
+
+
+
+                            <PagerContent>
+                                <MudTablePager />
+                            </PagerContent>
+                        </MudTable>
+
+
+                    </MudItem>
+                </MudGrid>
+            </MudPaper>
+
+        </MudContainer>
+
+
+
+
+
+
+
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="Cancel">Cancelar</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Guardar">Guardar</MudButton>
+    </DialogActions>
+
+
+
+
+
+</MudDialog>
+
+
+
+
+@code {
+
+
+
+
+
+
+
+    [Parameter]
+    public int IdProducto { get; set; }
+
+
+
+    private List<Fila> filas = new();
+
+    private void AgregarFila()
+    {
+        filas.Add(new Fila());
+    }
+
+    private void EliminarFila(Fila fila)
+    {
+        filas.Remove(fila);
+    }
+
+    public class Fila
+    {
+        public int Numero { get; set; }
+        public string Nombre { get; set; }
+    }
+
+
+
+    [Parameter]
+    public ProdpresentacionDTO _prodpresentacion { get; set; } = new ProdpresentacionDTO();
+
+
+
+
+
+    List<PresentacionDTO> listapresentacion = new List<PresentacionDTO>();
+    public PresentacionDTO presentacionSeleccionado;
+
+
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+
+        var resultado = await _presentacionServicio.Lista();
+
+        if (resultado.status)
+        {
+            listapresentacion = resultado.value!;
+            if (_prodpresentacion.IdProdpresentacion != 0)
+                presentacionSeleccionado = listapresentacion.FirstOrDefault(p => p.IdPresentacion == _prodpresentacion.IdPresentacion)!;
+            else
+                presentacionSeleccionado = listapresentacion.First();
+
+
+        }
+
+        await ObtenerProductos();
+        _loading = false;
+
+    }
+
+    private void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
+
+
+
+
+
+    private async Task Guardar()
+    {
+        if (_prodpresentacion.Cantidad == null)
+        {
+            _snackBar.Add("El campo Cantidad no puede estar vacío.", Severity.Error);
+            return;
+        }
+
+        try
+        {
+
+            _prodpresentacion.IdProducto = IdProducto;
+
+            _prodpresentacion.IdPresentacion = presentacionSeleccionado.IdPresentacion;
+
+            string _mensaje = "";
+            bool _resultado;
+
+            if (_prodpresentacion.IdProdpresentacion != 0)
+            {
+                _resultado = await _prodpresentacionServicio.Editar(_prodpresentacion);
+                _mensaje = "Producto fue modificado";
+                await ObtenerProductos();
+
+                _prodpresentacion.Cantidad = 0;
+            }
+            else
+            {
+                var response = await _prodpresentacionServicio.Crear(_prodpresentacion);
+                _resultado = response.status;
+                _mensaje = "Producto fue creado";
+                await ObtenerProductos();
+
+                _prodpresentacion.Cantidad = 0;
+            }
+
+            if (_resultado)
+            {
+                _snackBar.Add(_mensaje, Severity.Success, a => a.VisibleStateDuration = 500);
+               // MudDialog.Close(DialogResult.Ok(false));
+                await ObtenerProductos();
+            }
+            else
+            {
+                _snackBar.Add("Error al guardar cambios", Severity.Error, a => a.VisibleStateDuration = 500);
+            }
+        }
+        catch (Exception ex)
+        {
+            _snackBar.Add($"Error: {ex.Message}", Severity.Error);
+        }
+
+    }
+
+
+
+
+    List<ProdpresentacionDTO> listaProdpresentacion = new List<ProdpresentacionDTO>();
+
+    private ProdpresentacionDTO selectedItem1 = null;
+    private bool _loading = true;
+
+    private async Task ObtenerProductos()
+    {
+        
+        var result = await _prodpresentacionServicio.Lista();
+
+        if (result.status)
+        {
+            listaProdpresentacion = (List<ProdpresentacionDTO>)result.value!;
+            listaProdpresentacion = listaProdpresentacion.Where(p => p.IdProducto == IdProducto).ToList();
+        }
+        
+    }
+
+    private async Task AbrirNuevoProducto()
+    {
+        var dialogo = _dialogServicio.Show<MdProdpresentacion>("Nuevo Producto");
+        var resultado = await dialogo.Result;
+
+        if (!resultado.Canceled)
+        {
+            await ObtenerProductos();
+       }
+    }
+
+    private async Task AbrirEditarProducto(ProdpresentacionDTO model)
+    {
+
+        // Filtrar los productos para que solo se muestren los que tengan el IdProducto seleccionado
+       // IdProducto = model.IdProducto;
+
+        // Simplemente actualiza el modelo con los datos del producto a editar
+        _prodpresentacion = model;
+
+        // Opcional: Actualiza también el valor de la presentación seleccionada
+        presentacionSeleccionado = listapresentacion.FirstOrDefault(p => p.IdPresentacion == model.IdPresentacion);
+
+
+        // Filtra la lista de productos por el IdProducto
+        listaProdpresentacion = listaProdpresentacion.Where(p => p.IdProducto == IdProducto).ToList();
+        Console.WriteLine(listaProdpresentacion);
+
+        await ObtenerProductos();
+    }
+
+
+    private async Task EliminarUsuario(ProdpresentacionDTO model)
+    {
+        
+
+        
+            var resultado = await _prodpresentacionServicio.Eliminar(model.IdProdpresentacion);
+
+           
+                _snackBar.Add("El producto fue eliminado", Severity.Success, a => a.VisibleStateDuration = 500);
+                await ObtenerProductos();
+           
+        
+
+        /*
+        SweetAlertResult result = await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Esta seguro?",
+                Text = $"Eliminar producto: {model.IdProducto}",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true,
+                ConfirmButtonText = "Si, eliminar",
+                CancelButtonText = "No, volver"
+            });
+
+        if (result.IsConfirmed)
+        {
+            var resultado = await _prodpresentacionServicio.Eliminar(model.IdProdpresentacion);
+
+            if (resultado)
+            {
+                _snackBar.Add("El producto fue eliminado", Severity.Success, a => a.VisibleStateDuration = 500);
+                await ObtenerProductos();
+            }
+            else
+                _snackBar.Add("No se pudo eliminar", Severity.Error, a => a.VisibleStateDuration = 500);
+        }
+
+    */
+    }
+
+
+}

@@ -1,0 +1,515 @@
+﻿@page "/page/prodpresentacion"
+
+
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-5">
+
+    <MudText Typo="Typo.h5" GutterBottom="true">Sin permiso de administrador</MudText>
+
+    <MudPaper Elevation="3" Class="pa-4" Width="100%">
+        <MudGrid>
+            <p>Por favor, solicite permiso....</p>
+           
+            
+        </MudGrid>
+    </MudPaper>
+
+</MudContainer>
+
+@code {
+
+    /*
+    List<ProdpresentacionDTO> listaProdpresentacion = new List<ProdpresentacionDTO>();
+    public ProdpresentacionDTO prodpresentacionSeleccionado;
+
+    public long valorNIT = 25415478748;
+    public double _precio = 0.0;
+    public double _unidades = 0;
+    public string _nombreCliente = "";
+    public string _tipo = "Tendero";
+    public string _presentacion = "Blister";
+    private int _cantidad = 0;
+    VentaDTO _venta = new VentaDTO()
+            {
+            TipoPago = "Efectivo",
+            DetalleVenta = new List<DetalleVentaDTO>()
+    };
+    private ProductoDTO _productoSeleccionado;
+    private ClienteDTO _clienteSeleccionado;
+
+    private bool botonDesactivado = false;
+
+    private async Task<IEnumerable<ProductoDTO>> BuscarProducto(string valor)
+        {
+
+
+        var response = await _productoServicio.Lista();
+
+        if (response.status)
+            {
+            if (string.IsNullOrEmpty(valor))
+                return new List<ProductoDTO>();
+
+            List<ProductoDTO> lista = (List<ProductoDTO>)response.value!;
+            return lista.FindAll(p => p.Nombre.Contains(valor, StringComparison.InvariantCultureIgnoreCase));
+           // _precio = 100;
+        }
+            else
+            {
+            return new List<ProductoDTO>();
+    }
+    }
+
+
+    protected override async Task OnInitializedAsync()
+       {
+
+
+       // Console.WriteLine(_productoSeleccionado.IdProducto);
+
+        //  Console.WriteLine(_producto.IdProducto);
+        var resultado = await _prodpresentacionServicio.Lista();
+
+        if (resultado.status && resultado.value != null)
+            {
+            listaProdpresentacion = resultado.value!;
+            // if (_producto.IdProducto != 0)
+            //   categoriaSeleccionado = listaCategoria.FirstOrDefault(p => p.IdCategoria == _producto.IdCategoria)!;
+           // else
+           //  listaProdpresentacion = listaProdpresentacion.Where(p => p.IdProducto == IdPro).ToList();
+            //prodpresentacionSeleccionado = listaProdpresentacion.First();
+
+
+
+                }
+
+    }
+
+
+    private string NombreCliente
+        {
+        get => _clienteSeleccionado?.NombreCompleto ?? string.Empty;
+            set
+            {
+            if (_clienteSeleccionado != null)
+                {
+                _clienteSeleccionado.NombreCompleto = value;
+    }
+    }
+    }
+
+    private string TipoCliente
+        {
+        get => _clienteSeleccionado?.TipoCliente ?? string.Empty;
+            set
+            {
+            if (_clienteSeleccionado != null)
+                {
+                _clienteSeleccionado.TipoCliente = value;
+    }
+    }
+    }
+
+    private decimal PrecioSeleccionado
+        {
+
+            get
+            {
+            if (_productoSeleccionado == null || _clienteSeleccionado == null)
+            return 0m;
+
+            // Retorna el precio dependiendo del tipo de cliente seleccionado
+            return _clienteSeleccionado.TipoCliente switch
+                {
+                "Rutero" => _productoSeleccionado.Prutero ?? 0m,
+                "Publico" => _productoSeleccionado.Ppublico ?? 0m,
+                "Tendero" => _productoSeleccionado.Ptendero ?? 0m,
+                _ => 0m // Si el tipo de cliente no coincide, devuelve 0
+        };
+        }
+
+            set
+
+            {
+            if (_productoSeleccionado == null || _clienteSeleccionado == null)
+            return;
+
+            // Asigna el precio dependiendo del tipo de cliente seleccionado
+            switch (_clienteSeleccionado.TipoCliente)
+                    {
+                    case "Rutero":
+                    _productoSeleccionado.Prutero = value;
+                    break;
+                    case "Publico":
+                    _productoSeleccionado.Ppublico = value;
+                    break;
+                    case "Tendero":
+                    _productoSeleccionado.Ptendero = value;
+                    break;
+                    default:
+                    break; // No hace nada si el tipo de cliente no coincide
+    }
+    }
+    }
+
+    private async Task<IEnumerable<PresentacionDTO>> BuscarPresentacion(string valor)
+        {
+
+        var response = await _presentacionServicio.Lista();
+
+        if (response.status)
+            {
+            if (string.IsNullOrEmpty(valor))
+                return new List<PresentacionDTO>();
+
+            List<PresentacionDTO> lista = (List<PresentacionDTO>)response.value!;
+            return lista.FindAll(p => p.Descripcion.Contains(valor, StringComparison.InvariantCultureIgnoreCase));
+        _precio = 100;
+        }
+            else
+            {
+            return new List<PresentacionDTO>();
+    }
+    }
+
+
+    private async Task<IEnumerable<ClienteDTO>> BuscarCliente(string valor)
+        {
+
+        var response = await _clienteServicio.Lista();
+
+        if (response.status)
+            {
+            if (string.IsNullOrEmpty(valor))
+                return new List<ClienteDTO>();
+
+            List<ClienteDTO> lista = (List<ClienteDTO>)response.value!;
+            return lista.FindAll(p => p.NombreCompleto.Contains(valor, StringComparison.InvariantCultureIgnoreCase));
+        _precio = 100;
+        }
+            else
+            {
+            return new List<ClienteDTO>();
+    }
+    }
+
+    private async Task AgregarProducto()
+        {
+        if (_productoSeleccionado != null && _cantidad > 0)
+            {
+
+            var detalleVenta = new DetalleVentaDTO()
+                    {
+                    IdProducto = _productoSeleccionado.IdProducto,
+                    DescripcionProducto = _productoSeleccionado.Nombre,
+                    Cantidad = _cantidad,
+                    Precio = _productoSeleccionado.Ppublico,
+                    Total = _cantidad * _productoSeleccionado.Ppublico
+            };
+            _venta.DetalleVenta!.Add(detalleVenta);
+
+            _productoSeleccionado = null;
+    _cantidad = 0;
+    }
+
+
+
+    }
+
+    private async Task AgregarProductoEjemplo()
+        {
+
+        if (_presentacion == "Unidad")
+            {
+            _unidades = _cantidad * 1;
+
+        }
+        else if (_presentacion == "Blister")
+            {
+            _unidades = _cantidad * 10;
+        }
+        else if (_presentacion == "Caja")
+            {
+            _unidades = _cantidad * 100;
+        }
+        else if (_presentacion == "Fardo")
+            {
+            _unidades = _cantidad * 1000;
+        }
+
+
+        if (_tipo == "Rutero")
+            {
+            _precio = _cantidad * 2;
+        }
+        else if (_tipo == "Tendero")
+            {
+            _precio = _cantidad * 4;
+        }
+        else if (_tipo == "General")
+            {
+            _precio = _cantidad * 6;
+                }
+
+
+    }
+
+
+    private async Task EliminarProducto(int idproducto)
+        {
+        var productoEliminar = _venta.DetalleVenta.Find(p => p.IdProducto == idproducto);
+        _venta.DetalleVenta.Remove(productoEliminar);
+    }
+
+    private async Task RegistrarVenta()
+        {
+        botonDesactivado = true;
+
+        _venta.Total = _venta.DetalleVenta!.Sum(p => p.Total);
+        _venta.FechaRegistro = DateTime.Now;
+
+        var response = await _ventaServicio.Registrar(_venta);
+
+        if (response.status)
+            {
+            var _ventaCreada = (VentaDTO)response.value!;
+            _venta = new VentaDTO()
+                    {
+                    TipoPago = "Efectivo",
+                    DetalleVenta = new List<DetalleVentaDTO>()
+            };
+
+            await Swal.FireAsync("Venta Registrada", $"Numero de venta: {_ventaCreada.NumeroDocumento}", "success");
+        }
+            else
+            {
+            await Swal.FireAsync("Oops...", "No se pudo registrar!", "error");
+        }
+        botonDesactivado = false;
+
+    }
+
+
+
+
+    Color Color = Color.Success;
+    private void OnScroll(ScrollEventArgs e)
+        {
+        Color = (e.FirstChildBoundingClientRect.Top * -1) switch
+            {
+            var x when x < 500 => Color.Primary,
+            var x when x < 1500 => Color.Secondary,
+            var x when x < 2500 => Color.Tertiary,
+    _ => Color.Error
+    };
+    }
+
+    private async Task OnProductoSeleccionado(ProductoDTO producto)
+        {
+        if (producto != null)
+            {
+            // Actualiza el producto seleccionado
+            _productoSeleccionado = producto;
+
+            // Filtra las presentaciones relacionadas al producto seleccionado
+            var resultado = await _prodpresentacionServicio.Lista();
+
+            if (resultado.status && resultado.value != null)
+                {
+                listaProdpresentacion = resultado.value
+                    .Where(p => p.IdProducto == _productoSeleccionado.IdProducto)
+                .ToList();
+
+                // Selecciona la primera presentación de forma predeterminada, si hay alguna
+                prodpresentacionSeleccionado = listaProdpresentacion.FirstOrDefault();
+            }
+                else
+                {
+                listaProdpresentacion.Clear();
+        }
+        }
+            else
+            {
+            // Si no hay producto seleccionado, limpia las presentaciones
+            listaProdpresentacion.Clear();
+            prodpresentacionSeleccionado = null;
+        }
+    }
+
+
+
+    @inject IProdpresentacionService _prodpresentacionServicio;
+    @inject IProductoService _productoServicio;
+    @inject IPresentacionService _presentacionServicio;
+    @inject IClienteService _clienteServicio;
+    @inject IVentaService _ventaServicio;
+    @inject ISnackbar _snackBar
+    @inject SweetAlertService Swal;
+
+    <MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-5">
+
+    <MudText Typo="Typo.h5" GutterBottom="true">Nueva Venta</MudText>
+
+    <MudPaper Elevation="3" Class="pa-4" Width="100%">
+            <MudGrid>
+
+                <MudItem xs="3">
+                <MudAutocomplete T="ClienteDTO" Label="Buscar cliente" @bind-Value="_clienteSeleccionado" SearchFunc="@BuscarCliente"
+                ResetValueOnEmptyText="true"
+                AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary"
+                Variant="Variant.Outlined" Margin="Margin.Dense"
+                ToStringFunc="@(e => e == null ? null : $"{e.Nit} - {e.NombreCompleto}")" />
+
+
+            </MudItem>
+                <MudItem xs="6">
+                <MudTextField Label="Cliente" @bind-Value="NombreCliente" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" />
+            </MudItem>
+                <MudItem xs="3">
+                <MudSelect T="string" Label="Tipo Cliente" Variant="Variant.Outlined" @bind-Value="TipoCliente" Margin="Margin.Dense">
+                    <MudSelectItem Value="@("Rutero")" />
+                    <MudSelectItem Value="@("Tendero")" />
+                    <MudSelectItem Value="@("General")" />
+                    </MudSelect>
+
+
+
+            </MudItem>
+
+                <MudItem xs="5">
+
+                <MudAutocomplete T="ProductoDTO" Label="Buscar producto"  ValueChanged="OnProductoSeleccionado" SearchFunc="@BuscarProducto"
+                ResetValueOnEmptyText="true"
+                AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary"
+                Variant="Variant.Outlined" Margin="Margin.Dense"
+                ToStringFunc="@(e => e == null ? null : $"{e.Nombre} - {e.DescripcionCategoria}")" />
+            </MudItem>
+
+
+                <MudItem xs="3">
+                <MudSelect Label="Presentacion" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" Class="mb-3"
+                @bind-Value="prodpresentacionSeleccionado">
+                    @if (listaProdpresentacion != null && listaProdpresentacion.Any())
+                        {
+                        foreach (var rol in listaProdpresentacion)
+                            {
+                            <MudSelectItem Value="@rol">@rol.DescripcionPresentacion</MudSelectItem>
+                    }
+                    }
+                    else
+                        {
+                        <MudText>No hay presentaciones disponibles para este producto.</MudText>
+                }
+            </MudSelect>
+            </MudItem>
+                <MudItem xs="2">
+                <MudNumericField @bind-Value="_cantidad" Label="Cantidad" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" />
+            </MudItem>
+                <MudItem xs="2">
+                <MudNumericField @bind-Value="PrecioSeleccionado" Label="Precio" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" />
+            </MudItem>
+
+
+
+                <MudItem xs="6">
+
+            </MudItem>
+                <MudItem xs="3">
+
+                <MudNumericField @bind-Value="_unidades" Label="unidades" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" />
+
+            </MudItem>
+
+                <MudItem xs="3">
+                <MudButton Variant="Variant.Filled"
+                StartIcon="@Icons.Material.Filled.Add"
+                Color="Color.Info"
+                FullWidth="true"
+                Class="mt-1"
+                OnClick="AgregarProducto">Agregar</MudButton>
+                </MudItem>
+
+
+
+
+            <MudItem xs="12">
+                <div id="unique_id_scroll_section" class="ma-0" style="height:300px;overflow: auto;">
+                    <MudPaper Elevation="0" Height="3500px" Class="d-flex flex-column justify-space-between py-6">
+                        <MudTable Items="@_venta.DetalleVenta" Dense="true" Striped="true" Bordered="true">
+                                <HeaderContent>
+                                <MudTh>Producto</MudTh>
+                                <MudTh>Cantidad</MudTh>
+                                <MudTh>Precio</MudTh>
+                                <MudTh>Total</MudTh>
+                            <MudTh></MudTh>
+                            </HeaderContent>
+                            <RowTemplate Context="dvProducto">
+                                <MudTd DataLabel="Producto">@dvProducto.DescripcionProducto</MudTd>
+                                <MudTd DataLabel="Cantidad">@dvProducto.Cantidad</MudTd>
+                                <MudTd DataLabel="Precio">@dvProducto.Precio</MudTd>
+                                <MudTd DataLabel="Total">@dvProducto.Total</MudTd>
+                                <MudTd DataLabel="">
+                                    <MudFab Color="Color.Error"
+                                    StartIcon="@Icons.Material.Filled.Delete"
+                                    Size="Size.Small"
+                                    IconSize="Size.Small"
+                                    OnClick="@(() => EliminarProducto(dvProducto.IdProducto))" />
+                            </MudTd>
+                        </RowTemplate>
+                        </MudTable>
+
+                        <MudScrollToTop TopOffset="100"
+                        OnScroll="OnScroll"
+                        Selector="#unique_id_scroll_section"
+                        VisibleCssClass="visible absolute"
+                        HiddenCssClass="invisible">
+                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowUpward" Color="Color">Go to top</MudButton>
+                        </MudScrollToTop>
+                </MudPaper>
+            </div>
+
+
+            </MudItem>
+
+            <MudItem xs="6" Class="align-self-end">
+                <MudButton Variant="Variant.Filled"
+                StartIcon="@Icons.Material.Filled.Add"
+                Color="Color.Info"
+                FullWidth="true"
+                Class="mt-1"
+                OnClick="AgregarProductoEjemplo">Agregar</MudButton>
+            </MudItem>
+
+                <MudItem xs="3">
+                <MudButton Variant="Variant.Filled"
+                StartIcon="@Icons.Material.Filled.Save"
+                Color="Color.Primary"
+                FullWidth="true"
+                Class="mt-1"
+                OnClick="RegistrarVenta"
+                Disabled="@botonDesactivado">Registrar</MudButton>
+            </MudItem>
+                <MudItem xs="3">
+                <MudAlert Severity="Severity.Warning" NoIcon="true" Variant="Variant.Filled"
+                ContentAlignment="HorizontalAlignment.Center" Dense="true" Class="mt-1">
+                    Total @_venta.TotalTexto
+            </MudAlert>
+        </MudItem>
+
+    </MudGrid>
+        </MudPaper>
+
+    </MudContainer>
+
+
+
+
+        */
+
+
+
+
+
+
+
+}

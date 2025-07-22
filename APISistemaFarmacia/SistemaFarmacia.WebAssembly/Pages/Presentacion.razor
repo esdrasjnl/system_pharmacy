@@ -1,0 +1,151 @@
+﻿@page "/page/presentacion"
+@attribute [Authorize(Roles = "Administrador,Encargado")]
+
+@inject IPresentacionService _presentacionServicio
+@inject IDialogService _dialogServicio
+@inject ISnackbar _snackBar
+@inject SweetAlertService Swal;
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-5">
+
+    <MudText Typo="Typo.h5" GutterBottom="true">Presentaciones</MudText>
+
+    <MudPaper Elevation="3" Class="pa-4" Width="100%">
+        <MudGrid>
+            <MudItem xs="12">
+                <MudButton Variant="Variant.Filled"
+                           StartIcon="@Icons.Material.Filled.Add"
+                           Color="Color.Primary"
+                           OnClick="AbrirNuevaPresentacion">
+                    Nueva Categoria
+                </MudButton>
+            </MudItem>
+            <MudItem xs="12">
+
+                <MudTable Items="@listaPresentaciones"
+                          Dense="true"
+                          Striped="true" Bordered="true"
+                          Filter="new Func<PresentacionDTO,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1"
+                          Loading="@_loading" LoadingProgressColor="Color.Info">
+                    <ToolBarContent>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="searchString1" Placeholder="Buscar" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Categoria</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate Context="presentacionRow">
+                        <MudTd DataLabel="Categoria">@presentacionRow.Descripcion</MudTd>
+
+                        <MudTd DataLabel="">
+                            <MudFab Color="Color.Primary"
+                                    StartIcon="@Icons.Material.Filled.Edit"
+                                    Size="Size.Small"
+                                    IconSize="Size.Small"
+                                    OnClick="@(() => AbrirEditarPresentaciones(presentacionRow))" />
+                            <MudFab Color="Color.Error"
+                                    StartIcon="@Icons.Material.Filled.Delete"
+                                    Size="Size.Small"
+                                    IconSize="Size.Small"
+                                    OnClick="@(() => EliminarPresentacion(presentacionRow))" />
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+
+
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+
+</MudContainer>
+@code {
+    List<PresentacionDTO> listaPresentaciones = new List<PresentacionDTO>();
+    private string searchString1 = "";
+    private PresentacionDTO selectedItem1 = null;
+    private bool _loading = true;
+
+    private async Task ObtenerPresentaciones()
+    {
+        var result = await _presentacionServicio.Lista();
+
+        if (result.status)
+        {
+            listaPresentaciones = (List<PresentacionDTO>)result.value!;
+        }
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ObtenerPresentaciones();
+        _loading = false;
+    }
+
+    private bool FilterFunc1(PresentacionDTO element) => FilterFunc(element, searchString1);
+
+    private bool FilterFunc(PresentacionDTO element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.Descripcion.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+
+        return false;
+    }
+
+    private async Task AbrirNuevaPresentacion()
+    {
+        var dialogo = _dialogServicio.Show<MdPresentacion>("Nueva Presentacion");
+        var resultado = await dialogo.Result;
+
+        if (!resultado.Canceled)
+        {
+            await ObtenerPresentaciones();
+        }
+    }
+
+    private async Task AbrirEditarPresentaciones(PresentacionDTO presentacion)
+    {
+        var parametros = new DialogParameters { ["_presentacion"] = presentacion };
+
+        var dialogo = _dialogServicio.Show<MdPresentacion>("Editar Presentacion", parametros);
+        var resultado = await dialogo.Result;
+        if (!resultado.Canceled)
+        {
+            await ObtenerPresentaciones();
+        }
+    }
+
+    private async Task EliminarPresentacion(PresentacionDTO presentacion)
+    {
+        SweetAlertResult result = await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Esta seguro?",
+                Text = $"Eliminar presentacion: {presentacion.Descripcion}",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true,
+                ConfirmButtonText = "Si, eliminar",
+                CancelButtonText = "No, volver"
+            });
+
+        if (result.IsConfirmed)
+        {
+            var resultado = await _presentacionServicio.Eliminar(presentacion.IdPresentacion);
+
+            if (resultado)
+            {
+                _snackBar.Add("La presentacion fue eliminada", Severity.Success, a => a.VisibleStateDuration = 500);
+                await ObtenerPresentaciones();
+            }
+            else
+                _snackBar.Add("No se pudo eliminar", Severity.Error, a => a.VisibleStateDuration = 500);
+        }
+    }
+
+}
+

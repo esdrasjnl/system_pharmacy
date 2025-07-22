@@ -1,0 +1,344 @@
+﻿
+@inject ICategoriaService _categoriaServicio
+@inject IProductoService _productoServicio
+@inject ISnackbar _snackBar 
+
+<MudDialog Style="width:900px">
+
+    <DialogContent>
+
+
+
+        <EditForm Model="@_producto" OnValidSubmit="Guardar">
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
+            
+            <MudGrid>
+
+            <MudItem xs="12" sm="6">
+            <MudTextField @ref="codigo" @bind-Value="@_producto.Codigo" Class="mb-3"
+                          Label="Codigo Producto" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Badge" OnKeyUp="OnKeyUpCodigo" />
+            <ValidationMessage For="() => _producto.Codigo" />
+            </MudItem>
+
+            <MudItem xs="12" sm="6">
+                    <MudTextField @ref="nombre"  @bind-Value="@_producto.Nombre" Class="mb-3"
+                                  Label="Nombre" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Badge" OnKeyUp="OnKeyUpNombre" />
+            <ValidationMessage For="() => _producto.Nombre" />
+            </MudItem>
+
+
+            <MudItem xs="12" sm="6">
+            <MudSelect Label="Categoria" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" Class="mb-3"
+            @bind-Value="categoriaSeleccionado">
+                @if (listaCategoria.Any())
+                {
+                    foreach (var rol in listaCategoria)
+                    {
+                        <MudSelectItem Value="@rol">@rol.Descripcion</MudSelectItem>
+                    }
+                }
+            </MudSelect>
+            </MudItem>
+
+            <MudItem xs="12" sm="6">
+                    <MudTextField @ref="stock" @bind-Value="@_producto.Stock" Class="mb-3"
+                                     Label="Stock" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.QrCode" OnKeyUp="OnKeyUpStock" />
+            </MudItem>
+
+            <!-- Componente para cargar la imagen -->
+
+                <MudItem xs="12" sm="6">
+                    <MudTextField @ref="costo" @bind-Value="@_producto.pcosto" Class="mb-3"
+                                  Label="Precio Costo" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Money" OnKeyUp="OnKeyUpPublico" />
+                </MudItem>
+
+            <MudItem xs="12" sm="6">
+                    <MudTextField @ref="publico" @bind-Value="@_producto.Ppublico" Class="mb-3"
+                                  Label="Precio Publico" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Money" OnKeyUp="OnKeyUpPublico" />
+                </MudItem>
+
+            <MudItem xs="12" sm="6">
+                    <MudTextField @ref="tendero"  @bind-Value="@_producto.Ptendero" Class="mb-3"
+                                  Label="Precio Tendero" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Badge" OnKeyUp="OnKeyUpTendero" />
+                </MudItem>
+
+            <MudItem xs="12" sm="6">
+                    <MudTextField @ref="rutero"  @bind-Value="@_producto.Prutero" Class="mb-3"
+                                  Label="Precio Rutero" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Badge" OnKeyUp="OnKeyUpRutero" />
+                </MudItem>
+
+            <MudItem xs="12" sm="6">
+                    <MudTextField @ref="mayorista" @bind-Value="@_producto.Pmayorista" Class="mb-3"
+                                  Label="Precio Mayorista" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Badge" OnKeyUp="OnKeyUpMayorista" />
+                </MudItem>
+
+            <MudItem xs="12" sm="6">
+                    <MudTextField @ref="especial" @bind-Value="@_producto.Pespecial" Class="mb-3"
+                                  Label="Precio Especial" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Badge" OnKeyUp="OnKeyUpEspecial" />
+                </MudItem>
+
+            <MudItem xs="12" sm="6">
+            <MudSwitch @bind-Checked="_producto.EsActivo" Label="Estado del Producto"
+                       Color="Color.Success" ColorOff="Color.Gray" />
+                </MudItem>
+
+                <MudItem xs="12" sm="6">
+                    <MudText Typo="Typo.body1">Imagen</MudText>
+                    <InputFile OnChange="OnImageSelected" Accept="image/png, image/jpeg" Class="mb-3" />
+                    @if (!string.IsNullOrEmpty(imagenPreview))
+                    {
+                        <MudImage Src="@imagenPreview" Alt="Vista previa de la imagen" Class="mt-2" Style="width: 200px; height: 200px;" />
+                    }
+                </MudItem>
+
+            </MudGrid>
+
+        </EditForm>
+
+
+
+
+
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="Cancel">Cancelar</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Guardar">Guardar</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+
+    private MudTextField<string> codigo;
+    private MudTextField<string> nombre;
+    private MudTextField<int?> stock;
+    private MudTextField<decimal?> costo;
+    private MudTextField<decimal?> publico;
+    private MudTextField<decimal?> tendero;
+    private MudTextField<decimal?> rutero;
+    private MudTextField<decimal?> mayorista;
+    private MudTextField<decimal?> especial;
+
+    private List<Fila> filas = new();
+
+    private void AgregarFila()
+    {
+        filas.Add(new Fila());
+    }
+
+    private void EliminarFila(Fila fila)
+    {
+        filas.Remove(fila);
+    }
+
+    public class Fila
+    {
+        public int Numero { get; set; }
+        public string Nombre { get; set; }
+    }
+
+
+
+    [Parameter]
+    public ProductoDTO _producto { get; set; } = new ProductoDTO() 
+    {
+        EsActivo = true
+    };
+
+    private string? imagenPreview;
+    private IBrowserFile? imagenSeleccionada;
+
+    List<CategoriaDTO> listaCategoria = new List<CategoriaDTO>();
+    public CategoriaDTO categoriaSeleccionado;
+
+
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (_producto.Stock == null) // Verifica si es null
+            _producto.Stock = 0;
+        
+        if (_producto.Ppublico == null) // Verifica si es null
+            _producto.Ppublico = 0;
+
+        if (_producto.Ptendero == null) // Verifica si es null
+            _producto.Ptendero = 0;
+
+        if (_producto.Prutero == null) // Verifica si es null
+            _producto.Prutero = 0;
+
+        if (_producto.Pmayorista == null) // Verifica si es null
+            _producto.Pmayorista = 0;
+
+        if (_producto.Pespecial == null) // Verifica si es null
+            _producto.Pespecial = 0;
+
+
+        Console.WriteLine(_producto.IdProducto);
+        var resultado = await _categoriaServicio.Lista();
+
+        if (resultado.status)
+        {
+            listaCategoria = resultado.value!;
+            if (_producto.IdProducto != 0)
+                categoriaSeleccionado = listaCategoria.FirstOrDefault(p => p.IdCategoria == _producto.IdCategoria)!;
+            else
+                categoriaSeleccionado = listaCategoria.First();
+
+
+        }
+        
+    }
+
+    private void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
+
+
+    private async Task OnImageSelected(InputFileChangeEventArgs e)
+    {
+        imagenSeleccionada = e.File;
+
+        // Generar vista previa en Base64
+        using var stream = imagenSeleccionada.OpenReadStream();
+        using var memoryStream = new MemoryStream();
+        await stream.CopyToAsync(memoryStream);
+
+        imagenPreview = $"data:{imagenSeleccionada.ContentType};base64,{Convert.ToBase64String(memoryStream.ToArray())}";
+        _producto.Imagen = imagenPreview; // Guardar la imagen en Base64 en el modelo
+    }
+
+
+    private async Task Guardar()
+    {
+
+        if (string.IsNullOrWhiteSpace(_producto.Codigo))
+        {
+            _snackBar.Add("El campo Codigo no puede estar vacío.", Severity.Error);
+            return;
+        }
+        if (string.IsNullOrWhiteSpace(_producto.Nombre))
+        {
+            _snackBar.Add("El campo Nombre no puede estar vacío.", Severity.Error);
+            return;
+        }
+
+        try
+        {
+           
+            _producto.IdCategoria = categoriaSeleccionado.IdCategoria;
+
+            string _mensaje = "";
+            bool _resultado;
+
+            if (_producto.IdProducto != 0)
+            {
+                _resultado = await _productoServicio.Editar(_producto);
+                _mensaje = "Producto fue modificado";
+            }
+            else
+            {
+                var response = await _productoServicio.Crear(_producto);
+                _resultado = response.status;
+                _mensaje = "Producto fue creado";
+            }
+
+            if (_resultado)
+            {
+                _snackBar.Add(_mensaje, Severity.Success, a => a.VisibleStateDuration = 500);
+                MudDialog.Close(DialogResult.Ok(true));
+            }
+            else
+            {
+                _snackBar.Add("Error al guardar cambios", Severity.Error, a => a.VisibleStateDuration = 500);
+            }
+        }
+        catch (Exception ex)
+        {
+            _snackBar.Add($"Error: {ex.Message}", Severity.Error);
+        }
+
+        
+    }
+
+
+    private async Task OnKeyUpCodigo(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            // Mover foco al campo NIT
+            await nombre.FocusAsync();
+        }
+    }
+
+    private async Task OnKeyUpNombre(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            // Mover foco al campo NIT
+             await stock.FocusAsync();
+        }
+    }
+
+    private async Task OnKeyUpStock(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            // Mover foco al campo NIT
+             await publico.FocusAsync();
+        }
+    }
+
+    private async Task OnKeyUpPublico(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            // Mover foco al campo NIT
+             await tendero.FocusAsync();
+        }
+    }
+
+    private async Task OnKeyUpTendero(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            // Mover foco al campo NIT
+             await rutero.FocusAsync();
+        }
+    }
+
+    private async Task OnKeyUpRutero(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            // Mover foco al campo NIT
+             await mayorista.FocusAsync();
+        }
+    }
+
+    private async Task OnKeyUpMayorista(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            // Mover foco al campo NIT
+             await especial.FocusAsync();
+        }
+    }
+
+    private async Task OnKeyUpEspecial(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            // Mover foco al campo NIT
+            // await campoNit.FocusAsync();
+        }
+    }
+
+}

@@ -1,0 +1,196 @@
+﻿@page "/page/categoria"
+@attribute [Authorize(Roles = "Administrador,Encargado")]
+
+@inject ICategoriaService _categoriaServicio
+@inject IDialogService _dialogServicio
+@inject ISnackbar _snackBar
+@inject SweetAlertService Swal;
+
+@inject HttpClient Http;
+@inject IJSRuntime JSRuntime
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-5">
+
+    <MudText Typo="Typo.h5" GutterBottom="true">Categorias</MudText>
+
+    <MudPaper Elevation="3" Class="pa-4" Width="100%">
+        <MudGrid>
+
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled"
+                           StartIcon="@Icons.Material.Filled.Add"
+                           Color="Color.Primary"
+                           OnClick="AbrirNuevaCategoria">
+                    Nueva Categoria
+                </MudButton>
+            </MudItem>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled"
+                           StartIcon="@Icons.Material.Filled.Add"
+                           Color="Color.Secondary"
+                           OnClick="MostrarPdfEnNuevaPagina">
+                    Mostrar PDF
+                </MudButton>
+            </MudItem>
+
+           
+            <MudItem xs="12">
+
+                <MudTable Items="@listaCategorias"
+                          Dense="true"
+                          Striped="true" Bordered="true"
+                          Filter="new Func<CategoriaDTO,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1"
+                          Loading="@_loading" LoadingProgressColor="Color.Info">
+                    <ToolBarContent>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="searchString1" Placeholder="Buscar" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Categoria</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate Context="categoriaRow">
+                        <MudTd DataLabel="Categoria">@categoriaRow.Descripcion</MudTd>
+                        
+                        <MudTd DataLabel="">
+                            <MudFab Color="Color.Primary"
+                                    StartIcon="@Icons.Material.Filled.Edit"
+                                    Size="Size.Small"
+                                    IconSize="Size.Small"
+                                    OnClick="@(() => AbrirEditarCategorias(categoriaRow))" />
+                            <MudFab Color="Color.Error"
+                                    StartIcon="@Icons.Material.Filled.Delete"
+                                    Size="Size.Small"
+                                    IconSize="Size.Small"
+                                    OnClick="@(() => EliminarCategoria(categoriaRow))" />
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+
+
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+
+</MudContainer>
+@code {
+
+
+
+    private async Task MostrarPdfEnNuevaPagina()
+    {
+        // Llamar a la API para obtener la URL del PDF
+        var urlPdf = await GenerarPdf();
+
+        // Abrir el PDF en una nueva pestaña
+        await JSRuntime.InvokeVoidAsync("open", urlPdf, "_blank");
+    }
+
+    private async Task<string> GenerarPdf()
+    {
+        // Llamada a la API para generar el PDF. Este es solo un ejemplo.
+        // Asegúrate de que la API devuelva una URL válida del archivo PDF generado.
+
+        // Supón que tu API retorna la URL directa del PDF generado
+        string urlPdf = "http://apifatosamist.us-east-2.elasticbeanstalk.com/api/Categoria/pdf";  // URL a tu archivo PDF generado
+                         
+
+        return urlPdf;
+    }
+
+
+
+    
+    List<CategoriaDTO> listaCategorias = new List<CategoriaDTO>();
+    private string searchString1 = "";
+    private CategoriaDTO selectedItem1 = null;
+    private bool _loading = true;
+
+    private async Task ObtenerCategorias()
+    {
+        var result = await _categoriaServicio.Lista();
+
+        if (result.status)
+        {
+            listaCategorias = (List<CategoriaDTO>)result.value!;
+        }
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ObtenerCategorias();
+        _loading = false;
+    }
+
+    private bool FilterFunc1(CategoriaDTO element) => FilterFunc(element, searchString1);
+
+    private bool FilterFunc(CategoriaDTO element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.Descripcion.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        
+
+        return false;
+    }
+
+    private async Task AbrirNuevaCategoria()
+    {
+        var dialogo = _dialogServicio.Show<MdCategoria>("Nueva Categoria");
+        var resultado = await dialogo.Result;
+
+        if (!resultado.Canceled)
+        {
+            await ObtenerCategorias();
+        }
+    }
+
+    private async Task AbrirEditarCategorias(CategoriaDTO categoria)
+    {
+        var parametros = new DialogParameters { ["_categoria"] = categoria };
+
+        var dialogo = _dialogServicio.Show<MdCategoria>("Editar Categoria", parametros);
+        var resultado = await dialogo.Result;
+        if (!resultado.Canceled)
+        {
+            await ObtenerCategorias();
+        }
+    }
+
+    private async Task EliminarCategoria(CategoriaDTO categoria)
+    {
+        SweetAlertResult result = await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Esta seguro?",
+                Text = $"Eliminar categoria: {categoria.Descripcion}",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true,
+                ConfirmButtonText = "Si, eliminar",
+                CancelButtonText = "No, volver"
+            });
+
+        if (result.IsConfirmed)
+        {
+            var resultado = await _categoriaServicio.Eliminar(categoria.IdCategoria);
+
+            if (resultado)
+            {
+                _snackBar.Add("La categoria fue eliminada", Severity.Success, a => a.VisibleStateDuration = 500);
+                await ObtenerCategorias();
+            }
+            else
+                _snackBar.Add("No se pudo eliminar", Severity.Error, a => a.VisibleStateDuration = 500);
+        }
+    }
+
+
+
+
+    
+}
+

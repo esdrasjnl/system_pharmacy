@@ -1,0 +1,177 @@
+﻿@inject IClienteService _clienteServicio
+@inject ISnackbar _snackBar
+
+<MudDialog Style="width:400px">
+
+    <DialogContent>
+        <MudContainer Style="max-height: 400px; overflow-y: scroll" Class="m-0 p-0">
+
+            <EditForm Model="@_cliente" OnValidSubmit="Guardar">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <MudTextField @ref="campoNombreCompleto"  @bind-Value="@_cliente.NombreCompleto" Class="mb-3"
+                              Label="Nombre Completo" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Badge" OnKeyUp="OnKeyUpNombreCompleto" />
+                <ValidationMessage For="() => _cliente.NombreCompleto" />
+
+                <MudTextField @ref="campoNit" @bind-Value="@_cliente.Nit" Class="mb-3"
+                              Label="NIT" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Badge" OnKeyUp="OnKeyUpNit" />
+                <ValidationMessage For="() => _cliente.Nit" />
+
+                <MudTextField @ref="campoDireccion"  @bind-Value="@_cliente.Direccion" Class="mb-3"
+                              Label="Direccion" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Badge" OnKeyUp="OnKeyUpDireccion" />
+
+                <MudTextField @ref="campoTelefono" @bind-Value="@_cliente.Telefono" Class="mb-3"
+                              Label="Telefono" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Badge" OnKeyUp="OnKeyUpTelefono" />
+
+                <MudSelect  T="string" Label="Tipo de Cliente" Variant="Variant.Outlined" @bind-Value="_cliente.TipoCliente" Margin="Margin.Dense">
+                    <MudSelectItem Value="@("General")" />
+                    <MudSelectItem Value="@("Rutero")" />
+                    <MudSelectItem Value="@("Tendero")" />
+                    <MudSelectItem Value="@("Mayorista")" />
+                    <MudSelectItem Value="@("Especial")" />
+                </MudSelect>
+                <ValidationMessage For="() => _cliente.TipoCliente" />
+
+                <MudTextField @ref="campoObservaciones"  @bind-Value="@_cliente.Observaciones" Class="mb-3"
+                              Label="Observaciones" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Badge" OnKeyUp="OnKeyUpObservaciones" />
+
+            </EditForm>
+
+        </MudContainer>
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="Cancel">Cancelar</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Guardar" >Guardar</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [Parameter]
+    public ClienteDTO _cliente { get; set; } = new ClienteDTO();
+
+    private MudTextField<string> campoNombreCompleto;
+    private MudTextField<string> campoNit;
+    private MudTextField<string> campoDireccion;
+    private MudTextField<string> campoTelefono;
+    private MudTextField<string> campoObservaciones;
+    bool isShow;
+
+
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        //Console.WriteLine(_cliente.IdCategoria);
+        if (string.IsNullOrEmpty(_cliente.TipoCliente))
+        {
+            _cliente.TipoCliente = "General";
+        }
+
+         
+
+    }
+
+
+    private void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
+    private async Task Guardar()
+    {
+        if (string.IsNullOrWhiteSpace(_cliente.NombreCompleto))
+        {
+            _snackBar.Add("El campo de nombre no puede estar vacio.", Severity.Error);
+            return;
+        }
+        
+        if (string.IsNullOrWhiteSpace(_cliente.Nit))
+        {
+            _snackBar.Add("El campo de NIT no puede estar vacio.", Severity.Error);
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(_cliente.TipoCliente))
+        {
+            _snackBar.Add("El campo de Tipo Cliente no puede estar vacio.", Severity.Error);
+            return;
+        }
+
+
+        string _mensaje = "";
+        bool _resultado;
+
+        if (_cliente.IdCliente != 0)
+        {
+            _resultado = await _clienteServicio.Editar(_cliente);
+            _mensaje = "Cliente fue modificado";
+        }
+        else
+        {
+            var response = await _clienteServicio.Crear(_cliente);
+            _resultado = response.status;
+            _mensaje = "Cliente fue creado";
+        }
+
+        if (_resultado)
+        {
+            _snackBar.Add(_mensaje, Severity.Success, a => a.VisibleStateDuration = 500);
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        else
+            _snackBar.Add("Error al guardar cambios", Severity.Error, a => a.VisibleStateDuration = 500);
+
+    }
+
+    private async Task OnKeyUpNombreCompleto(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            // Mover foco al campo NIT
+            await campoNit.FocusAsync();
+        }
+    }
+
+    private async Task OnKeyUpNit(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            // Mover foco al campo Dirección
+            await campoDireccion.FocusAsync();
+        }
+    }
+
+
+    private async Task OnKeyUpDireccion(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            // Mover foco al campo Dirección
+            await campoTelefono.FocusAsync();
+        }
+    }
+
+    private async Task OnKeyUpTelefono(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            // Mover foco al campo Dirección
+            await campoObservaciones.FocusAsync();
+        }
+    }
+
+    private async Task OnKeyUpObservaciones(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            // Mover foco al campo Dirección
+           // await campoObservaciones.FocusAsync();
+        }
+    }
+
+}

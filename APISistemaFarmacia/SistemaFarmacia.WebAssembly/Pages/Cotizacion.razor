@@ -1,0 +1,697 @@
+﻿ @page "/page/cotizacion"
+@attribute [Authorize(Roles = "Administrador,Cajero,Encargado")]
+
+@using System.Globalization
+
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+@inject IProdpresentacionService _prodpresentacionServicio;
+@inject IProductoService _productoServicio;
+@inject IPresentacionService _presentacionServicio;
+@inject IClienteService _clienteServicio;
+@inject ICotizacionService _cotizacionServicio;
+@inject ISnackbar _snackBar
+@inject SweetAlertService Swal;
+
+@inject IJSRuntime JSRuntime
+@inject HttpClient Http
+
+@inject IDialogService _dialogServicio
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-5">
+
+    <MudText Typo="Typo.h5" GutterBottom="true">Nueva Cotizacion</MudText>
+
+    <MudPaper Elevation="3" Class="pa-4" Width="100%">
+        <MudGrid>
+
+            <MudItem xs="3">
+                <MudAutocomplete T="ClienteDTO" Label="Buscar cliente" @bind-Value="_clienteSeleccionado" SearchFunc="@BuscarCliente"
+                                 ResetValueOnEmptyText="true"
+                                 AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary"
+                                 Variant="Variant.Outlined" Margin="Margin.Dense"
+                                 ToStringFunc="@(e => e == null ? null : $"{e.Direccion} - {e.NombreCompleto}")" />
+
+
+            </MudItem>
+            <MudItem xs="6">
+                <MudTextField Label="Cliente" @bind-Value="NombreCliente" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" ReadOnly="true" />
+            </MudItem>
+
+
+            <MudItem xs="3">
+                <MudSelect T="string" Label="Tipo Cliente" Variant="Variant.Outlined" @bind-Value="TipoCliente" Margin="Margin.Dense">
+                    <MudSelectItem Value="@("Publico")" />
+                    <MudSelectItem Value="@("Tendero")" />
+                    <MudSelectItem Value="@("Rutero")" />
+                    <MudSelectItem Value="@("Mayorista")" />
+                    @if (isAdmin)
+                    {
+                        <MudSelectItem Value="@("Especial")" />
+                    }
+                </MudSelect>
+            </MudItem>
+
+
+
+            <MudItem xs="5">
+
+                <MudAutocomplete T="ProductoDTO" Label="Buscar producto" ValueChanged="OnProductoSeleccionado" SearchFunc="@BuscarProducto"
+                ResetValueOnEmptyText="true"
+                AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary"
+                Variant="Variant.Outlined" Margin="Margin.Dense"
+                ToStringFunc="@(e => e == null ? null : $"{e.Nombre} - {e.DescripcionCategoria}")" />
+
+
+            </MudItem>
+
+
+            <MudItem xs="3">
+                <MudSelect Label="Presentacion" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" Class="mb-3"
+                @bind-Value="prodpresentacionSeleccionado">
+                    @if (listaProdpresentacion != null && listaProdpresentacion.Any())
+                    {
+                        foreach (var presentacion in listaProdpresentacion)
+                        {
+                            <MudSelectItem Value="@presentacion">@presentacion.DescripcionPresentacion</MudSelectItem>
+                        }
+                    }
+                    else
+                    {
+
+                        <MudText>No hay presentaciones .</MudText>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="2">
+                <MudNumericField @bind-Value="_cantidad" Label="Cantidad" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" Min="1" Max="100000" />
+            </MudItem>
+            <MudItem xs="2">
+                <MudNumericField @bind-Value="PrecioSeleccionado" Label="Precio" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" Style="@GetColorStyle()" ReadOnly="true" />
+            </MudItem>
+
+
+
+            <MudItem xs="2">
+
+                @if (_productoSeleccionado != null)
+                {
+                    <MudNumericField @bind-Value="_productoSeleccionado.Stock" Label="Existencias" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" ReadOnly="true" />
+                }
+                else
+                {
+                    <MudNumericField @bind-Value="stock" Label="Existencias" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" ReadOnly="true" />
+                }
+
+
+            </MudItem>
+            <MudItem xs="3">
+
+                @if (prodpresentacionSeleccionado != null)
+                {
+                    <MudNumericField @bind-Value="VentaUnidades" Label="unidades" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" ReadOnly="true" />
+                }
+                else
+                {
+                    <MudNumericField @bind-Value="unidades" Label="unidades" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" ReadOnly="true" />
+                }
+
+
+
+            </MudItem>
+
+
+            <MudItem xs="3">
+                <MudButton Variant="Variant.Filled"
+                StartIcon="@Icons.Material.Filled.Add"
+                Color="Color.Info"
+                FullWidth="true"
+                Class="mt-1"
+                OnClick="AgregarProducto">Agregar</MudButton>
+            </MudItem>
+
+
+
+
+            <MudItem xs="12">
+                <div id="unique_id_scroll_section" class="ma-0" style="height:300px;overflow: auto;">
+                    <MudPaper Elevation="0" Height="3500px" Class="d-flex flex-column justify-space-between py-6">
+                        <MudTable Items="@_cotizacion.Detallecotizacion" Dense="true" Striped="true" Bordered="true">
+                            <HeaderContent>
+                                <MudTh>Codigo</MudTh>
+                                <MudTh>Cantidad</MudTh>
+                                <MudTh>Presentacion</MudTh>
+                                <MudTh>Producto</MudTh>
+                                <MudTh>Precio</MudTh>
+                                <MudTh>Total</MudTh>
+                                <MudTh></MudTh>
+                            </HeaderContent>
+                            <RowTemplate Context="dvProducto">
+                                <MudTd DataLabel="Codigo">@dvProducto.Codigo</MudTd>
+                                <MudTd DataLabel="Cantidad">
+                                    <MudNumericField Value="dvProducto.CantidadReporte"
+                                    Variant="Variant.Text"
+                                    Min="1"
+                                    Max="100000"
+                                    Step="1"
+                                    Immediate="true"
+                                    T="int?"
+                                    Margin="Margin.None"
+                                    Style="width: 80px;"
+                                    ValueChanged="@(cantidad => ActualizarTotal(dvProducto, cantidad))" />
+                                </MudTd>
+                                <MudTd DataLabel="Presentacion">@dvProducto.Presenta</MudTd>
+                                <MudTd DataLabel="Producto">@dvProducto.DescripcionProducto</MudTd>
+                                <MudTd DataLabel="Precio">@dvProducto.Precio</MudTd>
+                                <MudTd DataLabel="Total">@dvProducto.Total</MudTd>
+                                <MudTd DataLabel="">
+                                    <MudFab Color="Color.Error"
+                                    StartIcon="@Icons.Material.Filled.Delete"
+                                    Size="Size.Small"
+                                    IconSize="Size.Small"
+                                    OnClick="@(() => EliminarProducto(dvProducto.IdProducto))" />
+                                </MudTd>
+                            </RowTemplate>
+                        </MudTable>
+
+                        <MudScrollToTop TopOffset="100"
+                        OnScroll="OnScroll"
+                        Selector="#unique_id_scroll_section"
+                        VisibleCssClass="visible absolute"
+                        HiddenCssClass="invisible">
+                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowUpward" Color="Color">Go to top</MudButton>
+                        </MudScrollToTop>
+                    </MudPaper>
+                </div>
+
+
+            </MudItem>
+
+
+
+            <MudItem xs="3">
+                <MudButton Variant="Variant.Filled"
+                StartIcon="@Icons.Material.Filled.Save"
+                Color="Color.Primary"
+                FullWidth="true"
+                Class="mt-1"
+                OnClick="RegistrarVenta"
+                Disabled="@botonDesactivado">Registrar</MudButton>
+            </MudItem>
+            <MudItem xs="3">
+                <MudAlert Severity="Severity.Warning" NoIcon="true" Variant="Variant.Filled"
+                ContentAlignment="HorizontalAlignment.Center" Dense="true" Class="mt-1">
+                    Total @_cotizacion.TotalTexto
+                </MudAlert>
+            </MudItem>
+
+
+
+        </MudGrid>
+    </MudPaper>
+
+</MudContainer>
+
+@code {
+    string NoPrsentacion = "No hay presentaciones";
+    List<ProdpresentacionDTO> listaProdpresentacion = new List<ProdpresentacionDTO>();
+    public ProdpresentacionDTO prodpresentacionSeleccionado;
+
+
+
+
+    private bool isAdmin;
+
+
+
+
+    
+
+
+
+    //   public long valorNIT = 25415478748;
+    //  public double _precio = 0.0;
+    public double _unidades = 0;
+    public int stock = 0;
+    public int unidades = 0;
+    //  public string _nombreCliente = "";
+    // public string _tipo = "Tendero";
+    //   public string _presentacion = "Blister";
+    private int _cantidad = 0;
+
+    private
+    CotizacionDTO _cotizacion = new CotizacionDTO()
+        {
+            TipoPago = "Efectivo",
+            Detallecotizacion = new List<DetalleCotizacionDTO>()
+        };
+    private ProductoDTO _productoSeleccionado;
+    private ClienteDTO _clienteSeleccionado;
+
+    private bool botonDesactivado = false;
+
+    private async Task<IEnumerable<ProductoDTO>> BuscarProducto(string valor)
+    {
+
+
+
+
+        var response = await _productoServicio.ListaVenta();
+
+        if (response.status)
+        {
+            if (string.IsNullOrEmpty(valor))
+                return new List<ProductoDTO>();
+
+            List<ProductoDTO> lista = (List<ProductoDTO>)response.value!;
+            return lista.FindAll(p => p.Nombre.Contains(valor, StringComparison.InvariantCultureIgnoreCase));
+
+        }
+
+
+        else
+        {
+            return new List<ProductoDTO>();
+        }
+
+    }
+
+
+
+
+
+    private decimal VentaUnidades
+    {
+        get
+        {
+            if (prodpresentacionSeleccionado == null)
+                return 0m;
+
+            // Retorna el precio para el tipo de cliente "Rutero"
+            decimal _resultadoUnidades = prodpresentacionSeleccionado.Cantidad * _cantidad ?? 0m;
+            return _resultadoUnidades;  // Solo utilizamos "Rutero"
+
+        }
+
+        set
+        {
+            if (prodpresentacionSeleccionado == null)
+                return;
+
+            // Asigna el precio solo para el tipo de cliente "Rutero"
+
+            //     prodpresentacionSeleccionado.Cantidad = value;
+
+        }
+    }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+
+        // Console.WriteLine(_productoSeleccionado.IdProducto);
+
+        //  Console.WriteLine(_producto.IdProducto);
+        var resultado = await _prodpresentacionServicio.Lista();
+
+        if (resultado.status && resultado.value != null)
+        {
+            listaProdpresentacion = resultado.value!;
+            // if (_producto.IdProducto != 0)
+            //   categoriaSeleccionado = listaCategoria.FirstOrDefault(p => p.IdCategoria == _producto.IdCategoria)!;
+            // else
+            //  listaProdpresentacion = listaProdpresentacion.Where(p => p.IdProducto == IdPro).ToList();
+            //prodpresentacionSeleccionado = listaProdpresentacion.First();
+
+
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+
+            // Aquí se supone que el rol "Administrador" está en el claims del usuario
+            isAdmin = user.IsInRole("Administrador");
+
+
+        }
+
+    }
+
+
+    private string NombreCliente
+    {
+        get => _clienteSeleccionado?.NombreCompleto ?? string.Empty;
+        set
+        {
+            if (_clienteSeleccionado != null)
+            {
+                _clienteSeleccionado.NombreCompleto = value;
+            }
+        }
+    }
+
+    private string TipoCliente
+    {
+        get => _clienteSeleccionado?.TipoCliente ?? string.Empty;
+        set
+        {
+            if (_clienteSeleccionado != null)
+            {
+                _clienteSeleccionado.TipoCliente = value;
+            }
+        }
+    }
+
+
+
+
+    private decimal PrecioSeleccionado
+    {
+
+        get
+        {
+            if (_productoSeleccionado == null || _clienteSeleccionado == null)
+                return 0m;
+
+            if (prodpresentacionSeleccionado == null)
+            {
+                return _clienteSeleccionado.TipoCliente switch
+                {
+
+                    "Rutero" => _productoSeleccionado.Prutero ?? 0m,
+                    "Publico" => _productoSeleccionado.Ppublico ?? 0m,
+                    "Tendero" => _productoSeleccionado.Ptendero ?? 0m,
+                    "Mayorista" => _productoSeleccionado.Pmayorista ?? 0m,
+                    "Especial" => _productoSeleccionado.Pespecial ?? 0m,
+                    _ => 0m // Si el tipo de cliente no coincide, devuelve 0
+                };
+            }
+            else
+            {
+                return _clienteSeleccionado.TipoCliente switch
+                {
+
+                    "Rutero" => _productoSeleccionado.Prutero * prodpresentacionSeleccionado.Cantidad ?? 0m,
+                    "Publico" => _productoSeleccionado.Ppublico * prodpresentacionSeleccionado.Cantidad ?? 0m,
+                    "Tendero" => _productoSeleccionado.Ptendero * prodpresentacionSeleccionado.Cantidad ?? 0m,
+                    "Mayorista" => _productoSeleccionado.Pmayorista * prodpresentacionSeleccionado.Cantidad ?? 0m,
+                    "Especial" => _productoSeleccionado.Pespecial * prodpresentacionSeleccionado.Cantidad ?? 0m,
+                    _ => 0m // Si el tipo de cliente no coincide, devuelve 0
+                };
+            }
+            // Retorna el precio dependiendo del tipo de cliente seleccionado
+
+        }
+
+        set
+
+        {
+            if (_productoSeleccionado == null || _clienteSeleccionado == null)
+                return;
+
+            // Asigna el precio dependiendo del tipo de cliente seleccionado
+            switch (_clienteSeleccionado.TipoCliente)
+            {
+                case "Rutero":
+                    _productoSeleccionado.Prutero = value;
+                    break;
+                case "Publico":
+                    _productoSeleccionado.Ppublico = value;
+                    break;
+                case "Tendero":
+                    _productoSeleccionado.Ptendero = value;
+                    break;
+                case "Mayorista":
+                    _productoSeleccionado.Pmayorista = value;
+                    break;
+                case "Especial":
+                    _productoSeleccionado.Pespecial = value;
+                    break;
+                default:
+                    break; // No hace nada si el tipo de cliente no coincide
+            }
+        }
+    }
+
+
+
+    private async Task<IEnumerable<PresentacionDTO>> BuscarPresentacion(string valor)
+    {
+
+        var response = await _presentacionServicio.Lista();
+
+        if (response.status)
+        {
+            if (string.IsNullOrEmpty(valor))
+                return new List<PresentacionDTO>();
+
+            List<PresentacionDTO> lista = (List<PresentacionDTO>)response.value!;
+            return lista.FindAll(p => p.Descripcion.Contains(valor, StringComparison.InvariantCultureIgnoreCase));
+            // _precio = 100;
+        }
+        else
+        {
+            return new List<PresentacionDTO>();
+        }
+    }
+
+
+    private async Task<IEnumerable<ClienteDTO>> BuscarCliente(string valor)
+    {
+
+        var response = await _clienteServicio.Lista();
+
+        if (response.status)
+        {
+            if (string.IsNullOrEmpty(valor))
+                return new List<ClienteDTO>();
+
+            List<ClienteDTO> lista = (List<ClienteDTO>)response.value!;
+            return lista.FindAll(p => p.NombreCompleto.Contains(valor, StringComparison.InvariantCultureIgnoreCase));
+            //  _precio = 100;
+        }
+        else
+        {
+            return new List<ClienteDTO>();
+        }
+    }
+
+    private async Task AgregarProducto()
+    {
+        if (_productoSeleccionado != null && _cantidad > 0)
+        {
+            if (prodpresentacionSeleccionado.Cantidad * _cantidad > _productoSeleccionado.Stock)
+            {
+                _snackBar.Add("No hay suficiente producto en almacen.", Severity.Error);
+            }
+            else
+            {
+                var detalleVenta = new DetalleCotizacionDTO()
+                    {
+                        IdProducto = _productoSeleccionado.IdProducto,
+                        Codigo = _productoSeleccionado.Codigo,
+                        DescripcionProducto = _productoSeleccionado.Nombre,
+                        CantidadInventario = prodpresentacionSeleccionado.Cantidad * _cantidad,
+                        CantidadReporte = _cantidad,
+                        Presenta = prodpresentacionSeleccionado.DescripcionPresentacion,
+                        Precio = PrecioSeleccionado,
+                        // Precio = _productoSeleccionado.Ppublico,
+                        Total = _cantidad * PrecioSeleccionado,
+
+                    };
+                _cotizacion.Detallecotizacion!.Add(detalleVenta);
+
+                _productoSeleccionado = null;
+                _cantidad = 0;
+
+                autocompleteKey = Guid.NewGuid().ToString(); // Generar una nueva clave única
+                StateHasChanged();  // Forzar actualización
+            }
+        }
+        else
+        {
+            Console.WriteLine("no hay suficiente stock");
+        }
+
+
+
+    }
+
+    private string autocompleteKey = Guid.NewGuid().ToString();
+
+
+    private async Task EliminarProducto(int idproducto)
+    {
+        var productoEliminar = _cotizacion.Detallecotizacion.Find(p => p.IdProducto == idproducto);
+        _cotizacion.Detallecotizacion.Remove(productoEliminar);
+    }
+
+    private async Task RegistrarVenta()
+    {
+        if (_clienteSeleccionado == null)
+        {
+            _snackBar.Add("Debe seleccionar un cliente y agregar productos.", Severity.Error);
+        }
+        else 
+        {
+
+        botonDesactivado = true;
+
+        _cotizacion.IdCliente = _clienteSeleccionado.IdCliente;
+        _cotizacion.Total = _cotizacion.Detallecotizacion!.Sum(p => p.Total);
+        _cotizacion.FechaRegistro = DateTime.Now;
+
+        var response = await _cotizacionServicio.Registrar(_cotizacion);
+
+        if (response.status)
+        {
+            var _ventaCreada = (CotizacionDTO)response.value!;
+            _cotizacion = new CotizacionDTO()
+                {
+                    TipoPago = "Efectivo",
+                    Detallecotizacion = new List<DetalleCotizacionDTO>()
+                };
+
+            // Mostrar SweetAlert2 con el botón "Imprimir"
+            var result = await Swal.FireAsync(new SweetAlertOptions
+                {
+                    Title = "Cotizacion Registrada",
+                    Text = $"Número de cotizacion: {_ventaCreada.NumeroDocumentoCotizacion}",
+                    Icon = "success",
+                    ShowCancelButton = true,  // Agrega el botón "Cancelar"
+                    ConfirmButtonText = "Imprimir",  // Botón principal para imprimir
+                    CancelButtonText = "Cerrar"  // Botón secundario
+                });
+
+            // Si el usuario hace clic en "Imprimir", generar el PDF
+            if (result.IsConfirmed)
+            {
+                //await GenerarReporte(_ventaCreada.IdVenta);
+                Console.WriteLine("aqui se muestr el reporte");
+                MostrarPdfEnNuevaPagina(_ventaCreada.IdCotizacion);
+                StateHasChanged();
+            }
+            else
+            {
+                StateHasChanged();
+            }
+
+            //await Swal.FireAsync("Venta Registrada", $"Numero de venta: {_ventaCreada.IdVenta}", "success");
+        }
+        else
+        {
+            await Swal.FireAsync("Oops...", "No se pudo registrar!", "error");
+        }
+        botonDesactivado = false;
+
+
+        }
+        // MostrarPdfEnNuevaPagina();
+    }
+
+
+   
+
+
+
+
+
+    Color Color = Color.Success;
+    private void OnScroll(ScrollEventArgs e)
+    {
+        Color = (e.FirstChildBoundingClientRect.Top * -1) switch
+        {
+            var x when x < 500 => Color.Primary,
+            var x when x < 1500 => Color.Secondary,
+            var x when x < 2500 => Color.Tertiary,
+            _ => Color.Error
+        };
+    }
+
+    private async Task OnProductoSeleccionado(ProductoDTO producto)
+    {
+
+
+        if (producto != null)
+        {
+
+            _productoSeleccionado = producto;
+
+
+            var resultado = await _prodpresentacionServicio.Lista();
+
+            if (resultado.status && resultado.value != null)
+            {
+                listaProdpresentacion = resultado.value
+                    .Where(p => p.IdProducto == _productoSeleccionado.IdProducto)
+                    .ToList();
+
+
+                prodpresentacionSeleccionado = listaProdpresentacion.FirstOrDefault();
+            }
+            else
+            {
+                listaProdpresentacion.Clear();
+            }
+        }
+        else
+        {
+
+            listaProdpresentacion.Clear();
+            prodpresentacionSeleccionado = null;
+        }
+
+    }
+
+    private string GetColorStyle()
+    {
+        if (_clienteSeleccionado == null)
+            return "color: black; border-color: gray;";
+
+        return _clienteSeleccionado.TipoCliente switch
+        {
+            "Rutero" => "color: blue; border-color: blue;",   // Azul
+            "Publico" => "color: green; border-color: green;",    // verde
+            "Tendero" => "color: deepskyblue; border-color: deepskyblue;", // Celeste
+            "Mayorista" => "color: orange; border-color: orange;",    // Naranja
+            "Especial" => "color: red; border-color: red;", // Rojo
+            _ => "color: black; border-color: gray;"
+        };
+    }
+
+
+    private void ActualizarTotal(DetalleCotizacionDTO dvProducto, int? nuevaCantidad)
+    {
+
+
+        if (nuevaCantidad.HasValue)
+        {
+            dvProducto.CantidadReporte = nuevaCantidad.Value;
+            dvProducto.Total = dvProducto.CantidadReporte * dvProducto.Precio;
+        }
+
+        _cotizacion.Detallecotizacion = new List<DetalleCotizacionDTO>(_cotizacion.Detallecotizacion); // Forzar actualización
+        StateHasChanged(); // Asegurar que Blazor re-renderice la tabla
+
+    }
+
+    private async Task MostrarPdfEnNuevaPagina(int id)
+    {
+        // Llamar a la API para obtener la URL del PDF usando el identificador
+        var urlPdf = await GenerarPdf(id);
+
+        // Abrir el PDF en una nueva pestaña
+        await JSRuntime.InvokeVoidAsync("open", urlPdf, "_blank");
+    }
+
+    private async Task<string> GenerarPdf(int id)
+    {
+        // Construir la URL dinámica con el identificador
+        string urlPdf = $"http://apifatosamist.us-east-2.elasticbeanstalk.com/api/cotizacion/cotizacionpdf/{id}";  // URL con el id
+
+
+        return urlPdf;
+    }
+
+}

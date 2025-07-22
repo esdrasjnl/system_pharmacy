@@ -1,0 +1,193 @@
+﻿@page "/page/proveedor"
+@attribute [Authorize(Roles = "Administrador,Encargado")]
+
+@inject IProveedorService _proveedorServicio
+@inject IDialogService _dialogServicio
+@inject ISnackbar _snackBar
+@inject SweetAlertService Swal;
+
+@inject HttpClient Http;
+@inject IJSRuntime JSRuntime
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-5">
+
+    <MudText Typo="Typo.h5" GutterBottom="true">Proveedores</MudText>
+
+    <MudPaper Elevation="3" Class="pa-4" Width="100%">
+        <MudGrid>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled"
+                           StartIcon="@Icons.Material.Filled.Add"
+                           Color="Color.Primary"
+                           OnClick="AbrirNuevoProveedor">
+                    Nuevo Proveedor
+                </MudButton>
+            </MudItem>
+                <MudItem xs="2">
+                    <MudButton Variant="Variant.Filled"
+                               StartIcon="@Icons.Material.Filled.Add"
+                               Color="Color.Secondary"
+                               OnClick="MostrarPdfEnNuevaPagina">
+                        Mostrar PDF
+                    </MudButton>
+                
+
+
+
+            </MudItem>
+            <MudItem xs="12">
+
+                <MudTable Items="@listaProveedores"
+                          Dense="true"
+                          Striped="true" Bordered="true"
+                          Filter="new Func<ProveedorDTO,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1"
+                          Loading="@_loading" LoadingProgressColor="Color.Info">
+                    <ToolBarContent>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="searchString1" Placeholder="Buscar" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Proveedor</MudTh>
+                        <MudTh>NIT</MudTh>
+                        <MudTh>Direccion</MudTh>
+                        <MudTh>Telefono</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate Context="proveedorRow">
+                        <MudTd DataLabel="Proveedor">@proveedorRow.Nombre</MudTd>
+                        <MudTd DataLabel="NIT">@proveedorRow.Nit</MudTd>
+                        <MudTd DataLabel="Direccion">@proveedorRow.Direccion</MudTd>
+                        <MudTd DataLabel="Telefono">@proveedorRow.Telefono</MudTd>
+
+                        <MudTd DataLabel="">
+                            <MudFab Color="Color.Primary"
+                                    StartIcon="@Icons.Material.Filled.Edit"
+                                    Size="Size.Small"
+                                    IconSize="Size.Small"
+                                    OnClick="@(() => AbrirEditarProveedores(proveedorRow))" />
+                            <MudFab Color="Color.Error"
+                                    StartIcon="@Icons.Material.Filled.Delete"
+                                    Size="Size.Small"
+                                    IconSize="Size.Small"
+                                    OnClick="@(() => EliminarProveedor(proveedorRow))" />
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+
+
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+
+</MudContainer>
+
+@code {
+
+    private async Task MostrarPdfEnNuevaPagina()
+    {
+        // Llamar a la API para obtener la URL del PDF
+        var urlPdf = await GenerarPdf();
+
+        // Abrir el PDF en una nueva pestaña
+        await JSRuntime.InvokeVoidAsync("open", urlPdf, "_blank");
+    }
+
+    private async Task<string> GenerarPdf()
+    {
+        // Llamada a la API para generar el PDF. Este es solo un ejemplo.
+        // Asegúrate de que la API devuelva una URL válida del archivo PDF generado.
+
+        // Supón que tu API retorna la URL directa del PDF generado
+        string urlPdf = "http://apifatosamist.us-east-2.elasticbeanstalk.com/api/Proveedor/proveedorespdf";  // URL a tu archivo PDF generado
+
+        return urlPdf;
+    }
+
+    List<ProveedorDTO> listaProveedores = new List<ProveedorDTO>();
+    private string searchString1 = "";
+    private ProveedorDTO selectedItem1 = null;
+    private bool _loading = true;
+
+    private async Task ObtenerProveedores()
+    {
+        var result = await _proveedorServicio.Lista();
+
+        if (result.status)
+        {
+            listaProveedores = (List<ProveedorDTO>)result.value!;
+        }
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ObtenerProveedores();
+        _loading = false;
+    }
+
+    private bool FilterFunc1(ProveedorDTO element) => FilterFunc(element, searchString1);
+
+    private bool FilterFunc(ProveedorDTO element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.Nombre.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+
+        return false;
+    }
+
+    private async Task AbrirNuevoProveedor()
+    {
+        var dialogo = _dialogServicio.Show<MdProveedor>("Nuevo Proveedor");
+        var resultado = await dialogo.Result;
+
+        if (!resultado.Canceled)
+        {
+            await ObtenerProveedores();
+        }
+    }
+
+    private async Task AbrirEditarProveedores(ProveedorDTO proveedor)
+    {
+        var parametros = new DialogParameters { ["_proveedor"] = proveedor };
+
+        var dialogo = _dialogServicio.Show<MdProveedor>("Editar Proveedor", parametros);
+        var resultado = await dialogo.Result;
+        if (!resultado.Canceled)
+        {
+            await ObtenerProveedores();
+        }
+    }
+
+    private async Task EliminarProveedor(ProveedorDTO categoria)
+    {
+        SweetAlertResult result = await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Esta seguro?",
+                Text = $"Eliminar categoria: {categoria.Nombre}",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true,
+                ConfirmButtonText = "Si, eliminar",
+                CancelButtonText = "No, volver"
+            });
+
+        if (result.IsConfirmed)
+        {
+            var resultado = await _proveedorServicio.Eliminar(categoria.IdProveedor);
+
+            if (resultado)
+            {
+                _snackBar.Add("El proveedor fue eliminado", Severity.Success, a => a.VisibleStateDuration = 500);
+                await ObtenerProveedores();
+            }
+            else
+                _snackBar.Add("No se pudo eliminar", Severity.Error, a => a.VisibleStateDuration = 500);
+        }
+    }
+
+}

@@ -1,0 +1,192 @@
+﻿@page "/page/cliente"
+@attribute [Authorize(Roles = "Administrador,Encargado")]
+
+@inject IClienteService _clienteServicio
+@inject IDialogService _dialogServicio
+@inject ISnackbar _snackBar
+@inject SweetAlertService Swal;
+
+@inject HttpClient Http;
+@inject IJSRuntime JSRuntime
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-5">
+
+    <MudText Typo="Typo.h5" GutterBottom="true">Clientes</MudText>
+
+    <MudPaper Elevation="3" Class="pa-4" Width="100%">
+        <MudGrid>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled"
+                           StartIcon="@Icons.Material.Filled.Add"
+                           Color="Color.Primary"
+                           OnClick="AbrirNuevoCliente">
+                    Nuevo Cliente
+                </MudButton>
+            </MudItem>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled"
+                           StartIcon="@Icons.Material.Filled.Add"
+                           Color="Color.Secondary"
+                           OnClick="MostrarPdfEnNuevaPagina">
+                    Mostrar PDF
+                </MudButton>
+            </MudItem>
+            <MudItem xs="12">
+
+                <MudTable Items="@listaClientes"
+                          Dense="true"
+                          Striped="true" Bordered="true"
+                          Filter="new Func<ClienteDTO,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1"
+                          Loading="@_loading" LoadingProgressColor="Color.Info">
+                    <ToolBarContent>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="searchString1" Placeholder="Buscar" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Nombre completo</MudTh>
+                        <MudTh>Nit</MudTh>
+                        <MudTh>Tipo Cliente</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate Context="clienteRow">
+                        <MudTd DataLabel="Nombre Completo">@clienteRow.NombreCompleto</MudTd>
+                        <MudTd DataLabel="Nit">@clienteRow.Nit</MudTd>
+                        <MudTd DataLabel="Tipo Cliente">@clienteRow.TipoCliente</MudTd>
+                        <MudTd DataLabel="">
+                            <MudFab Color="Color.Primary"
+                                    StartIcon="@Icons.Material.Filled.Edit"
+                                    Size="Size.Small"
+                                    IconSize="Size.Small"
+                                    OnClick="@(() => AbrirEditarCliente(clienteRow))" />
+                            <MudFab Color="Color.Error"
+                                    StartIcon="@Icons.Material.Filled.Delete"
+                                    Size="Size.Small"
+                                    IconSize="Size.Small"
+                                    OnClick="@(() => EliminarCliente(clienteRow))" />
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+
+
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+
+</MudContainer>
+
+@code {
+
+     private async Task MostrarPdfEnNuevaPagina()
+    {
+        // Llamar a la API para obtener la URL del PDF
+        var urlPdf = await GenerarPdf();
+
+        // Abrir el PDF en una nueva pestaña
+        await JSRuntime.InvokeVoidAsync("open", urlPdf, "_blank");
+    }
+
+    private async Task<string> GenerarPdf()
+    {
+        // Llamada a la API para generar el PDF. Este es solo un ejemplo.
+        // Asegúrate de que la API devuelva una URL válida del archivo PDF generado.
+
+        // Supón que tu API retorna la URL directa del PDF generado
+        string urlPdf = "http://apifatosamist.us-east-2.elasticbeanstalk.com/api/Cliente/clientespdf";  // URL a tu archivo PDF generado
+
+        return urlPdf;
+    }
+
+
+    List<ClienteDTO> listaClientes = new List<ClienteDTO>();
+    private string searchString1 = "";
+    private ClienteDTO selectedItem1 = null;
+    private bool _loading = true;
+
+    private async Task ObtenerClientes()
+    {
+        var result = await _clienteServicio.Lista();
+
+        if (result.status)
+        {
+            listaClientes = (List<ClienteDTO>)result.value!;
+        }
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ObtenerClientes();
+        _loading = false;
+    }
+
+    private bool FilterFunc1(ClienteDTO element) => FilterFunc(element, searchString1);
+
+    private bool FilterFunc(ClienteDTO element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.NombreCompleto.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.Nit.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.Direccion.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        //if ($"{element.NombreApellidos} {element.Correo} {element.rolDescripcion}".Contains(searchString))
+        //  return true;
+
+        return false;
+    }
+
+    private async Task AbrirNuevoCliente()
+    {
+        var dialogo = _dialogServicio.Show<MdCliente>("Nuevo Cliente");
+        var resultado = await dialogo.Result;
+        
+
+        if (!resultado.Canceled)
+        {
+            await ObtenerClientes();
+        }
+    }
+
+    private async Task AbrirEditarCliente(ClienteDTO cliente)
+    {
+        var parametros = new DialogParameters { ["_cliente"] = cliente };
+
+        var dialogo = _dialogServicio.Show<MdCliente>("Editar Cliente", parametros);
+        var resultado = await dialogo.Result;
+        if (!resultado.Canceled)
+        {
+            await ObtenerClientes();
+        }
+    }
+
+    private async Task EliminarCliente(ClienteDTO cliente)
+    {
+        SweetAlertResult result = await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Esta seguro?",
+                Text = $"Eliminar cliente: {cliente.NombreCompleto}",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true,
+                ConfirmButtonText = "Si, eliminar",
+                CancelButtonText = "No, volver"
+            });
+
+        if (result.IsConfirmed)
+        {
+            var resultado = await _clienteServicio.Eliminar(cliente.IdCliente);
+
+            if (resultado)
+            {
+                _snackBar.Add("El cliente fue eliminado", Severity.Success, a => a.VisibleStateDuration = 500);
+                await ObtenerClientes();
+            }
+            else
+                _snackBar.Add("No se pudo eliminar", Severity.Error, a => a.VisibleStateDuration = 500);
+        }
+    }
+}

@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Nuevo perfil",
+    "Projects": [
+      {
+        "Path": "SistemaFarmacia.API\\SistemaFarmacia.API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "SistemaFarmacia.WebAssembly\\SistemaFarmacia.WebAssembly.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

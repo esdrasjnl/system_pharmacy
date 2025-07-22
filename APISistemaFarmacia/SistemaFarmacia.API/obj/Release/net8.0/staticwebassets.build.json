@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "4YJ4YeL2CNmRZhAyHGsCWsYY5iyb+7oL8EW4Zi7GTpw=",
+  "Source": "SistemaFarmacia.API",
+  "BasePath": "_content/SistemaFarmacia.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

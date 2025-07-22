@@ -1,0 +1,49 @@
+﻿<MudDialog>
+
+    <DialogContent>
+        <MudContainer Class="m-0 p-0">
+
+            <MudGrid>
+                <MudItem xs="12">
+                    <div class="d-flex flex-grow-1 gap-4">
+                        <MudTextField @bind-Value="_compra.FechaRegistro" Label="Fecha Registro" Variant="Variant.Outlined" ReadOnly="true" Margin="Margin.Dense"></MudTextField>
+                        <MudTextField @bind-Value="_compra.NumeroDocumentoCompra" Label="Numero Venta" Variant="Variant.Outlined" ReadOnly="true" Margin="Margin.Dense"></MudTextField>
+                        <MudTextField @bind-Value="_compra.TipoPago" Label="Tipo de Pago" Variant="Variant.Outlined" ReadOnly="true" Margin="Margin.Dense"></MudTextField>
+                        <MudTextField @bind-Value="_compra.Total" Label="Total" Variant="Variant.Outlined" ReadOnly="true" Margin="Margin.Dense"></MudTextField>
+                    </div>
+                </MudItem>
+                <MudItem xs="12">
+                    <MudText>Lista de productos</MudText>
+                </MudItem>
+                <MudItem xs="12">
+                    <MudDataGrid Items="@_compra.detalleCompra" Dense="true" Striped="true">
+                        <Columns>
+                            <PropertyColumn Property="x => x.DescripcionProducto" Title="Producto" />
+                            <PropertyColumn Property="x => x.CantidadInventario" Title="Cantidad" />
+                            <PropertyColumn Property="x => x.Precio" />
+                            <PropertyColumn Property="x => x.Total" />
+                        </Columns>
+                    </MudDataGrid>
+                </MudItem>
+            </MudGrid>
+
+        </MudContainer>
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Cerrar">Volver</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; }
+    [Parameter]
+    public CompraDTO _compra { get; set; } = new CompraDTO();
+
+    private void Cerrar()
+    {
+        MudDialog.Cancel();
+    }
+}
+

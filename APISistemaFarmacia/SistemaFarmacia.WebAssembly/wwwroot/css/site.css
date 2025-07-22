@@ -1,0 +1,37 @@
+﻿namespace SistemaFarmacia.WebAssembly.wwwroot.css
+{
+    public class site
+{
+    .rutero-color .mud-input
+
+{
+    border-color: #FFA500; /* Naranja */
+    color: #FFA500;
+}
+
+.publico-color .mud-input {
+    border-color: #1E90FF; /* Azul */
+    color: #1E90FF;
+}
+
+.tendero-color .mud-input {
+    border-color: #32CD32; /* Verde */
+    color: #32CD32;
+}
+
+.mayorista-color .mud-input {
+    border-color: #FF4500; /* Rojo */
+    color: #FF4500;
+}
+
+.especial-color .mud-input {
+    border-color: #9370DB; /* Púrpura */
+    color: #9370DB;
+}
+
+.default-color .mud-input {
+    border-color: #808080; /* Gris */
+    color: #808080;
+}
+    }
+}

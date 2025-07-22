@@ -1,0 +1,148 @@
+﻿@page "/page/reportecompra"
+@attribute [Authorize(Roles = "Administrador")]
+
+@using ClosedXML.Excel;
+@inject IJSRuntime _jsServicio;
+@inject ICompraService _compraServicio;
+@inject IDialogService _dialogServicio
+@inject ISnackbar _snackBar
+@inject SweetAlertService Swal;
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-5">
+
+    <MudText Typo="Typo.h5" GutterBottom="true">Historial Compra</MudText>
+
+    <MudPaper Elevation="3" Class="pa-4" Width="100%">
+
+        <div class="d-flex flex-grow-1 gap-3">
+
+            <MudDatePicker Label="Fecha Inicio" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Date="fechaInicio" Mask="@(new DateMask("dd/MM/yyyy"))" />
+
+            <MudDatePicker Label="Fecha Fin" Margin="Margin.Dense" Variant="Variant.Outlined" @bind-Date="fechaFin" Mask="@(new DateMask("dd/MM/yyyy"))" />
+
+
+            <MudButton Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Search"
+                       Color="Color.Info"
+                       Size="Size.Medium"
+                       Class="mt-1"
+                       OnClick="Buscar">Buscar</MudButton>
+
+        </div>
+
+        <MudGrid>
+            <MudItem xs="12">
+                <MudButton Variant="Variant.Filled"
+                           StartIcon="@Icons.Material.Filled.DataThresholding"
+                           Color="Color.Success"
+                           Size="Size.Medium"
+                           Class="mt-1"
+                           OnClick="ExportarExcel" Disabled="@desactivarBoton">Exportar Excel</MudButton>
+            </MudItem>
+            <MudItem xs="12">
+
+                <MudTable Items="@listaCompras"
+                          Dense="true"
+                          Striped="true" Bordered="true"
+                          Loading="@_loading" LoadingProgressColor="Color.Info">
+                    <HeaderContent>
+                        <MudTh>Fecha Registro</MudTh>
+                        <MudTh>Numero Venta</MudTh>
+                        <MudTh>Tipo de pago</MudTh>
+                        <MudTh>Total</MudTh>
+                        <MudTh>Producto</MudTh>
+                        <MudTh>Cantidad</MudTh>
+                        <MudTh>Precio</MudTh>
+                        <MudTh>Total por Producto</MudTh>
+                    </HeaderContent>
+                    <RowTemplate Context="compraRow">
+                        <MudTd DataLabel="Fecha Registro">@compraRow.FechaRegistro</MudTd>
+                        <MudTd DataLabel="Numero Compra">@compraRow.NumeroDocumentoCompra</MudTd>
+                        <MudTd DataLabel="Tipo de pago">@compraRow.TipoPago</MudTd>
+                        <MudTd DataLabel="Total">@compraRow.TotalCompra</MudTd>
+                        <MudTd DataLabel="Producto">@compraRow.Producto</MudTd>
+                        <MudTd DataLabel="Cantidad">@compraRow.Cantidad</MudTd>
+                        <MudTd DataLabel="Precio">@compraRow.Precio</MudTd>
+                        <MudTd DataLabel="Total por Producto">@compraRow.Total</MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+
+
+            </MudItem>
+        </MudGrid>
+
+    </MudPaper>
+
+</MudContainer>
+@code {
+
+    List<ReporteCompraDTO> listaCompras = new List<ReporteCompraDTO>();
+    private bool _loading = false;
+    DateTime? fechaInicio = null;
+    DateTime? fechaFin = null;
+    private bool desactivarBoton = true;
+
+
+    private async Task Buscar()
+    {
+        _loading = true;
+        string _fechaInicio;
+        string _fechaFin;
+
+        _fechaInicio = fechaInicio.Value.ToString("dd/MM/yyyy");
+        _fechaFin = fechaFin.Value.ToString("dd/MM/yyyy");
+
+        var resultado = await _compraServicio.Reporte(_fechaInicio, _fechaFin);
+        if (resultado.status)
+        {
+            listaCompras = (List<ReporteCompraDTO>)resultado.value!;
+            desactivarBoton = false;
+        }
+        else
+        {
+            listaCompras = new List<ReporteCompraDTO>();
+            desactivarBoton = true;
+        }
+
+        _loading = false;
+    }
+
+    private async Task ExportarExcel()
+    {
+        if (listaCompras.Any())
+        {
+
+            using (var libro = new XLWorkbook())
+            {
+                IXLWorksheet hoja = libro.Worksheets.Add("ventas");
+
+                hoja.Cell(1, 1).Value = "Numero Compra";
+                hoja.Cell(1, 2).Value = "Tipo de pago";
+                hoja.Cell(1, 3).Value = "Fecha Registro";
+                hoja.Cell(1, 4).Value = "Total";
+                hoja.Cell(1, 5).Value = "Producto";
+                hoja.Cell(1, 6).Value = "Cantidad";
+                hoja.Cell(1, 7).Value = "Precio";
+                hoja.Cell(1, 8).Value = "Total por Producto";
+
+                hoja.Cell(2, 1).InsertData(listaCompras);
+
+                using (var memoria = new MemoryStream())
+                {
+                    libro.SaveAs(memoria);
+
+                    var nombreExcel = string.Concat("Reporte ", DateTime.Now.ToString(), ".xlsx");
+                    await _jsServicio.GenerarArchivo(nombreExcel, memoria.ToArray());
+
+                }
+            
+            }
+    }
+
+
+    }
+
+}

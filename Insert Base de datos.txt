@@ -1,0 +1,57 @@
+
+--INSERTAR ROLES
+insert into rol(descripcion,esActivo) values
+('Administrador',1),
+('Encargado',1),
+('Cajero',1)
+
+go
+
+--INSERTAR USUARIOS
+insert into usuario(nombreApellidos,correo,idRol,Clave,esActivo) values
+('Sebastian Toj','sebastian@gmail.com',1,'7854',1),
+('Brayan','brayan@gmail.com',2,'8594',1),
+('Pablo','pablo@gmail.com',2,'5241',1)
+
+
+go
+
+--INSERTAR CLIENTE
+insert into cliente(nombreCompleto, nit, direccion, telefono, tipoCliente, Observaciones) values
+('Consumidor Final', '00000000','Chimaltenago','15247859','Publico','ninguna')
+
+go
+--INSERTAR CATEGORIAS
+insert into Categoria(descripcion) values 
+('Medicamentos')
+
+
+go
+--INSERTAR PRESENTACION
+insert into Presentacion(descripcion,esActivo) values 
+('Unidad',1),
+('Blister',1),
+('Caja',1),
+('Fardo',1)
+
+
+
+
+go
+
+--INSERTAR NUMERO VENTA INICIAL
+insert into NumeroDocumento(ultimo_Numero) values(0)
+
+go
+--INSERTAR NUMERO COMPRA INICIAL
+insert into NumeroDocumentoCompra(ultimo_Numero) values(0)
+
+go
+--INSERTAR NUMERO COTIZACION INICIAL
+insert into NumeroDocumentoCotizacion(ultimo_Numero) values(0)
+
+
+go
+--INSERTAR PROVEEDOR
+insert into Proveedor (nombre,nit,direccion,telefono,celular,cuenta) values
+('Proveedor','25415487','chimal','14524521','41414141','121452145-5')

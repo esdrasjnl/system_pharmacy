@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="QuestPDF" Version="2024.12.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SistemaFarmacia.BLL\SistemaFarmacia.BLL.csproj" />
+    <ProjectReference Include="..\SistemaFarmacia.DTO\SistemaFarmacia.DTO.csproj" />
+    <ProjectReference Include="..\SistemaFarmacia.IOC\SistemaFarmacia.IOC.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Utilidad\" />
+  </ItemGroup>
+
+</Project>

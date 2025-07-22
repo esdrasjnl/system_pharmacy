@@ -1,0 +1,261 @@
+﻿@page "/page/producto"
+@attribute [Authorize(Roles = "Administrador,Encargado")]
+
+@inject IProductoService _productoServicio
+@inject IDialogService _dialogServicio
+@inject ISnackbar _snackBar
+@inject SweetAlertService Swal;
+
+@inject HttpClient Http;
+@inject IJSRuntime JSRuntime
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-5">
+
+    <MudText Typo="Typo.h5" GutterBottom="true">Productos</MudText>
+
+    <MudPaper Elevation="3" Class="pa-4" Width="100%">
+        <MudGrid>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled"
+                StartIcon="@Icons.Material.Filled.Add"
+                Color="Color.Primary"
+                OnClick="AbrirNuevoProducto">
+                    Nuevo Producto
+                </MudButton>
+            </MudItem>
+            <MudItem xs="2">
+                <MudButton Variant="Variant.Filled"
+                           StartIcon="@Icons.Material.Filled.Add"
+                           Color="Color.Secondary"
+                           OnClick="MostrarPdfEnNuevaPagina">
+                    Mostrar PDF
+                </MudButton>
+            </MudItem>
+            <MudItem xs="12">
+
+                <MudTable Items="@listaProductos"
+                Striped="true" Bordered="true" Dense="true"
+                Filter="new Func<ProductoDTO,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1"
+                Loading="@_loading" LoadingProgressColor="Color.Info">
+                    <ToolBarContent>
+                        <MudSpacer />
+                        <MudTextField @bind-Value="searchString1" Placeholder="Buscar" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                    </ToolBarContent>
+                    <HeaderContent>
+                        <MudTh>Codigo</MudTh>
+                        <MudTh>Nombre</MudTh>
+                        <MudTh>Existencias</MudTh>
+                        <MudTh>Pr Costo</MudTh>
+                        <MudTh>Pr Publico</MudTh>
+                        <MudTh>Pr Tendero</MudTh>
+                        <MudTh>Pr Rutero</MudTh>
+                        <MudTh>Pr Mayoriata</MudTh>
+                        <MudTh>Pr Especial</MudTh>
+                        <MudTh>Estado</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate Context="productoRow">
+                        <MudTd DataLabel="Codigo">@productoRow.Codigo</MudTd>
+                        <MudTd DataLabel="Nombre">@productoRow.Nombre</MudTd>
+                        <MudTd DataLabel="Existencia">@productoRow.Stock</MudTd>
+                        <MudTd DataLabel="Pr Costo">@productoRow.pcosto</MudTd>
+                        <MudTd DataLabel="Pr Publico">@productoRow.Ppublico</MudTd>
+                        <MudTd DataLabel="Pr Tendero">@productoRow.Ptendero</MudTd>
+                        <MudTd DataLabel="Pr Rutero">@productoRow.Prutero</MudTd>
+                        <MudTd DataLabel="Pr Mayorista">@productoRow.Pmayorista</MudTd>
+                        <MudTd DataLabel="Pr Especial">@productoRow.Pespecial</MudTd>
+                        <MudTd DataLabel="Estado">@productoRow.EsActivo</MudTd>
+
+                        <MudTd DataLabel="">
+                            <MudFab Color="Color.Primary"
+                            StartIcon="@Icons.Material.Filled.Edit"
+                            Size="Size.Small"
+                            IconSize="Size.Small"
+                            OnClick="@(() => AbrirEditarProducto(productoRow))" />
+                            <MudFab Color="Color.Error"
+                            StartIcon="@Icons.Material.Filled.Delete"
+                            Size="Size.Small"
+                            IconSize="Size.Small"
+                            OnClick="@(() => EliminarUsuario(productoRow))" />
+
+                            <MudFab Color="Color.Secondary"
+                            StartIcon="@Icons.Material.Filled.Info"
+                            Size="Size.Small"
+                            IconSize="Size.Small"
+                            OnClick="@(() => AbrirDialogo(productoRow.IdProducto))" />
+
+
+
+                        </MudTd>
+
+                    </RowTemplate>
+
+
+
+
+
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+
+
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+
+</MudContainer>
+
+@code {
+
+
+    private async Task MostrarPdfEnNuevaPagina()
+    {
+        // Llamar a la API para obtener la URL del PDF
+        var urlPdf = await GenerarPdf();
+
+        // Abrir el PDF en una nueva pestaña
+        await JSRuntime.InvokeVoidAsync("open", urlPdf, "_blank");
+    }
+
+    private async Task<string> GenerarPdf()
+    {
+        // Llamada a la API para generar el PDF. Este es solo un ejemplo.
+        // Asegúrate de que la API devuelva una URL válida del archivo PDF generado.
+
+        // Supón que tu API retorna la URL directa del PDF generado
+        string urlPdf = "http://apifatosamist.us-east-2.elasticbeanstalk.com/api/Producto/productospdf";  // URL a tu archivo PDF generado
+                         
+        //string urlPdf = "http://localhost:5019/api/Producto/productospdf";
+        return urlPdf;
+    }
+
+    
+    List<ProductoDTO> listaProductos = new List<ProductoDTO>();
+
+    private string searchString1 = "";
+    private ProductoDTO selectedItem1 = null;
+    private bool _loading = true;
+
+    private async Task ObtenerProductos()
+    {
+        var result = await _productoServicio.Lista();
+
+        if (result.status)
+        {
+            listaProductos = (List<ProductoDTO>)result.value!;
+        }
+    }
+
+
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ObtenerProductos();
+        _loading = false;
+    }
+
+    private bool FilterFunc1(ProductoDTO element) => FilterFunc(element, searchString1);
+
+    private bool FilterFunc(ProductoDTO element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.Nombre.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.DescripcionCategoria.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+
+        if ($"{element.Nombre} {element.DescripcionCategoria}".Contains(searchString))
+            return true;
+
+        return false;
+    }
+
+    private async Task AbrirNuevoProducto()
+    {
+        var dialogo = _dialogServicio.Show<MdProducto>("Nuevo Producto");
+        var resultado = await dialogo.Result;
+
+        if (!resultado.Canceled)
+        {
+            await ObtenerProductos();
+        }
+    }
+
+
+
+    private async Task AbrirEditarProducto(ProductoDTO model)
+    {
+        var parametros = new DialogParameters { ["_producto"] = model };
+
+        var dialogo = _dialogServicio.Show<MdProducto>("Editar Producto", parametros);
+        var resultado = await dialogo.Result;
+
+        if (!resultado.Canceled)
+        {
+            await ObtenerProductos();
+        }
+    }
+
+
+
+
+
+
+    private async Task EliminarUsuario(ProductoDTO model)
+    {
+        SweetAlertResult result = await Swal.FireAsync(new SweetAlertOptions
+            {
+                Title = "Esta seguro?",
+                Text = $"Eliminar producto: {model.Nombre}",
+                Icon = SweetAlertIcon.Warning,
+                ShowCancelButton = true,
+                ConfirmButtonText = "Si, eliminar",
+                CancelButtonText = "No, volver"
+            });
+
+        if (result.IsConfirmed)
+        {
+            var resultado = await _productoServicio.Eliminar(model.IdProducto);
+
+            if (resultado)
+            {
+                _snackBar.Add("El producto fue eliminado", Severity.Success, a => a.VisibleStateDuration = 500);
+                await ObtenerProductos();
+            }
+            else
+                _snackBar.Add("No se pudo eliminar", Severity.Error, a => a.VisibleStateDuration = 500);
+        }
+    }
+
+
+
+
+
+
+
+    private async Task AbrirDialogo(int idProducto)
+    {
+
+        var parametros = new DialogParameters
+        {
+            ["IdProducto"] = idProducto
+        };
+
+        var dialogo = _dialogServicio.Show<MdProdpresentacion>("Nuevo Producto", parametros);
+        var resultado = await dialogo.Result;
+
+        if (!resultado.Canceled)
+        {
+            await ObtenerProductos();
+        }
+
+    }
+
+
+   
+
+}

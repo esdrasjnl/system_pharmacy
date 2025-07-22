@@ -1,0 +1,626 @@
+﻿@page "/page/compra"
+@attribute [Authorize(Roles = "Administrador,Encargado")]
+
+@inject IProdpresentacionService _prodpresentacionServicio;
+@inject IProductoService _productoServicio;
+@inject IPresentacionService _presentacionServicio;
+@inject IProveedorService _proveedorServicio;
+@inject ICompraService _compraServicio;
+@inject ISnackbar _snackBar
+@inject SweetAlertService Swal;
+
+@inject HttpClient Http;
+@inject IJSRuntime JSRuntime
+@inject HttpClient Http
+
+@inject IDialogService _dialogServicio
+@using MudBlazor
+
+
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-5">
+
+    <MudText Typo="Typo.h5" GutterBottom="true">Nueva Compra</MudText>
+
+    <MudPaper Elevation="3" Class="pa-4" Width="100%">
+        <MudGrid>
+
+            <MudItem xs="3">
+                <MudAutocomplete T="ProveedorDTO" Label="Buscar proveedor" @bind-Value="_proveedorSeleccionado" SearchFunc="@BuscarCliente"
+                                 ResetValueOnEmptyText="true"
+                                 AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary"
+                                 Variant="Variant.Outlined" Margin="Margin.Dense"
+                                 ToStringFunc="@(e => e == null ? null : $"{e.Nombre} - {e.Nombre}")" />
+
+            </MudItem>
+            <MudItem xs="6">
+                <MudTextField Label="Proveedor" @bind-Value="NombreCliente" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" ReadOnly="true" />
+            </MudItem>
+            <MudItem xs="1">
+                <MudFab Color="Color.Secondary"
+                        StartIcon="@Icons.Material.Filled.Info"
+                        Size="Size.Small"
+                        IconSize="Size.Small"
+                        OnClick="@(() => AbrirDialogo(_productoSeleccionado.IdProducto))" />
+            </MudItem>
+            <MudItem xs="1">
+                <MudFab Color="Color.Secondary"
+                        StartIcon="@Icons.Material.Filled.Info"
+                        Size="Size.Small"
+                        IconSize="Size.Small"
+                        OnClick="@(() => AbrirDialogoProducto(_productoSeleccionado))" />
+            </MudItem>
+
+            <MudItem xs="4">
+
+                <MudAutocomplete T="ProductoDTO" Label="Buscar producto" ValueChanged="OnProductoSeleccionado" SearchFunc="@BuscarProducto"
+                                 ResetValueOnEmptyText="true"
+                                 AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary"
+                                 Variant="Variant.Outlined" Margin="Margin.Dense"
+                                 ToStringFunc="@(e => e == null ? null : $"{e.Nombre} - {e.DescripcionCategoria}")" />
+
+
+            </MudItem>
+
+            <MudItem xs="3">
+                <MudSelect Label="Presentacion" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" Class="mb-3"
+                           @bind-Value="prodpresentacionSeleccionado">
+                    @if (listaProdpresentacion != null && listaProdpresentacion.Any())
+                    {
+                        foreach (var presentacion in listaProdpresentacion)
+                        {
+                            <MudSelectItem Value="@presentacion">@presentacion.DescripcionPresentacion</MudSelectItem>
+                        }
+                    }
+                    else
+                    {
+
+                        <MudText>No hay presentaciones .</MudText>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="2">
+                <MudNumericField @bind-Value="_cantidad" Label="Cantidad" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" Min="1" Max="100000" />
+            </MudItem>
+            <MudItem xs="2">
+                <MudNumericField @bind-Value="PrecioSeleccionado" Label="Precio" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" ReadOnly="true" />
+            </MudItem>
+
+
+
+            <MudItem xs="2">
+
+                @if (_productoSeleccionado != null)
+                {
+                    <MudNumericField @bind-Value="_productoSeleccionado.Stock" Label="Existencias" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" ReadOnly="true" />
+                }
+                else
+                {
+                    <MudNumericField @bind-Value="stock" Label="Existencias" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" ReadOnly="true" />
+                }
+
+
+            </MudItem>
+            <MudItem xs="3">
+
+                @if (prodpresentacionSeleccionado != null)
+                {
+                    <MudNumericField @bind-Value="VentaUnidades" Label="unidades" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" ReadOnly="true" />
+                }
+                else
+                {
+                    <MudNumericField @bind-Value="unidades" Label="unidades" Variant="Variant.Outlined" Step="1" Margin="Margin.Dense" ReadOnly="true" />
+                }
+
+
+
+            </MudItem>
+
+
+            <MudItem xs="3">
+                <MudButton Variant="Variant.Filled"
+                StartIcon="@Icons.Material.Filled.Add"
+                Color="Color.Info"
+                FullWidth="true"
+                Class="mt-1"
+                OnClick="AgregarProducto">Agregar</MudButton>
+            </MudItem>
+
+
+            <MudItem xs="12">
+                <div id="unique_id_scroll_section" class="ma-0" style="height:300px;overflow: auto;">
+                    <MudPaper Elevation="0" Height="3500px" Class="d-flex flex-column justify-space-between py-6">
+                        <MudTable Items="@_compra.detalleCompra" Dense="true" Striped="true" Bordered="true">
+                            <HeaderContent>
+                                <MudTh>Codigo</MudTh>
+                                <MudTh>Cantidad</MudTh>
+                                <MudTh>Presentacion</MudTh>
+                                <MudTh>Producto</MudTh>
+                                <MudTh>Precio</MudTh>
+                                <MudTh>Total</MudTh>
+                                <MudTh></MudTh>
+                            </HeaderContent>
+                            <RowTemplate Context="dvProducto">
+                                <MudTd DataLabel="Codigo">@dvProducto.Codigo</MudTd>
+
+                                <MudTd DataLabel="Cantidad">
+                                    <MudNumericField Value="dvProducto.CantidadReporte"
+                                    Variant="Variant.Text"
+                                    Min="1"
+                                    Max="1000000"
+                                    Step="1"
+                                    Immediate="true"
+                                    T="int?"
+                                    Margin="Margin.None"
+                                    Style="width: 80px;"
+                                    ValueChanged="@(cantidad => ActualizarTotal(dvProducto, cantidad))" />
+                                </MudTd>
+                                <MudTd DataLabel="Presentacion">@dvProducto.Presenta</MudTd>
+                                <MudTd DataLabel="Producto">@dvProducto.DescripcionProducto</MudTd>
+                                <MudTd DataLabel="Precio">@dvProducto.Precio</MudTd>
+                                <MudTd DataLabel="Total">@dvProducto.Total</MudTd>
+                                <MudTd DataLabel="">
+                                    <MudFab Color="Color.Error"
+                                    StartIcon="@Icons.Material.Filled.Delete"
+                                    Size="Size.Small"
+                                    IconSize="Size.Small"
+                                    OnClick="@(() => EliminarProducto((int)dvProducto.IdProducto))" />
+                                </MudTd>
+                            </RowTemplate>
+                        </MudTable>
+
+                        <MudScrollToTop TopOffset="100"
+                        OnScroll="OnScroll"
+                        Selector="#unique_id_scroll_section"
+                        VisibleCssClass="visible absolute"
+                        HiddenCssClass="invisible">
+                            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowUpward" Color="Color">Go to top</MudButton>
+                        </MudScrollToTop>
+                    </MudPaper>
+                </div>
+
+
+            </MudItem>
+
+
+
+
+
+            <MudItem xs="3">
+                <MudButton Variant="Variant.Filled"
+                StartIcon="@Icons.Material.Filled.Save"
+                Color="Color.Primary"
+                FullWidth="true"
+                Class="mt-1"
+                OnClick="RegistrarVenta"
+                Disabled="@botonDesactivado">Registrar</MudButton>
+            </MudItem>
+            <MudItem xs="3">
+                <MudAlert Severity="Severity.Warning" NoIcon="true" Variant="Variant.Filled"
+                ContentAlignment="HorizontalAlignment.Center" Dense="true" Class="mt-1">
+                    Total @_compra.TotalTexto
+                </MudAlert>
+            </MudItem>
+
+
+
+        </MudGrid>
+    </MudPaper>
+
+</MudContainer>
+
+@code {
+    string NoPrsentacion = "No hay presentaciones";
+    List<ProdpresentacionDTO> listaProdpresentacion = new List<ProdpresentacionDTO>();
+    public ProdpresentacionDTO prodpresentacionSeleccionado;
+
+
+    public double _unidades = 0;
+    public int stock = 0;
+    public int unidades = 0;
+
+    private int _cantidad = 0;
+
+    private
+    CompraDTO _compra = new CompraDTO()
+        {
+            TipoPago = "Efectivo",
+            detalleCompra = new List<DetalleCompraDTO>()
+        };
+    private ProductoDTO _productoSeleccionado;
+    private ProveedorDTO _proveedorSeleccionado;
+
+    private bool botonDesactivado = false;
+
+    private async Task<IEnumerable<ProductoDTO>> BuscarProducto(string valor)
+    {
+
+
+
+
+        var response = await _productoServicio.ListaVenta();
+
+        if (response.status)
+        {
+            if (string.IsNullOrEmpty(valor))
+                return new List<ProductoDTO>();
+
+            List<ProductoDTO> lista = (List<ProductoDTO>)response.value!;
+            return lista.FindAll(p => p.Nombre.Contains(valor, StringComparison.InvariantCultureIgnoreCase));
+
+        }
+
+
+        else
+        {
+            return new List<ProductoDTO>();
+        }
+
+    }
+
+
+
+
+
+    private decimal VentaUnidades
+    {
+        get
+        {
+            if (prodpresentacionSeleccionado == null)
+                return 0m;
+
+            // Retorna el precio para el tipo de cliente "Rutero"
+            return prodpresentacionSeleccionado.Cantidad * _cantidad ?? 0m;  // Solo utilizamos "Rutero"
+        }
+
+        set
+        {
+            if (prodpresentacionSeleccionado == null)
+                return;
+
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+
+
+        var resultado = await _prodpresentacionServicio.Lista();
+
+        if (resultado.status && resultado.value != null)
+        {
+            listaProdpresentacion = resultado.value!;
+
+
+
+        }
+
+    }
+
+
+    private string NombreCliente
+    {
+        get => _proveedorSeleccionado?.Nombre ?? string.Empty;
+        set
+        {
+            if (_proveedorSeleccionado != null)
+            {
+                _proveedorSeleccionado.Nombre = value;
+            }
+        }
+    }
+
+
+
+
+
+
+    private decimal PrecioSeleccionado
+    {
+
+        get
+        {
+            if (_productoSeleccionado == null || _proveedorSeleccionado == null)
+                return 0m;
+
+            if (prodpresentacionSeleccionado == null)
+            {
+                // Retorna el precio dependiendo del tipo de cliente seleccionado
+                return _productoSeleccionado.pcosto ?? 0m;
+                {
+
+                };
+            }
+            else
+            {
+                // Retorna el precio dependiendo del tipo de cliente seleccionado
+                return _productoSeleccionado.pcosto * prodpresentacionSeleccionado.Cantidad ?? 0m;
+                {
+
+                };
+            }
+
+        }
+
+        set
+
+        {
+            if (_productoSeleccionado == null || _proveedorSeleccionado == null)
+                return;
+
+            // Asigna el precio dependiendo del tipo de cliente seleccionado
+            _productoSeleccionado.pcosto = value;
+
+        }
+    }
+
+
+
+    private async Task<IEnumerable<PresentacionDTO>> BuscarPresentacion(string valor)
+    {
+
+        var response = await _presentacionServicio.Lista();
+
+        if (response.status)
+        {
+            if (string.IsNullOrEmpty(valor))
+                return new List<PresentacionDTO>();
+
+            List<PresentacionDTO> lista = (List<PresentacionDTO>)response.value!;
+            return lista.FindAll(p => p.Descripcion.Contains(valor, StringComparison.InvariantCultureIgnoreCase));
+            // _precio = 100;
+        }
+        else
+        {
+            return new List<PresentacionDTO>();
+        }
+    }
+
+
+    private async Task<IEnumerable<ProveedorDTO>> BuscarCliente(string valor)
+    {
+
+        var response = await _proveedorServicio.Lista();
+
+        if (response.status)
+        {
+            if (string.IsNullOrEmpty(valor))
+                return new List<ProveedorDTO>();
+
+            List<ProveedorDTO> lista = (List<ProveedorDTO>)response.value!;
+            return lista.FindAll(p => p.Nombre.Contains(valor, StringComparison.InvariantCultureIgnoreCase));
+            //  _precio = 100;
+        }
+        else
+        {
+            return new List<ProveedorDTO>();
+        }
+    }
+
+
+    private async Task AgregarProducto()
+    {
+        if (_productoSeleccionado != null && _cantidad > 0)
+        {
+
+            var detalleCompra = new DetalleCompraDTO()
+                {
+                    IdProducto = _productoSeleccionado.IdProducto,
+                    Codigo = _productoSeleccionado.Codigo,
+                    DescripcionProducto = _productoSeleccionado.Nombre,
+                    CantidadInventario = prodpresentacionSeleccionado.Cantidad * _cantidad,
+                    CantidadReporte = _cantidad,
+                    Presenta = prodpresentacionSeleccionado.DescripcionPresentacion,
+                    Precio = PrecioSeleccionado,
+                    // Precio = _productoSeleccionado.Ppublico,
+                    Total = _cantidad * PrecioSeleccionado,
+
+                };
+            _compra.detalleCompra!.Add(detalleCompra);
+
+            _productoSeleccionado = null;
+            _cantidad = 0;
+
+            autocompleteKey = Guid.NewGuid().ToString(); // Generar una nueva clave única
+            StateHasChanged();  // Forzar actualización
+        }
+
+
+
+    }
+
+
+    //  if (_compra.DetalleCompra == null)
+    // {
+    //    _compra.DetalleCompra = new List<DetalleCompraDTO>();
+    // }
+
+
+
+    private string autocompleteKey = Guid.NewGuid().ToString();
+
+
+    private async Task EliminarProducto(int idproducto)
+    {
+        var productoEliminar = _compra.detalleCompra.Find(p => p.IdProducto == idproducto);
+        _compra.detalleCompra.Remove(productoEliminar);
+    }
+
+    private async Task RegistrarVenta()
+    {
+        if (_proveedorSeleccionado == null)
+        {
+            _snackBar.Add("Debe seleccionar un proveedor y agregar productos", Severity.Error);
+        }
+        else 
+        { 
+
+        botonDesactivado = true;
+
+        _compra.IdProveedor = _proveedorSeleccionado.IdProveedor;
+        _compra.Total = _compra.detalleCompra!.Sum(p => p.Total);
+        _compra.FechaRegistro = DateTime.Now;
+        var response = await _compraServicio.Registrar(_compra);
+
+        if (response.status)
+        {
+            var _compraCreada = (CompraDTO)response.value!;
+            _compra = new CompraDTO()
+                {
+                    TipoPago = "Efectivo",
+                    detalleCompra = new List<DetalleCompraDTO>()
+                };
+
+            // Mostrar SweetAlert2 con el botón "Imprimir"
+            var result = await Swal.FireAsync(new SweetAlertOptions
+                {
+                    Title = "Compra Registrada",
+                    Text = $"Número de venta: {_compraCreada.NumeroDocumentoCompra}",
+                    Icon = "success",
+                    ShowCancelButton = true,  // Agrega el botón "Cancelar"
+                    ConfirmButtonText = "Imprimir Compra",  // Botón principal para imprimir
+                    CancelButtonText = "Cerrar"  // Botón secundario
+                });
+
+            // Si el usuario hace clic en "Imprimir", generar el PDF
+            if (result.IsConfirmed)
+            {
+                //await GenerarReporte(_ventaCreada.IdVenta);
+                Console.WriteLine("aqui se muestr el reporte");
+                MostrarPdfEnNuevaPagina(_compraCreada.IdCompra);
+            }
+
+           // await Swal.FireAsync("Compra Registrada", $"Numero de compra: {_compraCreada.NumeroDocumentoCompra}", "success");
+        }
+        else
+        {
+            await Swal.FireAsync("Oops...", "No se pudo registrar!", "error");
+        }
+        botonDesactivado = false;
+
+
+
+        }
+    }
+
+
+
+    private void ActualizarTotal(DetalleCompraDTO dvProducto, int? nuevaCantidad)
+    {
+
+
+        if (nuevaCantidad.HasValue)
+        {
+            dvProducto.CantidadReporte = nuevaCantidad.Value;
+            dvProducto.Total = dvProducto.CantidadReporte * dvProducto.Precio;
+        }
+
+        _compra.detalleCompra = new List<DetalleCompraDTO>(_compra.detalleCompra); // Forzar actualización
+        StateHasChanged(); // Asegurar que Blazor re-renderice la tabla
+
+    }
+
+
+    Color Color = Color.Success;
+    private void OnScroll(ScrollEventArgs e)
+    {
+        Color = (e.FirstChildBoundingClientRect.Top * -1) switch
+        {
+            var x when x < 500 => Color.Primary,
+            var x when x < 1500 => Color.Secondary,
+            var x when x < 2500 => Color.Tertiary,
+            _ => Color.Error
+        };
+    }
+
+    private async Task OnProductoSeleccionado(ProductoDTO producto)
+    {
+
+
+        if (producto != null)
+        {
+
+            _productoSeleccionado = producto;
+
+
+            var resultado = await _prodpresentacionServicio.Lista();
+
+            if (resultado.status && resultado.value != null)
+            {
+                listaProdpresentacion = resultado.value
+                    .Where(p => p.IdProducto == _productoSeleccionado.IdProducto)
+                    .ToList();
+
+
+                prodpresentacionSeleccionado = listaProdpresentacion.FirstOrDefault();
+            }
+            else
+            {
+                listaProdpresentacion.Clear();
+            }
+        }
+        else
+        {
+
+            listaProdpresentacion.Clear();
+            prodpresentacionSeleccionado = null;
+        }
+
+    }
+
+
+    private async Task AbrirDialogo(int idProducto)
+    {
+
+        var parametros = new DialogParameters
+            {
+                ["IdProducto"] = idProducto
+            };
+
+        var dialogo = _dialogServicio.Show<MdProdpresentacion>("Nuevo Producto", parametros);
+        var resultado = await dialogo.Result;
+
+        if (!resultado.Canceled)
+        {
+            //await ObtenerProductos();
+        }
+
+    }
+
+    private async Task AbrirDialogoProducto(ProductoDTO model)
+    {
+        var parametros = new DialogParameters { ["_producto"] = model };
+
+        var dialogo = _dialogServicio.Show<MdProducto>("Editar Producto", parametros);
+        var resultado = await dialogo.Result;
+
+        if (!resultado.Canceled)
+        {
+            //await ObtenerProductos();
+        }
+    }
+
+
+    private async Task MostrarPdfEnNuevaPagina(int id)
+    {
+        // Llamar a la API para obtener la URL del PDF usando el identificador
+        var urlPdf = await GenerarPdf(id);
+
+        // Abrir el PDF en una nueva pestaña
+        await JSRuntime.InvokeVoidAsync("open", urlPdf, "_blank");
+    }
+
+    private async Task<string> GenerarPdf(int id)
+    {
+        // Construir la URL dinámica con el identificador
+        string urlPdf = $"http://apifatosamist.us-east-2.elasticbeanstalk.com/api/Compra/comprapdf/{id}";  // URL con el id
+
+
+        return urlPdf;
+    }
+
+
+}
+
+

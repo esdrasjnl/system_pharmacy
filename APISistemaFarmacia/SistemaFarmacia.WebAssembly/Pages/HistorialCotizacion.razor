@@ -1,0 +1,181 @@
+﻿@page "/page/historialcotizacion"
+@attribute [Authorize(Roles = "Administrador,Cajero,Encargado")]
+
+@inject ICotizacionService _cotizacionServicio;
+@inject IDialogService _dialogServicio
+@inject ISnackbar _snackBar
+@inject SweetAlertService Swal;
+
+@inject HttpClient Http;
+@inject IJSRuntime JSRuntime
+
+<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="mt-5">
+
+    <MudText Typo="Typo.h5" GutterBottom="true">Historial Venta</MudText>
+
+    <MudPaper Elevation="3" Class="pa-4" Width="100%">
+
+        <div class="d-flex flex-grow-1 gap-4">
+            <MudSelect T="string" Label="Buscar por" Variant="Variant.Outlined"
+                       Margin="Margin.Dense"
+                       Value="buscarPor"
+                       ValueChanged="OnSelectedValueChanged">
+                <MudSelectItem Value="@("Fechas")" />
+                <MudSelectItem Value="@("Numero Venta")" />
+            </MudSelect>
+
+            <MudTextField @bind-Value="numeroVenta" Label="Numero de venta" Variant="Variant.Outlined" Margin="Margin.Dense" Class="@(noneNumero)"></MudTextField>
+
+            <MudDatePicker Label="Fecha Inicio" Margin="Margin.Dense" Variant="Variant.Outlined" Class="@(noneFecha)" @bind-Date="fechaInicio" Mask="@(new DateMask("dd/MM/yyyy"))" />
+
+            <MudDatePicker Label="Fecha Fin" Margin="Margin.Dense" Variant="Variant.Outlined" Class="@(noneFecha)" @bind-Date="fechaFin" Mask="@(new DateMask("dd/MM/yyyy"))" />
+
+
+            <MudButton Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Search"
+                       Color="Color.Info"
+                       Size="Size.Medium"
+                       Class="mt-1"
+                       OnClick="Buscar">Buscar</MudButton>
+
+        </div>
+
+        <MudGrid>
+            <MudItem xs="12">
+
+            </MudItem>
+            <MudItem xs="12">
+
+                <MudTable Items="@listaVentas"
+                          Dense="true"
+                          Striped="true" Bordered="true"
+                          Loading="@_loading" LoadingProgressColor="Color.Info">
+                    <HeaderContent>
+                        <MudTh>Fecha Registro</MudTh>
+                        <MudTh>Numero Venta</MudTh>
+                        <MudTh>Tipo de pago</MudTh>
+                        <MudTh>Total</MudTh>
+                        <MudTh></MudTh>
+                    </HeaderContent>
+                    <RowTemplate Context="ventaRow">
+                        <MudTd DataLabel="Fecha Registro">@ventaRow.FechaRegistro.Value.ToString("dd/MM/yyyy")</MudTd>
+                        <MudTd DataLabel="Numero Venta">@ventaRow.NumeroDocumentoCotizacion</MudTd>
+                        <MudTd DataLabel="Tipo de pago">@ventaRow.TipoPago</MudTd>
+                        <MudTd DataLabel="Total">@ventaRow.Total</MudTd>
+                        <MudTd DataLabel="">
+                            <MudFab Color="Color.Primary"
+                                    StartIcon="@Icons.Material.Filled.RemoveRedEye"
+                                    Size="Size.Small"
+                                    IconSize="Size.Small"
+                                    OnClick="@(() => mostrarDetalle(ventaRow))" />
+
+                            <MudFab Color="Color.Primary"
+                                    StartIcon="@Icons.Material.Filled.RemoveCircle"
+                                    Size="Size.Small"
+                                    IconSize="Size.Small"
+                                    OnClick="@(() => MostrarPdfEnNuevaPagina(ventaRow.IdCotizacion))" />
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager />
+                    </PagerContent>
+                </MudTable>
+
+
+            </MudItem>
+        </MudGrid>
+    </MudPaper>
+
+</MudContainer>
+
+@code {
+    List<CotizacionDTO> listaVentas = new List<CotizacionDTO>();
+    private bool _loading = false;
+    private string buscarPor = "Fechas";
+    private string numeroVenta = string.Empty;
+    DateTime? fechaInicio = null;
+    DateTime? fechaFin = null;
+
+    private string noneNumero = "d-none";
+    private string noneFecha = "d-block";
+
+    private void OnSelectedValueChanged(string value)
+    {
+        buscarPor = value;
+
+        if (value == "Fechas")
+        {
+            fechaInicio = null;
+            fechaFin = null;
+            numeroVenta = string.Empty;
+            noneNumero = "d-none";
+            noneFecha = "d-block";
+        }
+        else
+        {
+            fechaInicio = null;
+            fechaFin = null;
+            numeroVenta = string.Empty;
+            noneNumero = "d-block";
+            noneFecha = "d-none";
+        }
+
+    }
+
+    private async Task Buscar()
+    {
+        _loading = true;
+        string _bpor;
+        string _fechaInicio;
+        string _fechaFin;
+
+        if (buscarPor == "Fechas")
+        {
+            _bpor = "fecha";
+            _fechaInicio = fechaInicio.Value.ToString("dd/MM/yyyy");
+            _fechaFin = fechaFin.Value.ToString("dd/MM/yyyy");
+            numeroVenta = "";
+        }
+        else
+        {
+            _bpor = "numero";
+            _fechaInicio = "";
+            _fechaFin = "";
+        }
+
+
+        var resultado = await _cotizacionServicio.Historial(_bpor, numeroVenta, _fechaInicio, _fechaFin);
+        if (resultado.status)
+            listaVentas = (List<CotizacionDTO>)resultado.value!;
+        else
+            listaVentas = new List<CotizacionDTO>();
+
+        _loading = false;
+    }
+
+    private async Task mostrarDetalle(CotizacionDTO model)
+    {
+        DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Medium, FullWidth = true };
+        var parametros = new DialogParameters { ["_cotizacion"] = model };
+        var dialogo = _dialogServicio.Show<MdDetalleCotizacion>("Detalle cotizacion", parametros, maxWidth);
+    }
+
+
+    private async Task MostrarPdfEnNuevaPagina(int id)
+    {
+        // Llamar a la API para obtener la URL del PDF usando el identificador
+        var urlPdf = await GenerarPdf(id);
+
+        // Abrir el PDF en una nueva pestaña
+        await JSRuntime.InvokeVoidAsync("open", urlPdf, "_blank");
+    }
+
+    private async Task<string> GenerarPdf(int id)
+    {
+        // Construir la URL dinámica con el identificador
+        string urlPdf = $"http://apifatosamist.us-east-2.elasticbeanstalk.com/api/cotizacion/cotizacionpdf/{id}";  // URL con el id
+
+
+        return urlPdf;
+    }
+}

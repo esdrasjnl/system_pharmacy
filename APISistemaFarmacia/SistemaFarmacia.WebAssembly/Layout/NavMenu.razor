@@ -1,0 +1,117 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+<MudNavMenu>
+    <AuthorizeView Roles="Administrador">
+        <Authorized>
+    <MudNavLink Href="/page/dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Dashboard">DashBoard</MudNavLink>
+        </Authorized>
+    </AuthorizeView>
+
+
+    <MudNavGroup Icon="@Icons.Material.Filled.CoPresent" Title="Personas">
+        <AuthorizeView Roles="Administrador,Encargado">
+        <Authorized>
+        <MudNavLink Href="/page/usuario" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Group">Usuarios</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="Administrador,Cajero,Encargado">
+        <Authorized>
+        <MudNavLink Href="/page/cliente" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Person2">Clientes</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="Administrador,Encargado">
+        <Authorized>
+        <MudNavLink Href="/page/proveedor" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.PersonAdd">Proveedores</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+    </MudNavGroup>
+
+    <MudNavGroup Icon="@Icons.Material.Filled.AutoAwesome" Title="Productos">
+        <AuthorizeView Roles="Administrador,Encargado">
+        <Authorized>
+        <MudNavLink Href="/page/producto" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Medication">Productos</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="Administrador,Encargado">
+        <Authorized>
+        <MudNavLink Href="/page/presentacion" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Padding">Presentaciones</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="Administrador,Encargado">
+        <Authorized>
+        <MudNavLink Href="/page/categoria" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Category">Categorias</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+    </MudNavGroup>
+        
+    
+    <MudNavGroup Icon="@Icons.Material.Filled.ShoppingCart" Title="Ventas">
+        <AuthorizeView Roles="Administrador,Cajero,Encargado">
+        <Authorized>
+        <MudNavLink Href="/page/venta" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.AddTask">Ventas</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="Administrador,Encargado">
+        <Authorized>
+        <MudNavLink Href="/page/historialventa" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.PlaylistAddCheckCircle">Historial Ventas</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="Administrador">
+        <Authorized>
+        <MudNavLink Href="/page/reporte" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Receipt">Reporte Ventas</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+
+    </MudNavGroup>
+
+    <MudNavGroup Icon="@Icons.Material.Filled.AddShoppingCart" Title="Compras">
+        <AuthorizeView Roles="Administrador,Encargado">
+        <Authorized>
+        <MudNavLink Href="/page/compra" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.BubbleChart">Compras</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="Administrador,Encargado">
+        <Authorized>
+        <MudNavLink Href="/page/historialcompra" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Addchart">Historial Compras</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="Administrador">
+        <Authorized>
+        <MudNavLink Href="/page/reportecompra" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Analytics">Reporte Compra</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+
+    </MudNavGroup>
+
+
+    <MudNavGroup Icon="@Icons.Material.Filled.Description" Title="Cotizaciones">
+        <AuthorizeView Roles="Administrador,Cajero,Encargado">
+        <Authorized>
+        <MudNavLink Href="/page/cotizacion" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.AspectRatio">Cotizar</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="Administrador,Cajero,Encargado">
+        <Authorized>
+        <MudNavLink Href="/page/historialcotizacion" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Ballot">Historial Cotizaciones</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+
+        <AuthorizeView Roles="Administrador,Encargado">
+        <Authorized>
+        <MudNavLink Href="/page/reportecotizacion" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Assignment">Reporte Cotizaciones</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+
+    </MudNavGroup>
+
+    
+    
+</MudNavMenu>

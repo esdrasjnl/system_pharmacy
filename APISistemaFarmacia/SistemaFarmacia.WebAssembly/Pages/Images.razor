@@ -1,0 +1,200 @@
+﻿@page "/page/images"
+
+@inject ICategoriaService categoriaServicio
+@inject IProductoService productoServicio
+@inject NavigationManager _navServicio
+
+@inject IJSRuntime JSRuntime
+
+
+
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Font Awesome en Blazor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-XhJyePd0yj+PRps3H0efNtC8LnE/A8BbOVi7LLRjA3iCb0+DdA84Vk2gKUz4cP2NdmX5WnL1gpESsGKwDQ6Bcg==" crossorigin="anonymous" />
+</head>
+<body>
+
+
+</body>
+</html>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-XhJyePd0yj+PRps3H0efNtC8LnE/A8BbOVi7LLRjA3iCb0+DdA84Vk2gKUz4cP2NdmX5WnL1gpESsGKwDQ6Bcg==" crossorigin="anonymous" />
+
+
+<div class="row justify-content-center mt-3 mb-4">
+
+    <div class="col-sm-6 col-md-8 col-xl-12">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Buscar producto..." @bind-value="buscar">
+            <button class="btn btn-outline-secondary" type="button" @onclick="(async () => await  ObtenerCatalogo())">
+                <i class="oi oi-magnifying-glass"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+   
+
+        
+
+
+
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+    
+
+    <div class="col-sm-9">
+        <div class="row gx-4 row-cols-1 row-cols-md-3 row-cols-xl-4 justify-content-start">
+            @if (listaProducto != null)
+            {
+                foreach (var item in listaProducto)
+                {
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Sale badge-->
+                            
+                                <div class="badge bg-primary text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Oferta</div>
+                            
+
+
+                            <!-- Product image-->
+                            <img class="card-img-top border-dark border-1" src="@item.Imagen" style="width:100%;height:250px">
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">@item.Nombre</h5>
+                                    <!-- Product price-->
+                                    
+                                        <span>S /.@item.Ppublico</span>
+                                    
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+
+                            <div class="card-footer p-3 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="/detalle/@item.IdProducto">Agregar Producto</a></div>
+                            </div>
+
+                            <div>
+                                <i class="oi oi-star" onclick="calificar(this)" id="1estrella"></i>
+                                <i class="oi oi-star" onclick="calificar(this)" id=" 2estrella"></i>
+                                <i class="oi oi-star" onclick="calificar(this)" id=" 2estrella"></i>
+                                <i class="oi oi-star" onclick="calificar(this)" id=" 2estrella"></i>
+                                <i class="oi oi-star" onclick="calificar(this)" id=" 2estrella"></i>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                }
+
+            }
+            else
+            {
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+
+
+
+    private List<CategoriaDTO>? listaCategoria = null;
+    private List<ProductoDTO>? listaProducto = null;
+    private string buscar = "";
+    private string categoriaSeleccionada = "Todos";
+
+
+    private async Task ObtenerCategorias(string Valor = "")
+    {
+        var response = await categoriaServicio.Lista();
+        if (response.status)
+        {
+            listaCategoria = (List<CategoriaDTO>)response.value;
+        }
+        else
+        {
+            listaCategoria = new List<CategoriaDTO>();
+        }
+    }
+
+
+    private async Task ObtenerCatalogo()
+    {
+        var response = await productoServicio.Lista();
+        if (response.status)
+        {
+            listaProducto = (List<ProductoDTO>)response.value;
+        }
+        else
+        {
+            listaProducto = new List<ProductoDTO>();
+        }
+    }
+
+
+    private async Task RadioSeleccion(ChangeEventArgs args)
+    {
+        categoriaSeleccionada = args.Value.ToString();
+        buscar = "";
+        await ObtenerCatalogo();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ObtenerCategorias();
+        await ObtenerCatalogo();
+    }
+
+
+    // Variable para almacenar la calificación
+    private int contador;
+
+    // Función JavaScript para calificar
+    private void Calificar(string item)
+    {
+        contador = int.Parse(item);
+        string nombre = item.Substring(1);
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (i < contador)
+            {
+                JSRuntime.InvokeVoidAsync("eval", $"document.getElementById('{(i + 1)}{nombre}').style.color = 'orange';");
+            }
+            else
+            {
+                JSRuntime.InvokeVoidAsync("eval", $"document.getElementById('{(i + 1)}{nombre}').style.color = 'black';");
+            }
+        }
+    }
+
+
+}
+
+

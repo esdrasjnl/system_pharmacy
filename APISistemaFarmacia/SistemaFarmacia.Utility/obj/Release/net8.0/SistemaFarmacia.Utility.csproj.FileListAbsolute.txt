@@ -1,0 +1,17 @@
+C:\Users\Fredy\Desktop\farmacia web\APISistemaFarmacia\SistemaFarmacia.Utility\bin\Release\net8.0\SistemaFarmacia.Utility.deps.json
+C:\Users\Fredy\Desktop\farmacia web\APISistemaFarmacia\SistemaFarmacia.Utility\bin\Release\net8.0\SistemaFarmacia.Utility.dll
+C:\Users\Fredy\Desktop\farmacia web\APISistemaFarmacia\SistemaFarmacia.Utility\bin\Release\net8.0\SistemaFarmacia.Utility.pdb
+C:\Users\Fredy\Desktop\farmacia web\APISistemaFarmacia\SistemaFarmacia.Utility\bin\Release\net8.0\SistemaFarmacia.DTO.dll
+C:\Users\Fredy\Desktop\farmacia web\APISistemaFarmacia\SistemaFarmacia.Utility\bin\Release\net8.0\SistemaFarmacia.Model.dll
+C:\Users\Fredy\Desktop\farmacia web\APISistemaFarmacia\SistemaFarmacia.Utility\bin\Release\net8.0\SistemaFarmacia.DTO.pdb
+C:\Users\Fredy\Desktop\farmacia web\APISistemaFarmacia\SistemaFarmacia.Utility\bin\Release\net8.0\SistemaFarmacia.Model.pdb
+C:\Users\Fredy\Desktop\farmacia web\APISistemaFarmacia\SistemaFarmacia.Utility\obj\Release\net8.0\SistemaFarmacia.Utility.csproj.AssemblyReference.cache
+C:\Users\Fredy\Desktop\farmacia web\APISistemaFarmacia\SistemaFarmacia.Utility\obj\Release\net8.0\SistemaFarmacia.Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Fredy\Desktop\farmacia web\APISistemaFarmacia\SistemaFarmacia.Utility\obj\Release\net8.0\SistemaFarmacia.Utility.AssemblyInfoInputs.cache
+C:\Users\Fredy\Desktop\farmacia web\APISistemaFarmacia\SistemaFarmacia.Utility\obj\Release\net8.0\SistemaFarmacia.Utility.AssemblyInfo.cs
+C:\Users\Fredy\Desktop\farmacia web\APISistemaFarmacia\SistemaFarmacia.Utility\obj\Release\net8.0\SistemaFarmacia.Utility.csproj.CoreCompileInputs.cache
+C:\Users\Fredy\Desktop\farmacia web\APISistemaFarmacia\SistemaFarmacia.Utility\obj\Release\net8.0\SistemaF.FC52C23B.Up2Date
+C:\Users\Fredy\Desktop\farmacia web\APISistemaFarmacia\SistemaFarmacia.Utility\obj\Release\net8.0\SistemaFarmacia.Utility.dll
+C:\Users\Fredy\Desktop\farmacia web\APISistemaFarmacia\SistemaFarmacia.Utility\obj\Release\net8.0\refint\SistemaFarmacia.Utility.dll
+C:\Users\Fredy\Desktop\farmacia web\APISistemaFarmacia\SistemaFarmacia.Utility\obj\Release\net8.0\SistemaFarmacia.Utility.pdb
+C:\Users\Fredy\Desktop\farmacia web\APISistemaFarmacia\SistemaFarmacia.Utility\obj\Release\net8.0\ref\SistemaFarmacia.Utility.dll

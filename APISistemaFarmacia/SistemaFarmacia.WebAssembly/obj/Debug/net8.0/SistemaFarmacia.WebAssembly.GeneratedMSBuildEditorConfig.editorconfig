@@ -1,0 +1,161 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = SistemaFarmacia.WebAssembly
+build_property.RootNamespace = SistemaFarmacia.WebAssembly
+build_property.ProjectDir = C:\Users\Esdras\Desktop\Sistema Jona\APISistemaFarmacia\SistemaFarmacia.WebAssembly\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Esdras\Desktop\Sistema Jona\APISistemaFarmacia\SistemaFarmacia.WebAssembly
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Layout/LoginLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XExvZ2luTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Categoria.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0ZWdvcmlhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Cliente.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2xpZW50ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Compra.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29tcHJhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Cotizacion.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ290aXphY2lvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/DashBoard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGFzaEJvYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/HistorialCompra.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGlzdG9yaWFsQ29tcHJhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/HistorialCotizacion.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGlzdG9yaWFsQ290aXphY2lvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/HistorialVenta.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSGlzdG9yaWFsVmVudGEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Images.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW1hZ2VzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Modales/MdCategoria.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTW9kYWxlc1xNZENhdGVnb3JpYS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Modales/MdCliente.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTW9kYWxlc1xNZENsaWVudGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Modales/MdDetalleCompra.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTW9kYWxlc1xNZERldGFsbGVDb21wcmEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Modales/MdDetalleCotizacion.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTW9kYWxlc1xNZERldGFsbGVDb3RpemFjaW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Modales/MdDetalleVenta.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTW9kYWxlc1xNZERldGFsbGVWZW50YS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Modales/MdPresentacion.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTW9kYWxlc1xNZFByZXNlbnRhY2lvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Modales/MdProdpresentacion.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTW9kYWxlc1xNZFByb2RwcmVzZW50YWNpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Modales/MdProducto.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTW9kYWxlc1xNZFByb2R1Y3RvLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Modales/MdProveedor.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTW9kYWxlc1xNZFByb3ZlZWRvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Modales/MdUsuario.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTW9kYWxlc1xNZFVzdWFyaW8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Presentacion.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJlc2VudGFjaW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Prodpresentacion.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHByZXNlbnRhY2lvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Producto.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHVjdG8ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Proveedor.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvdmVlZG9yLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Reporte.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/ReporteCompra.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0ZUNvbXByYS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/ReporteCotizacion.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVwb3J0ZUNvdGl6YWNpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Usuario.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXN1YXJpby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Pages/Venta.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVmVudGEucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-12onpfklex
+
+[C:/Users/Esdras/Desktop/Sistema Jona/APISistemaFarmacia/SistemaFarmacia.WebAssembly/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-pgswnyqbu6

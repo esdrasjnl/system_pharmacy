@@ -1,0 +1,88 @@
+﻿@inject IPresentacionService _presentacionServicio
+@inject ISnackbar _snackBar
+
+<MudDialog Style="width:400px">
+
+    <DialogContent>
+        <MudContainer Style="max-height: 400px; overflow-y: scroll" Class="m-0 p-0">
+
+            <EditForm Model="@_presentacion" OnValidSubmit="Guardar">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <MudTextField @bind-Value="@_presentacion.Descripcion" Class="mb-3"
+                              Label="Descripcion" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Badge" />
+                <ValidationMessage For="() => _presentacion.Descripcion" />
+
+            </EditForm>
+
+        </MudContainer>
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Default" OnClick="Cancel">Cancelar</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Guardar">Guardar</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [Parameter]
+    public PresentacionDTO _presentacion { get; set; } = new PresentacionDTO();
+
+    bool isShow;
+
+
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine(_presentacion.IdPresentacion);
+
+
+
+
+    }
+
+
+    private void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
+    private async Task Guardar()
+    {
+        if (string.IsNullOrWhiteSpace(_presentacion.Descripcion))
+        {
+            _snackBar.Add("La descripción no puede estar vacía.", Severity.Error);
+            return;
+        }
+
+
+        string _mensaje = "";
+        bool _resultado;
+
+        if (_presentacion.IdPresentacion != 0)
+        {
+            _resultado = await _presentacionServicio.Editar(_presentacion);
+            _mensaje = "Presentacion fue modificada";
+        }
+        else
+        {
+            var response = await _presentacionServicio.Crear(_presentacion);
+            _resultado = response.status;
+            _mensaje = "Presentacion fue creada";
+        }
+
+        if (_resultado)
+        {
+            _snackBar.Add(_mensaje, Severity.Success, a => a.VisibleStateDuration = 500);
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        else
+            _snackBar.Add("Error al guardar cambios", Severity.Error, a => a.VisibleStateDuration = 500);
+
+    }
+}

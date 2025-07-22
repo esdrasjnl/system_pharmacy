@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\Fredy\Desktop\publicar\webassembly</_PublishTargetUrl>
+    <History>True|2025-03-09T16:43:49.4917398Z||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="cadenaSQL">
+      <Value>workstation id=DBFarmacia.mssql.somee.com%3bpacket size=4096%3buser id=Alejandro007_SQLLogin_1%3bpwd=ouqlta72fk%3bdata source=DBFarmacia.mssql.somee.com%3bpersist security info=False%3binitial catalog=DBFarmacia%3bTrustServerCertificate=True</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>
