@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iPnJ7QvIK8E=",
+  "dgSpecHash": "ZWBZuSOFoZ0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj",
+  "projectFilePath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Esdras\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Esdras\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

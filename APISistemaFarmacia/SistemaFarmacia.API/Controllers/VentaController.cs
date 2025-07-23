@@ -12,6 +12,7 @@ using Microsoft.JSInterop;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
 using System.Xml.Linq;
+using SistemaFarmacia.DAL.DBContext;
 
 namespace SistemaFarmacia.API.Controllers
 {
@@ -22,12 +23,14 @@ namespace SistemaFarmacia.API.Controllers
         private readonly IMapper _mapper;
         private readonly IVentaRepositorio _ventaRepositorio;
         private readonly IFacturaElectronicaService _facturaElectronicaService;
+        private readonly DbfarmaciaContext _context;
 
-        public VentaController(IMapper mapper, IVentaRepositorio ventaRepositorio, IFacturaElectronicaService facturaElectronicaService)
+        public VentaController(IMapper mapper, IVentaRepositorio ventaRepositorio, IFacturaElectronicaService facturaElectronicaService, DbfarmaciaContext context)
         {
             _mapper = mapper;
             _ventaRepositorio = ventaRepositorio;
             _facturaElectronicaService = facturaElectronicaService;
+            _context = context;
         }
 
         [HttpPost]
@@ -268,6 +271,160 @@ namespace SistemaFarmacia.API.Controllers
             return Ok(resultado);
         }
 
+        //[HttpGet("xmlCertificate/{id}")]
+        //public async Task<IActionResult> VentaIdXml(int id)
+        //{
+        //    try
+        //    {
+        //        var venta = await _ventaRepositorio.ObtenerPorId(id);
+        //        decimal iva = 1.12m;
+
+        //        if (venta == null)
+        //            return NotFound(new { message = "Venta no encontrada." });
+
+        //        var fechaActual = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz");
+        //        var itemsXml = "";
+        //        int linea = 1;
+
+        //        foreach (var detalle in venta.DetalleVenta)
+        //        {
+        //            itemsXml += $@"
+        //                <dte:Item NumeroLinea=""{linea}"" BienOServicio=""B"">
+        //                    <dte:Cantidad>{detalle.CantidadReporte:0.0000}</dte:Cantidad>
+        //                    <dte:Descripcion>{detalle.IdProductoNavigation?.Nombre}</dte:Descripcion>
+        //                    <dte:PrecioUnitario>{detalle.Precio:0.0000}</dte:PrecioUnitario>
+        //                    <dte:Precio>{(detalle.CantidadReporte * detalle.Precio):0.0000}</dte:Precio>
+        //                    <dte:Descuento>0.0000</dte:Descuento>
+        //                    <dte:Impuestos>
+        //                        <dte:Impuesto>
+        //                            <dte:NombreCorto>IVA</dte:NombreCorto>
+        //                            <dte:CodigoUnidadGravable>1</dte:CodigoUnidadGravable>
+        //                            <dte:MontoGravable>{((detalle.Total ?? 0) / iva):0.0000}</dte:MontoGravable>
+        //                            <dte:MontoImpuesto>{((detalle.Total ?? 0) - (detalle.Total ?? 0) / iva):0.0000}</dte:MontoImpuesto>
+        //                        </dte:Impuesto>
+        //                    </dte:Impuestos>
+        //                    <dte:Total>{detalle.Total:0.0000}</dte:Total>
+        //                </dte:Item>";
+        //            linea++;
+        //        }
+
+        //        var totalVenta = venta.DetalleVenta.Sum(d => d.Total ?? 0);
+        //        var totalImpuesto = totalVenta - (totalVenta / iva);
+        //        var certId = Guid.NewGuid().ToString().ToUpper();
+
+        //        var cdataContent = $@"<?xml version=""1.0"" encoding=""UTF-8""?>
+        //                <dte:GTDocumento Version=""0.1"" xmlns:dte=""http://www.sat.gob.gt/dte/fel/0.2.0""
+        //                    xmlns:cfc=""http://www.sat.gob.gt/dte/fel/CompCambiaria/0.1.0""
+        //                    xmlns:cex=""http://www.sat.gob.gt/face2/ComplementoExportaciones/0.1.0""
+        //                    xmlns:cfe=""http://www.sat.gob.gt/face2/ComplementoFacturaEspecial/0.1.0""
+        //                    xmlns:cno=""http://www.sat.gob.gt/face2/ComplementoReferenciaNota/0.1.0""
+        //                    xmlns:ds=""http://www.w3.org/2000/09/xmldsig#""
+        //                    xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
+        //                  <dte:SAT ClaseDocumento=""dte"">
+        //                    <dte:DTE ID=""DatosCertificados"">
+        //                      <dte:DatosEmision ID=""DatosEmision"">
+        //                        <dte:DatosGenerales Tipo=""FACT"" FechaHoraEmision=""{fechaActual}"" CodigoMoneda=""GTQ"" />
+        //                        <dte:Emisor NITEmisor=""107346834"" NombreEmisor=""TEKRA SOCIEDAD ANONIMA"" CodigoEstablecimiento=""1""
+        //                                    NombreComercial=""TEKRA SOCIEDAD ANONIMA"" CorreoEmisor="""" AfiliacionIVA=""GEN"">
+        //                          <dte:DireccionEmisor>
+        //                            <dte:Direccion>19 CALLE 18-48</dte:Direccion>
+        //                            <dte:CodigoPostal>01010</dte:CodigoPostal>
+        //                            <dte:Municipio>GUATEMALA</dte:Municipio>
+        //                            <dte:Departamento>GUATEMALA</dte:Departamento>
+        //                            <dte:Pais>GT</dte:Pais>
+        //                          </dte:DireccionEmisor>
+        //                        </dte:Emisor>
+        //                        <dte:Receptor IDReceptor=""{venta.IdClienteNavigation?.Nit ?? "C/F"}""
+        //                                      NombreReceptor=""{venta.IdClienteNavigation?.NombreCompleto}""
+        //                                      CorreoReceptor=""correo@ejemplo.com"">
+        //                          <dte:DireccionReceptor>
+        //                            <dte:Direccion>{venta.IdClienteNavigation?.Direccion ?? "GUATEMALA"}</dte:Direccion>
+        //                            <dte:CodigoPostal>01001</dte:CodigoPostal>
+        //                            <dte:Municipio>GUATEMALA</dte:Municipio>
+        //                            <dte:Departamento>GUATEMALA</dte:Departamento>
+        //                            <dte:Pais>GT</dte:Pais>
+        //                          </dte:DireccionReceptor>
+        //                        </dte:Receptor>
+        //                        <dte:Frases>
+        //                          <dte:Frase TipoFrase=""1"" CodigoEscenario=""1"" />
+        //                        </dte:Frases>
+        //                        <dte:Items>
+        //                          {itemsXml}
+        //                        </dte:Items>
+        //                        <dte:Totales>
+        //                          <dte:TotalImpuestos>
+        //                            <dte:TotalImpuesto NombreCorto=""IVA"" TotalMontoImpuesto=""{totalImpuesto:0.0000}"" />
+        //                          </dte:TotalImpuestos>
+        //                          <dte:GranTotal>{totalVenta:0.0000}</dte:GranTotal>
+        //                        </dte:Totales>
+        //                      </dte:DatosEmision>
+        //                    </dte:DTE>
+        //                    <dte:Adenda>
+        //                      <DECertificador>{certId}</DECertificador>
+        //                    </dte:Adenda>
+        //                  </dte:SAT>
+        //                </dte:GTDocumento>";
+
+        //        var soapXml = $@"<?xml version=""1.0"" encoding=""UTF-8""?>
+        //                <SOAP-ENV:Envelope xmlns:SOAP-ENV=""http://schemas.xmlsoap.org/soap/envelope/""
+        //                                   xmlns:ns1=""http://apicertificacion.desa.tekra.com.gt:8080/certificacion/wsdl/"">
+        //                  <SOAP-ENV:Body>
+        //                    <ns1:CertificacionDocumento>
+        //                      <Autenticacion>
+        //                        <pn_usuario>tekra_api</pn_usuario>
+        //                        <pn_clave>123456789</pn_clave>
+        //                        <pn_cliente>2121010001</pn_cliente>
+        //                        <pn_contrato>2122010001</pn_contrato>
+        //                        <pn_id_origen>TEKRA_PRUEBA</pn_id_origen>
+        //                        <pn_ip_origen>192.168.0.100</pn_ip_origen>
+        //                        <pn_firmar_emisor>SI</pn_firmar_emisor>
+        //                        <pn_validar_identificador>SI</pn_validar_identificador>
+        //                      </Autenticacion>
+        //                      <Documento><![CDATA[{cdataContent}]]></Documento>
+        //                    </ns1:CertificacionDocumento>
+        //                  </SOAP-ENV:Body>
+        //                </SOAP-ENV:Envelope>";
+
+        //        // Enviar el XML como text/xml a TEKRA
+        //        using var httpClient = new HttpClient();
+        //        var content = new StringContent(soapXml, Encoding.UTF8, "text/xml");
+        //        var response = await httpClient.PostAsync("http://apicertificacion.desa.tekra.com.gt:8080/certificacion/servicio.php", content);
+        //        var responseText = await response.Content.ReadAsStringAsync();
+
+        //        // Buscar el contenido entre <RepresentacionGrafica>...</RepresentacionGrafica>
+        //        var startTag = "<RepresentacionGrafica>";
+        //        var endTag = "</RepresentacionGrafica>";
+        //        var startIndex = responseText.IndexOf(startTag);
+        //        var endIndex = responseText.IndexOf(endTag);
+
+        //        if (startIndex == -1 || endIndex == -1 || endIndex <= startIndex)
+        //            return StatusCode(500, new { message = "No se encontró la representación gráfica (PDF) en la respuesta." });
+
+        //        startIndex += startTag.Length;
+        //        var base64Pdf = responseText.Substring(startIndex, endIndex - startIndex).Trim();
+
+        //        var pdfBytes = Convert.FromBase64String(base64Pdf);
+        //        var pdfFileName = $"venta_{venta.IdVenta}_TEKRA.pdf";
+
+        //        //return File(pdfBytes, "application/pdf", pdfFileName);
+        //        var result = new FileContentResult(pdfBytes, "application/pdf")
+        //        {
+        //            FileDownloadName = $"venta_{venta.IdVenta}_TEKRA.pdf"
+        //        };
+        //        Response.Headers["Content-Disposition"] = "inline; filename=" + result.FileDownloadName;
+        //        //return result;
+
+        //        //var pdfBytes = pdf.GeneratePdf();
+
+        //        // Asegurarse de que se está devolviendo el archivo correctamente para que se muestre en el navegador
+        //        return new FileContentResult(pdfBytes, "application/pdf");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, new { message = ex.Message });
+        //    }
+        //}
+
         [HttpGet("xmlCertificate/{id}")]
         public async Task<IActionResult> VentaIdXml(int id)
         {
@@ -286,22 +443,22 @@ namespace SistemaFarmacia.API.Controllers
                 foreach (var detalle in venta.DetalleVenta)
                 {
                     itemsXml += $@"
-                        <dte:Item NumeroLinea=""{linea}"" BienOServicio=""B"">
-                            <dte:Cantidad>{detalle.CantidadReporte:0.0000}</dte:Cantidad>
-                            <dte:Descripcion>{detalle.IdProductoNavigation?.Nombre}</dte:Descripcion>
-                            <dte:PrecioUnitario>{detalle.Precio:0.0000}</dte:PrecioUnitario>
-                            <dte:Precio>{(detalle.CantidadReporte * detalle.Precio):0.0000}</dte:Precio>
-                            <dte:Descuento>0.0000</dte:Descuento>
-                            <dte:Impuestos>
-                                <dte:Impuesto>
-                                    <dte:NombreCorto>IVA</dte:NombreCorto>
-                                    <dte:CodigoUnidadGravable>1</dte:CodigoUnidadGravable>
-                                    <dte:MontoGravable>{((detalle.Total ?? 0) / iva):0.0000}</dte:MontoGravable>
-                                    <dte:MontoImpuesto>{((detalle.Total ?? 0) - (detalle.Total ?? 0) / iva):0.0000}</dte:MontoImpuesto>
-                                </dte:Impuesto>
-                            </dte:Impuestos>
-                            <dte:Total>{detalle.Total:0.0000}</dte:Total>
-                        </dte:Item>";
+                <dte:Item NumeroLinea=""{linea}"" BienOServicio=""B"">
+                    <dte:Cantidad>{detalle.CantidadReporte:0.0000}</dte:Cantidad>
+                    <dte:Descripcion>{detalle.IdProductoNavigation?.Nombre}</dte:Descripcion>
+                    <dte:PrecioUnitario>{detalle.Precio:0.0000}</dte:PrecioUnitario>
+                    <dte:Precio>{(detalle.CantidadReporte * detalle.Precio):0.0000}</dte:Precio>
+                    <dte:Descuento>0.0000</dte:Descuento>
+                    <dte:Impuestos>
+                        <dte:Impuesto>
+                            <dte:NombreCorto>IVA</dte:NombreCorto>
+                            <dte:CodigoUnidadGravable>1</dte:CodigoUnidadGravable>
+                            <dte:MontoGravable>{((detalle.Total ?? 0) / iva):0.0000}</dte:MontoGravable>
+                            <dte:MontoImpuesto>{((detalle.Total ?? 0) - (detalle.Total ?? 0) / iva):0.0000}</dte:MontoImpuesto>
+                        </dte:Impuesto>
+                    </dte:Impuestos>
+                    <dte:Total>{detalle.Total:0.0000}</dte:Total>
+                </dte:Item>";
                     linea++;
                 }
 
@@ -310,85 +467,82 @@ namespace SistemaFarmacia.API.Controllers
                 var certId = Guid.NewGuid().ToString().ToUpper();
 
                 var cdataContent = $@"<?xml version=""1.0"" encoding=""UTF-8""?>
-                        <dte:GTDocumento Version=""0.1"" xmlns:dte=""http://www.sat.gob.gt/dte/fel/0.2.0""
-                            xmlns:cfc=""http://www.sat.gob.gt/dte/fel/CompCambiaria/0.1.0""
-                            xmlns:cex=""http://www.sat.gob.gt/face2/ComplementoExportaciones/0.1.0""
-                            xmlns:cfe=""http://www.sat.gob.gt/face2/ComplementoFacturaEspecial/0.1.0""
-                            xmlns:cno=""http://www.sat.gob.gt/face2/ComplementoReferenciaNota/0.1.0""
-                            xmlns:ds=""http://www.w3.org/2000/09/xmldsig#""
-                            xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
-                          <dte:SAT ClaseDocumento=""dte"">
-                            <dte:DTE ID=""DatosCertificados"">
-                              <dte:DatosEmision ID=""DatosEmision"">
-                                <dte:DatosGenerales Tipo=""FACT"" FechaHoraEmision=""{fechaActual}"" CodigoMoneda=""GTQ"" />
-                                <dte:Emisor NITEmisor=""107346834"" NombreEmisor=""TEKRA SOCIEDAD ANONIMA"" CodigoEstablecimiento=""1""
-                                            NombreComercial=""TEKRA SOCIEDAD ANONIMA"" CorreoEmisor="""" AfiliacionIVA=""GEN"">
-                                  <dte:DireccionEmisor>
-                                    <dte:Direccion>19 CALLE 18-48</dte:Direccion>
-                                    <dte:CodigoPostal>01010</dte:CodigoPostal>
-                                    <dte:Municipio>GUATEMALA</dte:Municipio>
-                                    <dte:Departamento>GUATEMALA</dte:Departamento>
-                                    <dte:Pais>GT</dte:Pais>
-                                  </dte:DireccionEmisor>
-                                </dte:Emisor>
-                                <dte:Receptor IDReceptor=""{venta.IdClienteNavigation?.Nit ?? "C/F"}""
-                                              NombreReceptor=""{venta.IdClienteNavigation?.NombreCompleto}""
-                                              CorreoReceptor=""correo@ejemplo.com"">
-                                  <dte:DireccionReceptor>
-                                    <dte:Direccion>{venta.IdClienteNavigation?.Direccion ?? "GUATEMALA"}</dte:Direccion>
-                                    <dte:CodigoPostal>01001</dte:CodigoPostal>
-                                    <dte:Municipio>GUATEMALA</dte:Municipio>
-                                    <dte:Departamento>GUATEMALA</dte:Departamento>
-                                    <dte:Pais>GT</dte:Pais>
-                                  </dte:DireccionReceptor>
-                                </dte:Receptor>
-                                <dte:Frases>
-                                  <dte:Frase TipoFrase=""1"" CodigoEscenario=""1"" />
-                                </dte:Frases>
-                                <dte:Items>
-                                  {itemsXml}
-                                </dte:Items>
-                                <dte:Totales>
-                                  <dte:TotalImpuestos>
-                                    <dte:TotalImpuesto NombreCorto=""IVA"" TotalMontoImpuesto=""{totalImpuesto:0.0000}"" />
-                                  </dte:TotalImpuestos>
-                                  <dte:GranTotal>{totalVenta:0.0000}</dte:GranTotal>
-                                </dte:Totales>
-                              </dte:DatosEmision>
-                            </dte:DTE>
-                            <dte:Adenda>
-                              <DECertificador>{certId}</DECertificador>
-                            </dte:Adenda>
-                          </dte:SAT>
-                        </dte:GTDocumento>";
+                <dte:GTDocumento Version=""0.1"" xmlns:dte=""http://www.sat.gob.gt/dte/fel/0.2.0""
+                    xmlns:cfc=""http://www.sat.gob.gt/dte/fel/CompCambiaria/0.1.0""
+                    xmlns:cex=""http://www.sat.gob.gt/face2/ComplementoExportaciones/0.1.0""
+                    xmlns:cfe=""http://www.sat.gob.gt/face2/ComplementoFacturaEspecial/0.1.0""
+                    xmlns:cno=""http://www.sat.gob.gt/face2/ComplementoReferenciaNota/0.1.0""
+                    xmlns:ds=""http://www.w3.org/2000/09/xmldsig#""
+                    xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
+                  <dte:SAT ClaseDocumento=""dte"">
+                    <dte:DTE ID=""DatosCertificados"">
+                      <dte:DatosEmision ID=""DatosEmision"">
+                        <dte:DatosGenerales Tipo=""FACT"" FechaHoraEmision=""{fechaActual}"" CodigoMoneda=""GTQ"" />
+                        <dte:Emisor NITEmisor=""107346834"" NombreEmisor=""TEKRA SOCIEDAD ANONIMA"" CodigoEstablecimiento=""1""
+                                    NombreComercial=""TEKRA SOCIEDAD ANONIMA"" CorreoEmisor="""" AfiliacionIVA=""GEN"">
+                          <dte:DireccionEmisor>
+                            <dte:Direccion>19 CALLE 18-48</dte:Direccion>
+                            <dte:CodigoPostal>01010</dte:CodigoPostal>
+                            <dte:Municipio>GUATEMALA</dte:Municipio>
+                            <dte:Departamento>GUATEMALA</dte:Departamento>
+                            <dte:Pais>GT</dte:Pais>
+                          </dte:DireccionEmisor>
+                        </dte:Emisor>
+                        <dte:Receptor IDReceptor=""{venta.IdClienteNavigation?.Nit ?? "C/F"}""
+                                      NombreReceptor=""{venta.IdClienteNavigation?.NombreCompleto}"" CorreoReceptor=""correo@ejemplo.com"">
+                          <dte:DireccionReceptor>
+                            <dte:Direccion>{venta.IdClienteNavigation?.Direccion ?? "GUATEMALA"}</dte:Direccion>
+                            <dte:CodigoPostal>01001</dte:CodigoPostal>
+                            <dte:Municipio>GUATEMALA</dte:Municipio>
+                            <dte:Departamento>GUATEMALA</dte:Departamento>
+                            <dte:Pais>GT</dte:Pais>
+                          </dte:DireccionReceptor>
+                        </dte:Receptor>
+                        <dte:Frases>
+                          <dte:Frase TipoFrase=""1"" CodigoEscenario=""1"" />
+                        </dte:Frases>
+                        <dte:Items>
+                          {itemsXml}
+                        </dte:Items>
+                        <dte:Totales>
+                          <dte:TotalImpuestos>
+                            <dte:TotalImpuesto NombreCorto=""IVA"" TotalMontoImpuesto=""{totalImpuesto:0.0000}"" />
+                          </dte:TotalImpuestos>
+                          <dte:GranTotal>{totalVenta:0.0000}</dte:GranTotal>
+                        </dte:Totales>
+                      </dte:DatosEmision>
+                    </dte:DTE>
+                    <dte:Adenda>
+                      <DECertificador>{certId}</DECertificador>
+                    </dte:Adenda>
+                  </dte:SAT>
+                </dte:GTDocumento>";
 
                 var soapXml = $@"<?xml version=""1.0"" encoding=""UTF-8""?>
-                        <SOAP-ENV:Envelope xmlns:SOAP-ENV=""http://schemas.xmlsoap.org/soap/envelope/""
-                                           xmlns:ns1=""http://apicertificacion.desa.tekra.com.gt:8080/certificacion/wsdl/"">
-                          <SOAP-ENV:Body>
-                            <ns1:CertificacionDocumento>
-                              <Autenticacion>
-                                <pn_usuario>tekra_api</pn_usuario>
-                                <pn_clave>123456789</pn_clave>
-                                <pn_cliente>2121010001</pn_cliente>
-                                <pn_contrato>2122010001</pn_contrato>
-                                <pn_id_origen>TEKRA_PRUEBA</pn_id_origen>
-                                <pn_ip_origen>192.168.0.100</pn_ip_origen>
-                                <pn_firmar_emisor>SI</pn_firmar_emisor>
-                                <pn_validar_identificador>SI</pn_validar_identificador>
-                              </Autenticacion>
-                              <Documento><![CDATA[{cdataContent}]]></Documento>
-                            </ns1:CertificacionDocumento>
-                          </SOAP-ENV:Body>
-                        </SOAP-ENV:Envelope>";
+                <SOAP-ENV:Envelope xmlns:SOAP-ENV=""http://schemas.xmlsoap.org/soap/envelope/""
+                                   xmlns:ns1=""http://apicertificacion.desa.tekra.com.gt:8080/certificacion/wsdl/"">
+                  <SOAP-ENV:Body>
+                    <ns1:CertificacionDocumento>
+                      <Autenticacion>
+                        <pn_usuario>tekra_api</pn_usuario>
+                        <pn_clave>123456789</pn_clave>
+                        <pn_cliente>2121010001</pn_cliente>
+                        <pn_contrato>2122010001</pn_contrato>
+                        <pn_id_origen>TEKRA_PRUEBA</pn_id_origen>
+                        <pn_ip_origen>192.168.0.100</pn_ip_origen>
+                        <pn_firmar_emisor>SI</pn_firmar_emisor>
+                        <pn_validar_identificador>SI</pn_validar_identificador>
+                      </Autenticacion>
+                      <Documento><![CDATA[{cdataContent}]]></Documento>
+                    </ns1:CertificacionDocumento>
+                  </SOAP-ENV:Body>
+                </SOAP-ENV:Envelope>";
 
-                // Enviar el XML como text/xml a TEKRA
                 using var httpClient = new HttpClient();
                 var content = new StringContent(soapXml, Encoding.UTF8, "text/xml");
                 var response = await httpClient.PostAsync("http://apicertificacion.desa.tekra.com.gt:8080/certificacion/servicio.php", content);
                 var responseText = await response.Content.ReadAsStringAsync();
 
-                // Buscar el contenido entre <RepresentacionGrafica>...</RepresentacionGrafica>
                 var startTag = "<RepresentacionGrafica>";
                 var endTag = "</RepresentacionGrafica>";
                 var startIndex = responseText.IndexOf(startTag);
@@ -399,21 +553,29 @@ namespace SistemaFarmacia.API.Controllers
 
                 startIndex += startTag.Length;
                 var base64Pdf = responseText.Substring(startIndex, endIndex - startIndex).Trim();
-
                 var pdfBytes = Convert.FromBase64String(base64Pdf);
-                var pdfFileName = $"venta_{venta.IdVenta}_TEKRA.pdf";
 
-                //return File(pdfBytes, "application/pdf", pdfFileName);
-                var result = new FileContentResult(pdfBytes, "application/pdf")
+                // Guardar PDF en C:\FacturasCertificadas
+                var nombreArchivo = $"venta_{venta.IdVenta}_TEKRA.pdf";
+                var carpeta = @"C:\FacturasCertificadas";
+                Directory.CreateDirectory(carpeta);
+                var rutaArchivo = Path.Combine(carpeta, nombreArchivo);
+                await System.IO.File.WriteAllBytesAsync(rutaArchivo, pdfBytes);
+
+                // Guardar en base de datos
+                var factura = new FacturasCertificadas
                 {
-                    FileDownloadName = $"venta_{venta.IdVenta}_TEKRA.pdf"
+                    IdVenta = venta.IdVenta,
+                    NombreArchivo = nombreArchivo,
+                    RutaArchivo = rutaArchivo,
+                    FechaGeneracion = DateTime.Now
                 };
-                Response.Headers["Content-Disposition"] = "inline; filename=" + result.FileDownloadName;
-                //return result;
 
-                //var pdfBytes = pdf.GeneratePdf();
+                _context.FacturasCertificadas.Add(factura);
+                await _context.SaveChangesAsync();
 
-                // Asegurarse de que se está devolviendo el archivo correctamente para que se muestre en el navegador
+                // 📤 Mostrar el archivo en navegador
+                Response.Headers["Content-Disposition"] = $"inline; filename={nombreArchivo}";
                 return new FileContentResult(pdfBytes, "application/pdf");
             }
             catch (Exception ex)
@@ -421,6 +583,30 @@ namespace SistemaFarmacia.API.Controllers
                 return StatusCode(500, new { message = ex.Message });
             }
         }
+
+
+        private async Task GuardarFacturaCertificadaAsync(int idVenta, string nombreArchivo, string rutaArchivo)
+        {
+            try
+            {
+                var factura = new FacturasCertificadas
+                {
+                    IdVenta = idVenta,
+                    NombreArchivo = nombreArchivo,
+                    RutaArchivo = rutaArchivo,
+                    FechaGeneracion = DateTime.Now
+                };
+
+                _context.FacturasCertificadas.Add(factura); // _context es tu DbContext inyectado
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                // Puedes loguear el error o lanzar la excepción nuevamente si lo deseas
+                Console.WriteLine($"Error al guardar factura certificada: {ex.Message}");
+            }
+        }
+
     }
 }
 

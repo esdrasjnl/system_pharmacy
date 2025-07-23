@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fONP0WRtj+E=",
+  "dgSpecHash": "XRL3+lKvLDI=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj",
+  "projectFilePath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Esdras\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\Esdras\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

@@ -188,12 +188,13 @@ total decimal(10,2)
 )
 
 CREATE TABLE FacturasCertificadas (
-    Id INT,
-	IdVenta INT,
-	NombreArchivo NVARCHAR(100),
-	RutaArchivo NVARCHAR(300),
-	FechaGeneracion DATETIME
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    IdVenta INT,
+    NombreArchivo NVARCHAR(100),
+    RutaArchivo NVARCHAR(300),
+    FechaGeneracion DATETIME
 );
+
 
 
 

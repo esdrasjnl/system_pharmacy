@@ -1,21 +1,73 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\",
+  "WorkspaceRootPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EB27923F-7E88-42E5-B504-59DEAC15DA0E}|SistemaFarmacia.API\\SistemaFarmacia.API.csproj|c:\\users\\esdras\\desktop\\sistema jona\\apisistemafarmacia\\sistemafarmacia.api\\controllers\\ventacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{EB27923F-7E88-42E5-B504-59DEAC15DA0E}|SistemaFarmacia.API\\SistemaFarmacia.API.csproj|c:\\users\\esdras\\desktop\\sistema jona\\system_pharmacy\\apisistemafarmacia\\sistemafarmacia.api\\controllers\\ventacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EB27923F-7E88-42E5-B504-59DEAC15DA0E}|SistemaFarmacia.API\\SistemaFarmacia.API.csproj|solutionrelative:sistemafarmacia.api\\controllers\\ventacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|c:\\users\\esdras\\desktop\\sistema jona\\apisistemafarmacia\\sistemafarmacia.model\\facturascertificadas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B6CC3881-D3C3-4E81-8756-4882B4FD1BEF}|SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj|c:\\users\\esdras\\desktop\\sistema jona\\system_pharmacy\\apisistemafarmacia\\sistemafarmacia.dal\\dbcontext\\dbfarmaciacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6CC3881-D3C3-4E81-8756-4882B4FD1BEF}|SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj|solutionrelative:sistemafarmacia.dal\\dbcontext\\dbfarmaciacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|c:\\users\\esdras\\desktop\\sistema jona\\system_pharmacy\\apisistemafarmacia\\sistemafarmacia.model\\numerodocumento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|solutionrelative:sistemafarmacia.model\\numerodocumento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|c:\\users\\esdras\\desktop\\sistema jona\\system_pharmacy\\apisistemafarmacia\\sistemafarmacia.model\\facturascertificadas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|solutionrelative:sistemafarmacia.model\\facturascertificadas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|c:\\users\\esdras\\desktop\\sistema jona\\apisistemafarmacia\\sistemafarmacia.model\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|c:\\users\\esdras\\desktop\\sistema jona\\system_pharmacy\\apisistemafarmacia\\sistemafarmacia.model\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|solutionrelative:sistemafarmacia.model\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|c:\\users\\esdras\\desktop\\sistema jona\\system_pharmacy\\apisistemafarmacia\\sistemafarmacia.model\\venta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|solutionrelative:sistemafarmacia.model\\venta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|c:\\users\\esdras\\desktop\\sistema jona\\system_pharmacy\\apisistemafarmacia\\sistemafarmacia.model\\detallecompra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|solutionrelative:sistemafarmacia.model\\detallecompra.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{384414C4-2D34-478C-8324-D0B9CE7699FE}|SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj|c:\\users\\esdras\\desktop\\sistema jona\\system_pharmacy\\apisistemafarmacia\\sistemafarmacia.bll\\servicios\\comprarepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{384414C4-2D34-478C-8324-D0B9CE7699FE}|SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj|solutionrelative:sistemafarmacia.bll\\servicios\\comprarepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6CC3881-D3C3-4E81-8756-4882B4FD1BEF}|SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj|c:\\users\\esdras\\desktop\\sistema jona\\system_pharmacy\\apisistemafarmacia\\sistemafarmacia.dal\\repositorios\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6CC3881-D3C3-4E81-8756-4882B4FD1BEF}|SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj|solutionrelative:sistemafarmacia.dal\\repositorios\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|c:\\users\\esdras\\desktop\\sistema jona\\system_pharmacy\\apisistemafarmacia\\sistemafarmacia.model\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|solutionrelative:sistemafarmacia.model\\categoria.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|c:\\users\\esdras\\desktop\\sistema jona\\system_pharmacy\\apisistemafarmacia\\sistemafarmacia.model\\detalleventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|solutionrelative:sistemafarmacia.model\\detalleventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|c:\\users\\esdras\\desktop\\sistema jona\\system_pharmacy\\apisistemafarmacia\\sistemafarmacia.model\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|solutionrelative:sistemafarmacia.model\\producto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|c:\\users\\esdras\\desktop\\sistema jona\\system_pharmacy\\apisistemafarmacia\\sistemafarmacia.model\\cotizacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|solutionrelative:sistemafarmacia.model\\cotizacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{384414C4-2D34-478C-8324-D0B9CE7699FE}|SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj|c:\\users\\esdras\\desktop\\sistema jona\\system_pharmacy\\apisistemafarmacia\\sistemafarmacia.bll\\servicios\\categoriarepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{384414C4-2D34-478C-8324-D0B9CE7699FE}|SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj|solutionrelative:sistemafarmacia.bll\\servicios\\categoriarepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{384414C4-2D34-478C-8324-D0B9CE7699FE}|SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj|c:\\users\\esdras\\desktop\\sistema jona\\system_pharmacy\\apisistemafarmacia\\sistemafarmacia.bll\\servicios\\rolrepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{384414C4-2D34-478C-8324-D0B9CE7699FE}|SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj|solutionrelative:sistemafarmacia.bll\\servicios\\rolrepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|c:\\users\\esdras\\desktop\\sistema jona\\system_pharmacy\\apisistemafarmacia\\sistemafarmacia.model\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DF483B4E-59FF-4C10-B356-22E6C2DD3E62}|SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj|solutionrelative:sistemafarmacia.model\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A9346D5C-C94B-4F1D-973F-C6EAE0297A1F}|SistemaFarmacia.WebAssembly\\SistemaFarmacia.WebAssembly.csproj|c:\\users\\esdras\\desktop\\sistema jona\\apisistemafarmacia\\sistemafarmacia.webassembly\\pages\\venta.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{A9346D5C-C94B-4F1D-973F-C6EAE0297A1F}|SistemaFarmacia.WebAssembly\\SistemaFarmacia.WebAssembly.csproj|c:\\users\\esdras\\desktop\\sistema jona\\system_pharmacy\\apisistemafarmacia\\sistemafarmacia.webassembly\\pages\\venta.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A9346D5C-C94B-4F1D-973F-C6EAE0297A1F}|SistemaFarmacia.WebAssembly\\SistemaFarmacia.WebAssembly.csproj|solutionrelative:sistemafarmacia.webassembly\\pages\\venta.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
@@ -26,28 +78,211 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FacturasCertificadas.cs",
-              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Model\\FacturasCertificadas.cs",
-              "RelativeDocumentMoniker": "SistemaFarmacia.Model\\FacturasCertificadas.cs",
-              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Model\\FacturasCertificadas.cs",
-              "RelativeToolTip": "SistemaFarmacia.Model\\FacturasCertificadas.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA1AAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "VentaController.cs",
+              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.API\\Controllers\\VentaController.cs",
+              "RelativeDocumentMoniker": "SistemaFarmacia.API\\Controllers\\VentaController.cs",
+              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.API\\Controllers\\VentaController.cs",
+              "RelativeToolTip": "SistemaFarmacia.API\\Controllers\\VentaController.cs",
+              "ViewState": "AgIAACICAAAAAAAAAAAAwEkCAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-16T23:46:34.175Z",
+              "WhenOpened": "2025-06-12T22:27:02.413Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "NumeroDocumento.cs",
+              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\NumeroDocumento.cs",
+              "RelativeDocumentMoniker": "SistemaFarmacia.Model\\NumeroDocumento.cs",
+              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\NumeroDocumento.cs",
+              "RelativeToolTip": "SistemaFarmacia.Model\\NumeroDocumento.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T05:20:48.914Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\Usuario.cs",
+              "RelativeDocumentMoniker": "SistemaFarmacia.Model\\Usuario.cs",
+              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\Usuario.cs",
+              "RelativeToolTip": "SistemaFarmacia.Model\\Usuario.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T05:20:41.203Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FacturasCertificadas.cs",
+              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\FacturasCertificadas.cs",
+              "RelativeDocumentMoniker": "SistemaFarmacia.Model\\FacturasCertificadas.cs",
+              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\FacturasCertificadas.cs",
+              "RelativeToolTip": "SistemaFarmacia.Model\\FacturasCertificadas.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T05:20:30.942Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DbfarmaciaContext.cs",
+              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DAL\\DBContext\\DbfarmaciaContext.cs",
+              "RelativeDocumentMoniker": "SistemaFarmacia.DAL\\DBContext\\DbfarmaciaContext.cs",
+              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DAL\\DBContext\\DbfarmaciaContext.cs",
+              "RelativeToolTip": "SistemaFarmacia.DAL\\DBContext\\DbfarmaciaContext.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAAADIAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T04:59:21.73Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DAL\\Repositorios\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "SistemaFarmacia.DAL\\Repositorios\\GenericRepository.cs",
+              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DAL\\Repositorios\\GenericRepository.cs",
+              "RelativeToolTip": "SistemaFarmacia.DAL\\Repositorios\\GenericRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T04:59:18.18Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Venta.cs",
+              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\Venta.cs",
+              "RelativeDocumentMoniker": "SistemaFarmacia.Model\\Venta.cs",
+              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\Venta.cs",
+              "RelativeToolTip": "SistemaFarmacia.Model\\Venta.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T04:58:44.679Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Categoria.cs",
+              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\Categoria.cs",
+              "RelativeDocumentMoniker": "SistemaFarmacia.Model\\Categoria.cs",
+              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\Categoria.cs",
+              "RelativeToolTip": "SistemaFarmacia.Model\\Categoria.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T04:51:42.363Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DetalleVenta.cs",
+              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\DetalleVenta.cs",
+              "RelativeDocumentMoniker": "SistemaFarmacia.Model\\DetalleVenta.cs",
+              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\DetalleVenta.cs",
+              "RelativeToolTip": "SistemaFarmacia.Model\\DetalleVenta.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T04:50:49.327Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Producto.cs",
+              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\Producto.cs",
+              "RelativeDocumentMoniker": "SistemaFarmacia.Model\\Producto.cs",
+              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\Producto.cs",
+              "RelativeToolTip": "SistemaFarmacia.Model\\Producto.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAYwCUAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T04:28:35.321Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Cotizacion.cs",
+              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\Cotizacion.cs",
+              "RelativeDocumentMoniker": "SistemaFarmacia.Model\\Cotizacion.cs",
+              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\Cotizacion.cs",
+              "RelativeToolTip": "SistemaFarmacia.Model\\Cotizacion.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAIwBMAAABeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T04:26:49.719Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DetalleCompra.cs",
+              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\DetalleCompra.cs",
+              "RelativeDocumentMoniker": "SistemaFarmacia.Model\\DetalleCompra.cs",
+              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\DetalleCompra.cs",
+              "RelativeToolTip": "SistemaFarmacia.Model\\DetalleCompra.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T02:48:33.233Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CompraRepositorio.cs",
+              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.BLL\\Servicios\\CompraRepositorio.cs",
+              "RelativeDocumentMoniker": "SistemaFarmacia.BLL\\Servicios\\CompraRepositorio.cs",
+              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.BLL\\Servicios\\CompraRepositorio.cs",
+              "RelativeToolTip": "SistemaFarmacia.BLL\\Servicios\\CompraRepositorio.cs",
+              "ViewState": "AgIAAFgAAAAAAAAAAADwv2wAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T05:01:28.458Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "RolRepositorio.cs",
+              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.BLL\\Servicios\\RolRepositorio.cs",
+              "RelativeDocumentMoniker": "SistemaFarmacia.BLL\\Servicios\\RolRepositorio.cs",
+              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.BLL\\Servicios\\RolRepositorio.cs",
+              "RelativeToolTip": "SistemaFarmacia.BLL\\Servicios\\RolRepositorio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T02:44:43.609Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "CategoriaRepositorio.cs",
+              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.BLL\\Servicios\\CategoriaRepositorio.cs",
+              "RelativeDocumentMoniker": "SistemaFarmacia.BLL\\Servicios\\CategoriaRepositorio.cs",
+              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.BLL\\Servicios\\CategoriaRepositorio.cs",
+              "RelativeToolTip": "SistemaFarmacia.BLL\\Servicios\\CategoriaRepositorio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T02:39:02.059Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "Cliente.cs",
-              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Model\\Cliente.cs",
+              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\Cliente.cs",
               "RelativeDocumentMoniker": "SistemaFarmacia.Model\\Cliente.cs",
-              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Model\\Cliente.cs",
+              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\Cliente.cs",
               "RelativeToolTip": "SistemaFarmacia.Model\\Cliente.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -56,28 +291,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 16,
               "Title": "Venta.razor",
-              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\Pages\\Venta.razor",
+              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\Pages\\Venta.razor",
               "RelativeDocumentMoniker": "SistemaFarmacia.WebAssembly\\Pages\\Venta.razor",
-              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\Pages\\Venta.razor",
+              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\Pages\\Venta.razor",
               "RelativeToolTip": "SistemaFarmacia.WebAssembly\\Pages\\Venta.razor",
               "ViewState": "AgIAABEDAAAAAAAAAAAlwDMDAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-06-12T22:28:17.604Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "VentaController.cs",
-              "DocumentMoniker": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.API\\Controllers\\VentaController.cs",
-              "RelativeDocumentMoniker": "SistemaFarmacia.API\\Controllers\\VentaController.cs",
-              "ToolTip": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.API\\Controllers\\VentaController.cs",
-              "RelativeToolTip": "SistemaFarmacia.API\\Controllers\\VentaController.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAswCoAAAA+AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-12T22:27:02.413Z",
-              "EditorCaption": ""
             }
           ]
         }

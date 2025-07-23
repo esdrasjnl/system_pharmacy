@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.API\\SistemaFarmacia.API.csproj": {}
+    "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.API\\SistemaFarmacia.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.API\\SistemaFarmacia.API.csproj": {
+    "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.API\\SistemaFarmacia.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.API\\SistemaFarmacia.API.csproj",
+        "projectUniqueName": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.API\\SistemaFarmacia.API.csproj",
         "projectName": "SistemaFarmacia.API",
-        "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.API\\SistemaFarmacia.API.csproj",
+        "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.API\\SistemaFarmacia.API.csproj",
         "packagesPath": "C:\\Users\\Esdras\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.API\\obj\\",
+        "outputPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,14 +32,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj": {
-                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj"
+              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj": {
+                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj"
               },
-              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj": {
-                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj"
+              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj": {
+                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj"
               },
-              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.IOC\\SistemaFarmacia.IOC.csproj": {
-                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.IOC\\SistemaFarmacia.IOC.csproj"
+              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.IOC\\SistemaFarmacia.IOC.csproj": {
+                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.IOC\\SistemaFarmacia.IOC.csproj"
               }
             }
           }
@@ -92,14 +92,14 @@
         }
       }
     },
-    "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj": {
+    "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj",
+        "projectUniqueName": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj",
         "projectName": "SistemaFarmacia.BLL",
-        "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj",
+        "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj",
         "packagesPath": "C:\\Users\\Esdras\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.BLL\\obj\\",
+        "outputPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.BLL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -120,17 +120,17 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj": {
-                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj"
+              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj": {
+                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj"
               },
-              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj": {
-                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj"
+              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj": {
+                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj"
               },
-              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj": {
-                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj"
+              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj": {
+                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj"
               },
-              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Utility\\SistemaFarmacia.Utility.csproj": {
-                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Utility\\SistemaFarmacia.Utility.csproj"
+              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Utility\\SistemaFarmacia.Utility.csproj": {
+                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Utility\\SistemaFarmacia.Utility.csproj"
               }
             }
           }
@@ -184,14 +184,14 @@
         }
       }
     },
-    "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj": {
+    "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj",
         "projectName": "SistemaFarmacia.DAL",
-        "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj",
+        "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj",
         "packagesPath": "C:\\Users\\Esdras\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DAL\\obj\\",
+        "outputPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -212,8 +212,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj": {
-                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj"
+              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj": {
+                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj"
               }
             }
           }
@@ -253,14 +253,14 @@
         }
       }
     },
-    "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj": {
+    "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj",
+        "projectUniqueName": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj",
         "projectName": "SistemaFarmacia.DTO",
-        "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj",
+        "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj",
         "packagesPath": "C:\\Users\\Esdras\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DTO\\obj\\",
+        "outputPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DTO\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -318,14 +318,14 @@
         }
       }
     },
-    "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.IOC\\SistemaFarmacia.IOC.csproj": {
+    "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.IOC\\SistemaFarmacia.IOC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.IOC\\SistemaFarmacia.IOC.csproj",
+        "projectUniqueName": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.IOC\\SistemaFarmacia.IOC.csproj",
         "projectName": "SistemaFarmacia.IOC",
-        "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.IOC\\SistemaFarmacia.IOC.csproj",
+        "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.IOC\\SistemaFarmacia.IOC.csproj",
         "packagesPath": "C:\\Users\\Esdras\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.IOC\\obj\\",
+        "outputPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.IOC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -346,14 +346,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj": {
-                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj"
+              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj": {
+                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.BLL\\SistemaFarmacia.BLL.csproj"
               },
-              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj": {
-                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj"
+              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj": {
+                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DAL\\SistemaFarmacia.DAL.csproj"
               },
-              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Utility\\SistemaFarmacia.Utility.csproj": {
-                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Utility\\SistemaFarmacia.Utility.csproj"
+              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Utility\\SistemaFarmacia.Utility.csproj": {
+                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Utility\\SistemaFarmacia.Utility.csproj"
               }
             }
           }
@@ -393,14 +393,14 @@
         }
       }
     },
-    "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj": {
+    "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj",
+        "projectUniqueName": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj",
         "projectName": "SistemaFarmacia.Model",
-        "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj",
+        "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj",
         "packagesPath": "C:\\Users\\Esdras\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Model\\obj\\",
+        "outputPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -470,14 +470,14 @@
         }
       }
     },
-    "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Utility\\SistemaFarmacia.Utility.csproj": {
+    "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Utility\\SistemaFarmacia.Utility.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Utility\\SistemaFarmacia.Utility.csproj",
+        "projectUniqueName": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Utility\\SistemaFarmacia.Utility.csproj",
         "projectName": "SistemaFarmacia.Utility",
-        "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Utility\\SistemaFarmacia.Utility.csproj",
+        "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Utility\\SistemaFarmacia.Utility.csproj",
         "packagesPath": "C:\\Users\\Esdras\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Utility\\obj\\",
+        "outputPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Utility\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -498,11 +498,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj": {
-                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj"
+              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj": {
+                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.DTO\\SistemaFarmacia.DTO.csproj"
               },
-              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj": {
-                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj"
+              "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj": {
+                "projectPath": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.Model\\SistemaFarmacia.Model.csproj"
               }
             }
           }

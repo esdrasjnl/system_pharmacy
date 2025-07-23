@@ -49,6 +49,8 @@ public partial class DbfarmaciaContext : DbContext
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
     public virtual DbSet<Venta> Venta { get; set; }
+    public virtual DbSet<FacturasCertificadas> FacturasCertificadas { get; set; }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
 
