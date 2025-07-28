@@ -112,6 +112,14 @@
 
     </MudNavGroup>
 
+    <MudNavGroup Icon="@Icons.Material.Filled.Description" Title="Factura">
+        <AuthorizeView Roles="Administrador,Cajero,Encargado">
+            <Authorized>
+                <MudNavLink Href="/page/consultarfactura" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.AspectRatio">Consultar Factura</MudNavLink>
+            </Authorized>
+        </AuthorizeView>
+
+    </MudNavGroup>
     
     
 </MudNavMenu>

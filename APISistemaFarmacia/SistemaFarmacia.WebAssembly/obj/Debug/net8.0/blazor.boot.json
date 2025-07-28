@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "SistemaFarmacia.WebAssembly",
   "resources": {
-    "hash": "sha256-HiH63igEb7kBnOdleL+Acnwak3U3AnXwguVqf9x3ueE=",
+    "hash": "sha256-OuBAGPoqOB7t4RHL+v7eONlhUylBPZpHo0FkYnLcZDc=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-B6DNRvFeCUi3jbx9uKpuj+hV9cN0KG4RdZj1FgBZwj8="
     },
@@ -226,11 +226,11 @@
       "netstandard.wasm": "sha256-JT2F4bYWJpaSGq+iD0ITLpWxsDhMUjhqje9RpBtTg7w=",
       "System.Private.CoreLib.wasm": "sha256-fvIPBcvgvsRuWrKi2LGQsLYvcKUSnyIuBUsE3LJu/0Y=",
       "SistemaFarmacia.DTO.wasm": "sha256-ll9ZSC5wQmulFwiOv4I4Frsp9DK53XKlw7h6I0mUbJ4=",
-      "SistemaFarmacia.WebAssembly.wasm": "sha256-ezBajEZMmD53qf7V5rOUyMrksOBMz7i69KKWA36MkOU="
+      "SistemaFarmacia.WebAssembly.wasm": "sha256-Jf742nO/vGtBXutCe983JgVfg8J0nr0azE3UI2bL89Y="
     },
     "pdb": {
       "SistemaFarmacia.DTO.pdb": "sha256-IshyGK5m5j1BAinfTmoV+0aQJZNIkkpVd+h34YQH58w=",
-      "SistemaFarmacia.WebAssembly.pdb": "sha256-LU4avJXAbKVREr0j0N4rFAgXM+Nz1+pmvdylBSabWrM="
+      "SistemaFarmacia.WebAssembly.pdb": "sha256-2MGncQPJV4OouH9i8dTZVmOz4bbYLfBtEt30/SkROqw="
     }
   },
   "cacheBootResources": true,

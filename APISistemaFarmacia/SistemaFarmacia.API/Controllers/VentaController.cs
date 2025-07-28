@@ -607,6 +607,22 @@ namespace SistemaFarmacia.API.Controllers
             }
         }
 
+        [HttpGet("consultarFactura/{numeroFactura}")]
+        public async Task<IActionResult> ConsultarFactura(string numeroFactura)
+        {
+            var factura = await _context.FacturasCertificadas
+                .FirstOrDefaultAsync(f => f.NombreArchivo.Contains(numeroFactura)); // o f.IdVenta == id
+
+            if (factura == null || !System.IO.File.Exists(factura.RutaArchivo))
+                return NotFound("Factura no encontrada o archivo no existe.");
+
+            var pdfBytes = await System.IO.File.ReadAllBytesAsync(factura.RutaArchivo);
+            var fileName = Path.GetFileName(factura.RutaArchivo);
+
+            return File(pdfBytes, "application/pdf", fileName);
+        }
+
+
     }
 }
 

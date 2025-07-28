@@ -3365,9 +3365,6 @@ C:\Users\Esdras\Desktop\Sistema Jona\system_pharmacy\APISistemaFarmacia\SistemaF
 C:\Users\Esdras\Desktop\Sistema Jona\system_pharmacy\APISistemaFarmacia\SistemaFarmacia.WebAssembly\obj\Debug\net8.0\compressed\jr4lsudh1d-oyz0vx2fzb.gz
 C:\Users\Esdras\Desktop\Sistema Jona\system_pharmacy\APISistemaFarmacia\SistemaFarmacia.WebAssembly\obj\Debug\net8.0\compressed\3gtnyg1e0g-2unbzsab4j.gz
 C:\Users\Esdras\Desktop\Sistema Jona\system_pharmacy\APISistemaFarmacia\SistemaFarmacia.WebAssembly\obj\Debug\net8.0\compressed\1gov4vxcjs-qyordhchea.gz
-C:\Users\Esdras\Desktop\Sistema Jona\system_pharmacy\APISistemaFarmacia\SistemaFarmacia.WebAssembly\obj\Debug\net8.0\compressed\bwigphx206-7lk55dgnz0.gz
-C:\Users\Esdras\Desktop\Sistema Jona\system_pharmacy\APISistemaFarmacia\SistemaFarmacia.WebAssembly\obj\Debug\net8.0\compressed\8dzvd8wzhi-xfjzlzy5ju.gz
-C:\Users\Esdras\Desktop\Sistema Jona\system_pharmacy\APISistemaFarmacia\SistemaFarmacia.WebAssembly\obj\Debug\net8.0\compressed\9s7t7pjzpq-urmlyms4sm.gz
 C:\Users\Esdras\Desktop\Sistema Jona\system_pharmacy\APISistemaFarmacia\SistemaFarmacia.WebAssembly\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Esdras\Desktop\Sistema Jona\system_pharmacy\APISistemaFarmacia\SistemaFarmacia.WebAssembly\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Esdras\Desktop\Sistema Jona\system_pharmacy\APISistemaFarmacia\SistemaFarmacia.WebAssembly\obj\Debug\net8.0\staticwebassets.build.endpoints.json
@@ -3383,3 +3380,6 @@ C:\Users\Esdras\Desktop\Sistema Jona\system_pharmacy\APISistemaFarmacia\SistemaF
 C:\Users\Esdras\Desktop\Sistema Jona\system_pharmacy\APISistemaFarmacia\SistemaFarmacia.WebAssembly\obj\Debug\net8.0\refint\SistemaFarmacia.WebAssembly.dll
 C:\Users\Esdras\Desktop\Sistema Jona\system_pharmacy\APISistemaFarmacia\SistemaFarmacia.WebAssembly\obj\Debug\net8.0\SistemaFarmacia.WebAssembly.pdb
 C:\Users\Esdras\Desktop\Sistema Jona\system_pharmacy\APISistemaFarmacia\SistemaFarmacia.WebAssembly\obj\Debug\net8.0\ref\SistemaFarmacia.WebAssembly.dll
+C:\Users\Esdras\Desktop\Sistema Jona\system_pharmacy\APISistemaFarmacia\SistemaFarmacia.WebAssembly\obj\Debug\net8.0\compressed\bwigphx206-pr4gik6obo.gz
+C:\Users\Esdras\Desktop\Sistema Jona\system_pharmacy\APISistemaFarmacia\SistemaFarmacia.WebAssembly\obj\Debug\net8.0\compressed\8dzvd8wzhi-o4495vohop.gz
+C:\Users\Esdras\Desktop\Sistema Jona\system_pharmacy\APISistemaFarmacia\SistemaFarmacia.WebAssembly\obj\Debug\net8.0\compressed\9s7t7pjzpq-kxco97idky.gz

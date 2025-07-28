@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "NSe8rFVSSLUrRvkrEh5/7pvE4l+kXu55mkokcLiv4vA=",
+  "Hash": "+x0beNddZ+OHmG3wiWfxXEOjJ0P2AZfCwPpnhx1Yw7g=",
   "Source": "SistemaFarmacia.WebAssembly",
   "BasePath": "/",
   "Mode": "Root",
@@ -829,8 +829,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "manifest",
-      "Fingerprint": "urmlyms4sm",
-      "Integrity": "dl88f7nbwIPjw1/GEr+GLRMNOiAhmjA0gzJXOk25PHs=",
+      "Fingerprint": "kxco97idky",
+      "Integrity": "iCNZzHL28/LHpC2So7AuPZ+mtf11xuyykm4ovQXSlWA=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net8.0\\blazor.boot.json"
@@ -2026,8 +2026,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "xfjzlzy5ju",
-      "Integrity": "LU4avJXAbKVREr0j0N4rFAgXM+Nz1+pmvdylBSabWrM=",
+      "Fingerprint": "o4495vohop",
+      "Integrity": "2MGncQPJV4OouH9i8dTZVmOz4bbYLfBtEt30/SkROqw=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net8.0\\SistemaFarmacia.WebAssembly.pdb"
@@ -2047,8 +2047,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "7lk55dgnz0",
-      "Integrity": "ezBajEZMmD53qf7V5rOUyMrksOBMz7i69KKWA36MkOU=",
+      "Fingerprint": "pr4gik6obo",
+      "Integrity": "Jf742nO/vGtBXutCe983JgVfg8J0nr0azE3UI2bL89Y=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\webcil\\SistemaFarmacia.WebAssembly.wasm"
@@ -6485,7 +6485,7 @@
       "OriginalItemSpec": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\bin\\Debug\\net8.0\\wwwroot\\_framework\\MudBlazor.wasm"
     },
     {
-      "Identity": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\8dzvd8wzhi-xfjzlzy5ju.gz",
+      "Identity": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\8dzvd8wzhi-o4495vohop.gz",
       "SourceId": "SistemaFarmacia.WebAssembly",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\",
@@ -6499,8 +6499,8 @@
       "RelatedAsset": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\bin\\Debug\\net8.0\\wwwroot\\_framework\\SistemaFarmacia.WebAssembly.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "uxuxi5iohv",
-      "Integrity": "4sA8WbXwu2EMa2proCi3YQhCG4SnupDoaO4qfYj+EJg=",
+      "Fingerprint": "6q8mhf0snq",
+      "Integrity": "riIB6pTXNRE/G/bWRDHKiBsNR1TLW70v164gMkng23c=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\bin\\Debug\\net8.0\\wwwroot\\_framework\\SistemaFarmacia.WebAssembly.pdb"
@@ -6611,7 +6611,7 @@
       "OriginalItemSpec": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Net.ServicePoint.wasm"
     },
     {
-      "Identity": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\9s7t7pjzpq-urmlyms4sm.gz",
+      "Identity": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\9s7t7pjzpq-kxco97idky.gz",
       "SourceId": "SistemaFarmacia.WebAssembly",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\",
@@ -6625,8 +6625,8 @@
       "RelatedAsset": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.boot.json",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "e1bykhq2xi",
-      "Integrity": "nvtkcrmbm9GL9MaVIp8NT9UthUOsY5KCV9jx8RWipJM=",
+      "Fingerprint": "34spc7p3n1",
+      "Integrity": "bU3xk/l7b2+6nB68zd4xUdbNof/+eLrrkCrRa2WlOkI=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.boot.json"
@@ -7052,7 +7052,7 @@
       "OriginalItemSpec": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\bin\\Debug\\net8.0\\wwwroot\\_framework\\System.Buffers.wasm"
     },
     {
-      "Identity": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\bwigphx206-7lk55dgnz0.gz",
+      "Identity": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\bwigphx206-pr4gik6obo.gz",
       "SourceId": "SistemaFarmacia.WebAssembly",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\",
@@ -7066,8 +7066,8 @@
       "RelatedAsset": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\bin\\Debug\\net8.0\\wwwroot\\_framework\\SistemaFarmacia.WebAssembly.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "3pj2ks7976",
-      "Integrity": "yfsqH+YxX1+NeUCPst73sd1+7UOdi6t6gbMOl00+rkA=",
+      "Fingerprint": "hcbmx3exl6",
+      "Integrity": "D1Ac3io+RfeYZxHdpuLjJh1Da1jJp7qxrNuaxKdxFQs=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\bin\\Debug\\net8.0\\wwwroot\\_framework\\SistemaFarmacia.WebAssembly.wasm"
@@ -11969,11 +11969,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"dl88f7nbwIPjw1/GEr+GLRMNOiAhmjA0gzJXOk25PHs=\""
+          "Value": "\"iCNZzHL28/LHpC2So7AuPZ+mtf11xuyykm4ovQXSlWA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 23 Jul 2025 04:45:44 GMT"
+          "Value": "Mon, 28 Jul 2025 03:26:44 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -11983,13 +11983,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-dl88f7nbwIPjw1/GEr+GLRMNOiAhmjA0gzJXOk25PHs="
+          "Value": "sha256-iCNZzHL28/LHpC2So7AuPZ+mtf11xuyykm4ovQXSlWA="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json",
-      "AssetFile": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\9s7t7pjzpq-urmlyms4sm.gz",
+      "AssetFile": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\9s7t7pjzpq-kxco97idky.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -12008,11 +12008,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"nvtkcrmbm9GL9MaVIp8NT9UthUOsY5KCV9jx8RWipJM=\""
+          "Value": "\"bU3xk/l7b2+6nB68zd4xUdbNof/+eLrrkCrRa2WlOkI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 23 Jul 2025 04:40:11 GMT"
+          "Value": "Mon, 28 Jul 2025 03:19:09 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12032,19 +12032,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"dl88f7nbwIPjw1/GEr+GLRMNOiAhmjA0gzJXOk25PHs=\""
+          "Value": "W/\"iCNZzHL28/LHpC2So7AuPZ+mtf11xuyykm4ovQXSlWA=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-dl88f7nbwIPjw1/GEr+GLRMNOiAhmjA0gzJXOk25PHs="
+          "Value": "sha256-iCNZzHL28/LHpC2So7AuPZ+mtf11xuyykm4ovQXSlWA="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json.gz",
-      "AssetFile": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\9s7t7pjzpq-urmlyms4sm.gz",
+      "AssetFile": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\9s7t7pjzpq-kxco97idky.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -12061,11 +12061,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"nvtkcrmbm9GL9MaVIp8NT9UthUOsY5KCV9jx8RWipJM=\""
+          "Value": "\"bU3xk/l7b2+6nB68zd4xUdbNof/+eLrrkCrRa2WlOkI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 23 Jul 2025 04:40:11 GMT"
+          "Value": "Mon, 28 Jul 2025 03:19:09 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -12083,7 +12083,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-nvtkcrmbm9GL9MaVIp8NT9UthUOsY5KCV9jx8RWipJM="
+          "Value": "sha256-bU3xk/l7b2+6nB68zd4xUdbNof/+eLrrkCrRa2WlOkI="
         }
       ]
     },
@@ -19770,7 +19770,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "270488"
+          "Value": "275284"
         },
         {
           "Name": "Content-Type",
@@ -19778,11 +19778,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"LU4avJXAbKVREr0j0N4rFAgXM+Nz1+pmvdylBSabWrM=\""
+          "Value": "\"2MGncQPJV4OouH9i8dTZVmOz4bbYLfBtEt30/SkROqw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 23 Jul 2025 04:45:43 GMT"
+          "Value": "Mon, 28 Jul 2025 03:26:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -19792,18 +19792,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-LU4avJXAbKVREr0j0N4rFAgXM+Nz1+pmvdylBSabWrM="
+          "Value": "sha256-2MGncQPJV4OouH9i8dTZVmOz4bbYLfBtEt30/SkROqw="
         }
       ]
     },
     {
       "Route": "_framework/SistemaFarmacia.WebAssembly.pdb",
-      "AssetFile": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\8dzvd8wzhi-xfjzlzy5ju.gz",
+      "AssetFile": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\8dzvd8wzhi-o4495vohop.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000004626931"
+          "Quality": "0.000004566022"
         }
       ],
       "ResponseHeaders": [
@@ -19813,15 +19813,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "216125"
+          "Value": "219008"
         },
         {
           "Name": "ETag",
-          "Value": "\"4sA8WbXwu2EMa2proCi3YQhCG4SnupDoaO4qfYj+EJg=\""
+          "Value": "\"riIB6pTXNRE/G/bWRDHKiBsNR1TLW70v164gMkng23c=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 23 Jul 2025 04:40:11 GMT"
+          "Value": "Mon, 28 Jul 2025 03:19:08 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -19841,19 +19841,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"LU4avJXAbKVREr0j0N4rFAgXM+Nz1+pmvdylBSabWrM=\""
+          "Value": "W/\"2MGncQPJV4OouH9i8dTZVmOz4bbYLfBtEt30/SkROqw=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-LU4avJXAbKVREr0j0N4rFAgXM+Nz1+pmvdylBSabWrM="
+          "Value": "sha256-2MGncQPJV4OouH9i8dTZVmOz4bbYLfBtEt30/SkROqw="
         }
       ]
     },
     {
       "Route": "_framework/SistemaFarmacia.WebAssembly.pdb.gz",
-      "AssetFile": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\8dzvd8wzhi-xfjzlzy5ju.gz",
+      "AssetFile": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\8dzvd8wzhi-o4495vohop.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -19862,7 +19862,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "216125"
+          "Value": "219008"
         },
         {
           "Name": "Content-Type",
@@ -19870,11 +19870,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"4sA8WbXwu2EMa2proCi3YQhCG4SnupDoaO4qfYj+EJg=\""
+          "Value": "\"riIB6pTXNRE/G/bWRDHKiBsNR1TLW70v164gMkng23c=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 23 Jul 2025 04:40:11 GMT"
+          "Value": "Mon, 28 Jul 2025 03:19:08 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -19892,7 +19892,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-4sA8WbXwu2EMa2proCi3YQhCG4SnupDoaO4qfYj+EJg="
+          "Value": "sha256-riIB6pTXNRE/G/bWRDHKiBsNR1TLW70v164gMkng23c="
         }
       ]
     },
@@ -19907,7 +19907,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "461077"
+          "Value": "464661"
         },
         {
           "Name": "Content-Type",
@@ -19915,11 +19915,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ezBajEZMmD53qf7V5rOUyMrksOBMz7i69KKWA36MkOU=\""
+          "Value": "\"Jf742nO/vGtBXutCe983JgVfg8J0nr0azE3UI2bL89Y=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 23 Jul 2025 04:45:43 GMT"
+          "Value": "Mon, 28 Jul 2025 03:26:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -19929,18 +19929,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ezBajEZMmD53qf7V5rOUyMrksOBMz7i69KKWA36MkOU="
+          "Value": "sha256-Jf742nO/vGtBXutCe983JgVfg8J0nr0azE3UI2bL89Y="
         }
       ]
     },
     {
       "Route": "_framework/SistemaFarmacia.WebAssembly.wasm",
-      "AssetFile": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\bwigphx206-7lk55dgnz0.gz",
+      "AssetFile": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\bwigphx206-pr4gik6obo.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000007254104"
+          "Quality": "0.000007192589"
         }
       ],
       "ResponseHeaders": [
@@ -19950,15 +19950,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "137852"
+          "Value": "139031"
         },
         {
           "Name": "ETag",
-          "Value": "\"yfsqH+YxX1+NeUCPst73sd1+7UOdi6t6gbMOl00+rkA=\""
+          "Value": "\"D1Ac3io+RfeYZxHdpuLjJh1Da1jJp7qxrNuaxKdxFQs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 23 Jul 2025 04:40:11 GMT"
+          "Value": "Mon, 28 Jul 2025 03:19:08 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -19978,19 +19978,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"ezBajEZMmD53qf7V5rOUyMrksOBMz7i69KKWA36MkOU=\""
+          "Value": "W/\"Jf742nO/vGtBXutCe983JgVfg8J0nr0azE3UI2bL89Y=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ezBajEZMmD53qf7V5rOUyMrksOBMz7i69KKWA36MkOU="
+          "Value": "sha256-Jf742nO/vGtBXutCe983JgVfg8J0nr0azE3UI2bL89Y="
         }
       ]
     },
     {
       "Route": "_framework/SistemaFarmacia.WebAssembly.wasm.gz",
-      "AssetFile": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\bwigphx206-7lk55dgnz0.gz",
+      "AssetFile": "C:\\Users\\Esdras\\Desktop\\Sistema Jona\\system_pharmacy\\APISistemaFarmacia\\SistemaFarmacia.WebAssembly\\obj\\Debug\\net8.0\\compressed\\bwigphx206-pr4gik6obo.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -19999,7 +19999,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "137852"
+          "Value": "139031"
         },
         {
           "Name": "Content-Type",
@@ -20007,11 +20007,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"yfsqH+YxX1+NeUCPst73sd1+7UOdi6t6gbMOl00+rkA=\""
+          "Value": "\"D1Ac3io+RfeYZxHdpuLjJh1Da1jJp7qxrNuaxKdxFQs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 23 Jul 2025 04:40:11 GMT"
+          "Value": "Mon, 28 Jul 2025 03:19:08 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -20029,7 +20029,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-yfsqH+YxX1+NeUCPst73sd1+7UOdi6t6gbMOl00+rkA="
+          "Value": "sha256-D1Ac3io+RfeYZxHdpuLjJh1Da1jJp7qxrNuaxKdxFQs="
         }
       ]
     },

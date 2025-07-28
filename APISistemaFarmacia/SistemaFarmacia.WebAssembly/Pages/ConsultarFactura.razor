@@ -1,0 +1,44 @@
+﻿@page "/page/consultarfactura"
+@inject HttpClient Http
+@inject IJSRuntime JSRuntime
+@inject ISnackbar Snackbar
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-6">
+    <MudPaper Class="pa-4">
+        <MudText Typo="Typo.h5">Consultar Factura Certificada</MudText>
+
+        <MudTextField Label="Número de Factura"
+                      @bind-Value="numeroFactura"
+                      Placeholder="Ej: venta_123_TEKRA.pdf"
+                      Margin="Margin.Normal" />
+
+        <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                   OnClick="ConsultarFacturaAsync" Class="mt-2">
+            Ver Factura
+        </MudButton>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private string numeroFactura = "";
+
+    private async Task ConsultarFacturaAsync()
+    {
+        if (string.IsNullOrWhiteSpace(numeroFactura))
+        {
+            Snackbar.Add("Debes ingresar un número de factura", Severity.Warning);
+            return;
+        }
+
+        try
+        {
+            var url = $"http://localhost:5019/api/Venta/consultarFactura/{numeroFactura}";
+            await JSRuntime.InvokeVoidAsync("open", url, "_blank");
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"Error al consultar: {ex.Message}", Severity.Error);
+        }
+    }
+}
+

@@ -692,6 +692,22 @@
   },
   {
     "ContainingType": "SistemaFarmacia.API.Controllers.VentaController",
+    "Method": "ConsultarFactura",
+    "RelativePath": "api/Venta/consultarFactura/{numeroFactura}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "numeroFactura",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "SistemaFarmacia.API.Controllers.VentaController",
     "Method": "Historial",
     "RelativePath": "api/Venta/Historial",
     "HttpMethod": "GET",
